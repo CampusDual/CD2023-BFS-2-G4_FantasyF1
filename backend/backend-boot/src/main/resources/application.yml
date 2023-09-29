@@ -9,11 +9,10 @@ ontimize:
       enabled: true
    globalcors:
       cors-configurations:
-         "[/**]":
+         '[/**]':
             allowed-origins: "*"
             allowed-headers: "*"
-            exposed-headers:
-               ["X-Auth-Token", "Content-disposition", "X-Requested-With"]
+            exposed-headers: ["X-Auth-Token","Content-disposition","X-Requested-With"]
             allowed-methods:
                - GET
                - POST
@@ -42,10 +41,13 @@ ontimize:
          user-password-column: PASSWORD
          query-id: login
          other-data:
-            - USER_ID
             - NAME
             - SURNAME
             - EMAIL
+            - NIF
+            - USERBLOCKED
+            - LASTPASSWORDUPDATE
+            - FIRSTLOGIN
       user-role-information-service:
          user-role-repository: UserRoleDao
          query-id: userRole
@@ -67,7 +69,7 @@ spring:
       initial-size: 10
       test-on-borrow: true
    main:
-      banner-mode: "off"
+      banner-mode: 'off'
    session:
       store-type: none
    autoconfigure:

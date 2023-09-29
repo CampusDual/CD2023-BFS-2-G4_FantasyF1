@@ -1,0 +1,10 @@
+<div fxFill fxLayout="column" fxLayoutAlign="start">
+    <o-table attr="allCompetitionsTable" service="competitions" entity="competition" keys="COMP_ID" key="COMP_ID"
+        columns="COMP_ID;COMP_NAME;COMP_TYPE;COMP_DESCRIPTION" visible-columns="COMP_NAME;COMP_TYPE;COMP_DESCRIPTION"
+        query-rows="10" insert-button="no" delete-button="no">
+        <o-table-column attr="COMP_NAME" title="COMP_NAME" width="100px" content-align="center"></o-table-column>
+        <o-table-column attr="COMP_TYPE" title="COMP_TYPE" width="100px" content-align="center"></o-table-column>
+        <o-table-column attr="COMP_DESCRIPTION" title="COMP_DESCRIPTION" width="100px"
+            content-align="center"></o-table-column>
+    </o-table>
+</div>

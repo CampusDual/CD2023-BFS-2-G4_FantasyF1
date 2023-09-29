@@ -11,22 +11,5 @@
         <Column>IDPILOT</Column>
     </UpdateKeys>
     <Queries>
-        <Query id="default">
-            <ValidColumns>
-                <Column>ID</Column>
-                <Column>NAME</Column>
-                <Column>SURNAME</Column>
-                <Column>TEAM</Column>
-            </ValidColumns>
-            <Sentence>
-                <![CDATA[
-                    SELECT
-                        #COLUMNS#
-                    FROM
-                        ${mainschema}.PILOTS
-                    #WHERE#
-                ]]>
-            </Sentence>
-        </Query>
     </Queries>
 </JdbcEntitySetup>

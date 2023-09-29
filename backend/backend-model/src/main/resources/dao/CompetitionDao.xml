@@ -11,22 +11,5 @@
         <Column>COMP_ID</Column>
     </UpdateKeys>
     <Queries>
-        <Query id="default">
-            <ValidColumns>
-                <Column>COMP_ID</Column>
-                <Column>COMP_NAME</Column>
-                <Column>COMP_TYPE</Column>
-                <Column>COMP_DESCRIPTION</Column>
-            </ValidColumns>
-            <Sentence>
-                <![CDATA[
-                    SELECT
-                        #COLUMNS#
-                    FROM
-                        ${mainschema}.COMPETITIONS
-                    #WHERE#
-                ]]>
-            </Sentence>
-        </Query>
     </Queries>
 </JdbcEntitySetup>

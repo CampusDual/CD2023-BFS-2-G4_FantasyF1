@@ -12,6 +12,4 @@ export class PilotComponent implements OnInit {
   ngOnInit() {
   }
 
-  Ip
-
 }

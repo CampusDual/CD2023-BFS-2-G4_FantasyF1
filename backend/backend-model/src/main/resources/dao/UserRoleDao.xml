@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <JdbcEntitySetup
-	xmlns="http://www.ontimize.com/schema/jdbc"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
-	catalog="" schema="${mainschema}" table="TUSER_ROLE"
-	datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
+		xmlns="http://www.ontimize.com/schema/jdbc"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
+		catalog="" schema="${mainschema}" table="TUSER_ROLE"
+		datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
 	<DeleteKeys>
 		<Column>usro_id</Column>
 	</DeleteKeys>
@@ -14,27 +14,27 @@
 	<Queries>
 		<Query id="login">
 			<Sentence>
-                <![CDATA[
+				<![CDATA[
                     SELECT
                         #COLUMNS#
-                    FROM ${mainschema}.USERS
+                    FROM ${mainschema}.TUSER
                     #WHERE#
                     #ORDER#
                 ]]>
-            </Sentence>
+			</Sentence>
 		</Query>
 		<Query id="userRole">
 			<AmbiguousColumns>
-				<AmbiguousColumn name="USER_" prefix="u" />
+				<AmbiguousColumn name="USER_" prefix="tu" />
 				<AmbiguousColumn name="ID_ROLENAME" prefix="tr" />
 			</AmbiguousColumns>
 			<Sentence>
-					<![CDATA[
+				<![CDATA[
 					select
 						#COLUMNS#
 					from
-						${mainschema}.USERS u
-						JOIN ${mainschema}.TUSER_ROLE tur ON u.USER_ = tur.USER_
+						${mainschema}.TUSER tu
+						JOIN ${mainschema}.TUSER_ROLE tur ON tu.USER_ = tur.USER_
 						JOIN ${mainschema}.TROLE tr ON tur.ID_ROLENAME = tr.ID_ROLENAME
 					#WHERE#
 					#ORDER#
@@ -47,7 +47,7 @@
 				<AmbiguousColumn name="ID_SERVER_PERMISSION" prefix="tsp" />
 			</AmbiguousColumns>
 			<Sentence>
-					<![CDATA[
+				<![CDATA[
 					select
 						#COLUMNS#
 					from
@@ -57,11 +57,11 @@
 					#WHERE#
 					#ORDER#
 					]]>
-		</Sentence>
+			</Sentence>
 		</Query>
 		<Query id="clientPermissions">
 			<Sentence>
-					<![CDATA[
+				<![CDATA[
 					select
 						#COLUMNS#
 					from
@@ -69,7 +69,7 @@
 					#WHERE#
 					#ORDER#
 					]]>
-		</Sentence>
+			</Sentence>
 		</Query>
 	</Queries>
 </JdbcEntitySetup>

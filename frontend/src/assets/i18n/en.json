@@ -30,5 +30,6 @@
   "PUBLIC": "Public",
   "PRIVATE": "Private",
   "PIL_NAME": "Name",
-  "PIL_SURNAME": "Surname"
+  "PIL_SURNAME": "Surname",
+  "NEW_LEAGUE": "New league"
 }

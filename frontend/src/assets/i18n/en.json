@@ -25,8 +25,8 @@
   "SURNAME": "Surname",
   "TEAM": "Team",
   "COMPETITION_NAME": "Name of the competition",
-  "DESCRIPTION": "Description of the league",
-  "LEAGUE_TYPE": "League type",
+  "DESCRIPTION": "Description of the competition",
+  "COMPETITION_TYPE": "Competition type",
   "PUBLIC": "Public",
   "PRIVATE": "Private"
 }

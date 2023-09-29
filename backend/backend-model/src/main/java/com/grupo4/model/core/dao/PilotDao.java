@@ -11,8 +11,8 @@ import org.springframework.stereotype.Repository;
         configurationFile = "dao/PilotDao.xml",
         configurationFilePlaceholder = "dao/placeholders.properties")
 public class PilotDao extends OntimizeJdbcDaoSupport {
-    public static final String IDPILOT = "IDPILOT";
-    public static final String NAME = "NAME";
-    public static final String SURNAME = "SURNAME";
-    public static final String TEAM = "TEAM";
+    public static final String PIL_ID = "PIL_ID";
+    public static final String PIL_NAME = "PIL_NAME";
+    public static final String PIL_SURNAME = "PIL_SURNAME";
+    public static final String PIL_TEAM = "PIL_TEAM";
 }

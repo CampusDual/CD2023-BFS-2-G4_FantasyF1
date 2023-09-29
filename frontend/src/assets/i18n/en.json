@@ -23,10 +23,12 @@
   "ID": "Id.",
   "NAME": "Name",
   "SURNAME": "Surname",
-  "TEAM": "Team",
+  "PIL_TEAM": "Team",
   "COMP_NAME": "Name of the competition",
   "COMP_DESCRIPTION": "Description of the competition",
   "COMP_TYPE": "Competition type",
   "PUBLIC": "Public",
-  "PRIVATE": "Private"
+  "PRIVATE": "Private",
+  "PIL_NAME": "Name",
+  "PIL_SURNAME": "Surname"
 }

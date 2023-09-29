@@ -5,10 +5,10 @@
         catalog="" schema="${mainschema}" table="PILOTS"
         datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
     <DeleteKeys>
-        <Column>IDPILOT</Column>
+        <Column>PIL_ID</Column>
     </DeleteKeys>
     <UpdateKeys>
-        <Column>IDPILOT</Column>
+        <Column>PIL_ID</Column>
     </UpdateKeys>
     <Queries>
     </Queries>

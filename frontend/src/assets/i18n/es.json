@@ -24,9 +24,9 @@
   "NAME": "Nombre",
   "SURNAME": "Apellido",
   "TEAM": "Equipo",
-  "COMPETITION_NAME": "Nombre de la competicion",
-  "DESCRIPTION": "Descripción de la competicion",
-  "COMPETITION_TYPE": "Tipo de competicion",
+  "COMP_NAME": "Nombre de la competicion",
+  "COMP_DESCRIPTION": "Descripción de la competicion",
+  "COMP_TYPE": "Tipo de competicion",
   "PUBLIC": "Pública",
   "PRIVATE": "Privada"
 }

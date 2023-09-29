@@ -7,7 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class New_competitionComponent implements OnInit {
 
-  visibilidad: String[] = ["Public", "Private"] ;
+  public staticData = [{
+    id: 1,
+    name: "PUBLIC"
+  }, {
+    id: 2,
+    name: "PRIVATE"
+  }];
 
 
   constructor() { }

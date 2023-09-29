@@ -26,5 +26,7 @@
   "TEAM": "Team",
   "COMPETITION_NAME": "Name of the competition",
   "DESCRIPTION": "Description of the league",
-  "LEAGUE_TYPE": "League type"
+  "LEAGUE_TYPE": "League type",
+  "PUBLIC": "Public",
+  "PRIVATE": "Private"
 }

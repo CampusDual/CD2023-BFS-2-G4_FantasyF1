@@ -6,6 +6,7 @@ import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
 import { PilotComponent } from './pilot/pilot.component';
 import { InicioComponent } from './inicio/inicio.component';
+import { New_competitionComponent } from './new_competition/new_competition.component';
 
 @NgModule({
   imports: [
@@ -16,7 +17,8 @@ import { InicioComponent } from './inicio/inicio.component';
   declarations: [
     HomeComponent,
     PilotComponent,
-    InicioComponent
+    InicioComponent,
+    New_competitionComponent
   ]
 })
 export class HomeModule { 

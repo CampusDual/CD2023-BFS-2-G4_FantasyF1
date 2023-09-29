@@ -23,5 +23,8 @@
   "ID": "Id.",
   "NAME": "Name",
   "SURNAME": "Surname",
-  "TEAM": "Team"
+  "TEAM": "Team",
+  "COMPETITION_NAME": "Name of the competition",
+  "DESCRIPTION": "Description of the league",
+  "LEAGUE_TYPE": "League type"
 }

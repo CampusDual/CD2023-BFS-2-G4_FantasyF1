@@ -9,16 +9,17 @@ ontimize:
       enabled: true
    globalcors:
       cors-configurations:
-         '[/**]':
+         "[/**]":
             allowed-origins: "*"
             allowed-headers: "*"
-            exposed-headers: ["X-Auth-Token","Content-disposition","X-Requested-With"]
+            exposed-headers:
+               ["X-Auth-Token", "Content-disposition", "X-Requested-With"]
             allowed-methods:
-            - GET
-            - POST
-            - PUT
-            - OPTIONS
-            - DELETE
+               - GET
+               - POST
+               - PUT
+               - OPTIONS
+               - DELETE
    jdbc:
       name-convention: upper
       sqlhandler: postgresql
@@ -41,13 +42,10 @@ ontimize:
          user-password-column: PASSWORD
          query-id: login
          other-data:
+            - USER_ID
             - NAME
             - SURNAME
             - EMAIL
-            - NIF
-            - USERBLOCKED
-            - LASTPASSWORDUPDATE
-            - FIRSTLOGIN
       user-role-information-service:
          user-role-repository: UserRoleDao
          query-id: userRole
@@ -62,14 +60,14 @@ server:
       mime-types: application/json, application/xml
 spring:
    datasource:
-     # driver-class-name: org.postgresql.jdbcDriver
+      # driver-class-name: org.postgresql.jdbcDriver
       jdbc-url: jdbc:postgresql://45.84.210.174:65432/2023_BFS_2_G4
       username: 2023_BFS_2_G4
       password: b2f34VKzTvt2
       initial-size: 10
       test-on-borrow: true
    main:
-      banner-mode: 'off'
+      banner-mode: "off"
    session:
       store-type: none
    autoconfigure:

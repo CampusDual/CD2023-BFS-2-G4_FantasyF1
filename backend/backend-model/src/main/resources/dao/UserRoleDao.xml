@@ -17,7 +17,7 @@
                 <![CDATA[
                     SELECT
                         #COLUMNS#
-                    FROM ${mainschema}.TUSER
+                    FROM ${mainschema}.USERS
                     #WHERE#
                     #ORDER#
                 ]]>
@@ -25,7 +25,7 @@
 		</Query>
 		<Query id="userRole">
 			<AmbiguousColumns>
-				<AmbiguousColumn name="USER_" prefix="tu" />
+				<AmbiguousColumn name="USER_" prefix="u" />
 				<AmbiguousColumn name="ID_ROLENAME" prefix="tr" />
 			</AmbiguousColumns>
 			<Sentence>
@@ -33,8 +33,8 @@
 					select
 						#COLUMNS#
 					from
-						${mainschema}.TUSER tu
-						JOIN ${mainschema}.TUSER_ROLE tur ON tu.USER_ = tur.USER_
+						${mainschema}.USERS u
+						JOIN ${mainschema}.TUSER_ROLE tur ON u.USER_ = tur.USER_
 						JOIN ${mainschema}.TROLE tr ON tur.ID_ROLENAME = tr.ID_ROLENAME
 					#WHERE#
 					#ORDER#

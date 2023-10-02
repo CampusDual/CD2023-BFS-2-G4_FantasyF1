@@ -27,6 +27,10 @@ public class CompetitionService implements ICompetitionService {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap);
     }
 
+    public EntityResult publicCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "public");
+    }
+
 
     public EntityResult competitionInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.insert(competitionDao, attrMap);
@@ -42,13 +46,4 @@ public class CompetitionService implements ICompetitionService {
         return this.daoHelper.delete(this.competitionDao, keyMap);
     }
 
-    @Override
-    public EntityResult competitionTypeQuery(Map<String, Object> keyMap, List<String> attrMap) throws OntimizeJEERuntimeException {
-        return null;
-    }
-
-    @Override
-    public EntityResult competitionTypeUpdate(Map<String, Object> attrMap, Map<String, Object> keyMap) throws OntimizeJEERuntimeException {
-        return null;
-    }
 }

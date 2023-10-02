@@ -6,8 +6,8 @@
         <o-text-input class="input-padding" attr="COMP_NAME" fxFlex="40" required="yes"></o-text-input>
       </o-row>
       <o-row>
-        <o-combo attr="COMP_TYPE" label="COMP_TYPE" data="Public" [static-data]="staticData" value-column="name"
-          columns="id;name" visible-columns="name" read-only="no" required="yes"></o-combo>
+        <o-combo attr="COMP_ISPUBLIC" data="Public" label="COMP_TYPE" [static-data]="staticData" value-column="value"
+          columns="value;name" visible-columns="name" read-only="no" required="yes"></o-combo>
       </o-row>
       <o-row>
         <o-textarea-input attr="COMP_DESCRIPTION" fxFlex></o-textarea-input>

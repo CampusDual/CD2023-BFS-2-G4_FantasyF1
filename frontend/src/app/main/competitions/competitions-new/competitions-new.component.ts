@@ -8,10 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class CompetitionsNewComponent implements OnInit {
 
   public staticData = [{
-    id: 1,
+    value: true,
     name: "PUBLIC"
   }, {
-    id: 2,
+    value: false,
     name: "PRIVATE"
   }];
 
@@ -20,5 +20,6 @@ export class CompetitionsNewComponent implements OnInit {
 
   ngOnInit() {
   }
+
 
 }

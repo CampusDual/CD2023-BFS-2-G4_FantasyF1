@@ -1,0 +1,15 @@
+<JdbcEntitySetup
+        xmlns="http://www.ontimize.com/schema/jdbc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
+        catalog="" schema="${mainschema}" table="USERS_COMPETITIONS"
+        datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
+    <DeleteKeys>
+        <Column>UC_ID</Column>
+    </DeleteKeys>
+    <UpdateKeys>
+        <Column>UC_ID</Column>
+    </UpdateKeys>
+    <Queries>
+    </Queries>
+</JdbcEntitySetup>

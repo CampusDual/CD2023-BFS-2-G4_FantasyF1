@@ -13,6 +13,6 @@ import org.springframework.stereotype.Repository;
 public class CompetitionDao extends OntimizeJdbcDaoSupport {
     public static final String COMP_ID = "COMP_ID";
     public static final String COMP_NAME = "COMP_NAME";
-    public static final String COMP_TYPE = "COMP_TYPE";
+    public static final String COMP_ISPUBLIC = "COMP_ISPUBLIC";
     public static final String COMP_DESCRIPTION = "COMP_DESCRIPTION";
 }

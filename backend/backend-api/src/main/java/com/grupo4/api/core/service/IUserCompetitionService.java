@@ -8,7 +8,9 @@ import java.util.Map;
 
 public interface IUserCompetitionService {
 
-    public EntityResult userCompetitionQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException;
+    // ---- USERS_COMPÈTITIONS ----
+
+    public EntityResult userCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
     public EntityResult userCompetitionInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException;
     public EntityResult userCompetitionUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException;
     public EntityResult userCompetitionDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException;

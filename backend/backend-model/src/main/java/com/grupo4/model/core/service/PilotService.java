@@ -42,23 +42,4 @@ public class PilotService implements IPilotService {
         return null;
     }
 
-
-    public EntityResult pilotTypeQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
-        return null;
-    }
-
-
-    public EntityResult pilotTypeInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        return null;
-    }
-
-
-    public EntityResult pilotTypeUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException {
-        return null;
-    }
-
-
-    public EntityResult pilotTypeDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
-        return null;
-    }
 }

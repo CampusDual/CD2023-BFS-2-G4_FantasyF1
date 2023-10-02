@@ -14,5 +14,6 @@ public class PilotDao extends OntimizeJdbcDaoSupport {
     public static final String PIL_ID = "PIL_ID";
     public static final String PIL_NAME = "PIL_NAME";
     public static final String PIL_SURNAME = "PIL_SURNAME";
-    public static final String PIL_TEAM = "PIL_TEAM";
+    public static final String TEAM_ID = "TEAM_ID";
+    public static final String PIL_PRICE = "PIL_PRICE";
 }

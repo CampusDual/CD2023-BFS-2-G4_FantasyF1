@@ -16,19 +16,20 @@ import java.util.Map;
 @Service("UserCompetitionService")
 public class UserCompetitionService implements IUserCompetitionService {
 
-    @Autowired
+   @Autowired
     private UserCompetitionDao userCompetitionDao;
+
     @Autowired
     private DefaultOntimizeDaoHelper daoHelper;
 
     @Override
-    public EntityResult userCompetitionQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
-        return null;
+    public EntityResult userCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap);
     }
 
     @Override
     public EntityResult userCompetitionInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        return null;
+        return this.daoHelper.insert(userCompetitionDao, attributes);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.grupo4.ws.core.rest;
 
-import com.grupo4.api.core.service.ICompetitionService;
 import com.grupo4.api.core.service.IUserCompetitionService;
 import com.ontimize.jee.server.rest.ORestController;
 import org.springframework.beans.factory.annotation.Autowired;

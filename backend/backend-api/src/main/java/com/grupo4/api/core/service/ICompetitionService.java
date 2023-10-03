@@ -14,7 +14,8 @@ public interface ICompetitionService {
     public EntityResult competitionInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException;
     public EntityResult competitionUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException;
     public EntityResult competitionDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException;
-
     public EntityResult publicCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
+    public EntityResult publicCountCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
+    public EntityResult allCountCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
 
 }

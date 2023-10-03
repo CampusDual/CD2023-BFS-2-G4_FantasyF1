@@ -31,16 +31,21 @@ public class CompetitionService implements ICompetitionService {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "public");
     }
 
+    public EntityResult publicCountCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "publicCount");
+    }
+
+    public EntityResult allCountCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "allCount");
+    }
 
     public EntityResult competitionInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.insert(competitionDao, attrMap);
     }
 
-
     public EntityResult competitionUpdate(Map<String, Object> attrMap, Map<String, Object> keyMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.update(competitionDao, attrMap, keyMap);
     }
-
 
     public EntityResult competitionDelete(Map<String, Object> keyMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.delete(this.competitionDao, keyMap);

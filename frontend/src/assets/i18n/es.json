@@ -20,16 +20,14 @@
   "FOOTER_CREATED_BY": "Creado por Imatia Innovation",
   "FOOTER_RIGHTS": "Todos los derechos reservados",
   "PILOTS": "Pilotos",
-  "ID": "Id.",
-  "NAME": "Nombre",
-  "SURNAME": "Apellido",
   "PIL_TEAM": "Equipo",
   "COMP_NAME": "Nombre de la competicion",
-  "COMP_DESCRIPTION": "Descripción de la competicion",
+  "COMP_DESCRIPTION": "Descripción",
   "COMP_TYPE": "Tipo de competicion",
   "PUBLIC": "Pública",
   "PRIVATE": "Privada",
   "PIL_NAME": "Nombre",
   "PIL_SURNAME": "Apellido",
-  "NEW_LEAGUE": "Nueva liga"
+  "NEW_LEAGUE": "Nueva liga",
+  "NUM_USERS": "Usuarios registrados"
 }

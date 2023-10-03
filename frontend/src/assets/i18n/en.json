@@ -31,5 +31,6 @@
   "NEW_LEAGUE": "New league",
   "NUM_USERS": "Users registered",
   "COMP_ALL_TITLE": "Available competitions",
-  "COMP_USER_TITLE": "My competitions"
+  "COMP_USER_TITLE": "My competitions",
+  "SEARCH_PRIVATE_LEAGUE": "Search private competition"
 }

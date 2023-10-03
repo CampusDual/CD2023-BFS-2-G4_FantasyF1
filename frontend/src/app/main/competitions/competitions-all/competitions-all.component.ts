@@ -12,4 +12,8 @@ export class CompetitionsAllComponent implements OnInit {
   ngOnInit() {
   }
 
+  searchPrivate() {
+    prompt('Type...');
+  }
+
 }

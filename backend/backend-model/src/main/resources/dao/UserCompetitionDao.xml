@@ -11,5 +11,21 @@
         <Column>UC_ID</Column>
     </UpdateKeys>
     <Queries>
+        <Query id="filter">
+            <Sentence>
+                <![CDATA[
+                    WITH PUBLIC_COMPETITIONS AS
+                        (SELECT *
+                        FROM ${mainschema}.USERS_COMPETITIONS
+                        WHERE USER_ = ?)
+                    SELECT
+                        #COLUMNS#
+                        FROM
+                        PUBLIC_COMPETITIONS
+                        #WHERE#
+                        #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

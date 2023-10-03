@@ -29,5 +29,7 @@
   "PIL_NAME": "Nombre",
   "PIL_SURNAME": "Apellido",
   "NEW_LEAGUE": "Nueva liga",
-  "NUM_USERS": "Usuarios registrados"
+  "NUM_USERS": "Usuarios registrados",
+  "COMP_ALL_TITLE": "Competiciones disponibles",
+  "COMP_USER_TITLE": "Mis competiciones"
 }

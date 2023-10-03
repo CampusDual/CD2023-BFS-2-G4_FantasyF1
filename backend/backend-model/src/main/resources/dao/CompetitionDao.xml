@@ -30,23 +30,35 @@
         <Query id="publicCount">
             <Sentence>
                 <![CDATA[
-                    SELECT c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION, count(uc.USER_) AS NUM_USERS
-                    FROM COMPETITIONS c
-                    INNER JOIN USERS_COMPETITIONS uc
-                    ON c.COMP_ID = uc.COMP_ID
-                    WHERE c.COMP_ISPUBLIC = true
-                    GROUP BY c.COMP_ID;
+                    WITH PUBLIC_COUNT AS (
+                        SELECT c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION, c.COMP_ISPUBLIC, count(uc.USER_) AS NUM_USERS, COUNT(UC.USER_) > 10 AS COMPLETE
+                        FROM COMPETITIONS c
+                        INNER JOIN USERS_COMPETITIONS uc
+                        ON c.COMP_ID = uc.COMP_ID
+                        WHERE c.COMP_ISPUBLIC = true
+                        GROUP BY c.COMP_ID
+                        HAVING COUNT(UC.USER_) < 10)
+                    SELECT #COLUMNS#
+                    FROM PUBLIC_COUNT
+                    #WHERE#
+                    #ORDER#;
                 ]]>
             </Sentence>
         </Query>
         <Query id="allCount">
             <Sentence>
                 <![CDATA[
-                    SELECT c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION, count(uc.USER_) AS NUM_USERS
-                    FROM ${mainschema}.COMPETITIONS c
-                    INNER JOIN ${mainschema}.USERS_COMPETITIONS uc
-                    ON c.COMP_ID = uc.COMP_ID
-                    GROUP BY c.COMP_ID;
+                    WITH PUBLIC_COUNT AS (
+                        SELECT c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION, c.COMP_ISPUBLIC, count(uc.USER_) AS NUM_USERS, COUNT(UC.USER_) > 10 AS COMPLETE
+                        FROM ${mainschema}.COMPETITIONS c
+                        INNER JOIN ${mainschema}.USERS_COMPETITIONS uc
+                        ON c.COMP_ID = uc.COMP_ID
+                        GROUP BY c.COMP_ID
+                        HAVING COUNT(UC.USER_) < 10)
+                    SELECT #COLUMNS#
+                    FROM PUBLIC_COUNT
+                    #WHERE#
+                    #ORDER#;
                 ]]>
             </Sentence>
         </Query>

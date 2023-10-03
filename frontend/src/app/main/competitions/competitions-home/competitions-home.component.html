@@ -1,6 +1,7 @@
 <div fxFill fxLayout="column" fxLayoutAlign="start">
-    <o-table attr="competitionsHomeTable" service="users_competitions" entity="userCompetition" keys="UC_ID" key="UC_ID"
-        columns="UC_ID;COMP_ID;USER_" visible-columns="COMP_ID;USER_" query-rows="10">
+    <o-table title="COMP_USER_TITLE" show-title="true" attr="competitionsHomeTable" service="users_competitions"
+        entity="userCompetition" keys="UC_ID" key="UC_ID" columns="UC_ID;COMP_ID;USER_" visible-columns="COMP_ID;USER_"
+        query-rows="10">
         <o-table-column attr="COMP_ID" title="COMP_ID" width="100px" content-align="center"></o-table-column>
         <o-table-column attr="USER_" title="USER_" width="100px" content-align="center"></o-table-column>
     </o-table>

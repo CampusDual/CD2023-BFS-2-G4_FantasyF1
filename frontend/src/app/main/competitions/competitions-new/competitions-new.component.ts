@@ -9,10 +9,10 @@ export class CompetitionsNewComponent implements OnInit {
 
   public staticData = [{
     value: true,
-    name: "PUBLIC"
+    name: 'PUBLIC'
   }, {
     value: false,
-    name: "PRIVATE"
+    name: 'PRIVATE'
   }];
 
 

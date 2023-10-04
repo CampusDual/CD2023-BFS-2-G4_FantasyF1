@@ -32,5 +32,6 @@
   "NUM_USERS": "Usuarios registrados",
   "COMP_ALL_TITLE": "Competiciones disponibles",
   "COMP_USER_TITLE": "Mis competiciones",
-  "SEARCH_PRIVATE_LEAGUE": "Buscar competición privada"
+  "SEARCH_PRIVATE_LEAGUE": "Buscar competición privada",
+  "COMP_CODE": "Código de la competición (sólo para competiciones privadas)"
 }

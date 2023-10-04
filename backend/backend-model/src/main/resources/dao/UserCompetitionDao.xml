@@ -14,16 +14,15 @@
         <Query id="filter">
             <Sentence>
                 <![CDATA[
-                    WITH PUBLIC_COMPETITIONS AS
-                        (SELECT *
-                        FROM ${mainschema}.USERS_COMPETITIONS
-                        WHERE USER_ = ?)
-                    SELECT
-                        #COLUMNS#
-                        FROM
-                        PUBLIC_COMPETITIONS
-                        #WHERE#
-                        #ORDER#;
+                    WITH USER_COMPETITION AS
+                        (SELECT  uc.UC_ID, uc.USER_, c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION
+                        FROM ${mainschema}.USERS_COMPETITIONS uc
+                        INNER JOIN COMPETITIONS c
+                        ON c.COMP_ID = uc.COMP_ID)
+                    SELECT #COLUMNS#
+                    FROM USER_COMPETITION
+                    #WHERE#
+                    #ORDER#;
                 ]]>
             </Sentence>
         </Query>

@@ -5,6 +5,7 @@ import com.grupo4.model.core.dao.UserCompetitionDao;
 import com.ontimize.jee.common.dto.EntityResult;
 import com.ontimize.jee.common.exceptions.OntimizeJEERuntimeException;
 import com.ontimize.jee.server.dao.DefaultOntimizeDaoHelper;
+import com.ontimize.jee.server.dao.IOntimizeDaoSupport;
 import com.ontimize.jee.server.dao.ISQLQueryAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
@@ -25,15 +26,17 @@ public class UserCompetitionService implements IUserCompetitionService {
     @Autowired
     private DefaultOntimizeDaoHelper daoHelper;
 
-    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-
     @Override
     public EntityResult userCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        keysValues.put("USER_", authentication.getName());
         return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap);
     }
 
     @Override
     public EntityResult userCompetitionFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        keysValues.put("USER_", authentication.getName());
         return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap,"filter");
     }
 

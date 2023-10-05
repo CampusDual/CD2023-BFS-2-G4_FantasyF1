@@ -47,6 +47,10 @@ public class CompetitionService implements ICompetitionService {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "allCount");
     }
 
+    public EntityResult competitionByIdQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "competitionById");
+    }
+
     public EntityResult competitionInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
         Map<String, Object> keyMap = new HashMap<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

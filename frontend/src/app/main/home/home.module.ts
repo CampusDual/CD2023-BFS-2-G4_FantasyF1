@@ -8,6 +8,7 @@ import { PilotComponent } from '../pilot/pilot.component';
 import { CompetitionsNewComponent } from '../competitions/competitions-new/competitions-new.component';
 import { CompetitionsAllComponent } from '../competitions/competitions-all/competitions-all.component';
 import { CompetitionsHomeComponent } from '../competitions/competitions-home/competitions-home.component';
+import { CompetitionsDetailComponent } from '../competitions/competitions-detail/competitions-detail.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { CompetitionsHomeComponent } from '../competitions/competitions-home/com
     PilotComponent,
     CompetitionsNewComponent,
     CompetitionsAllComponent,
-    CompetitionsHomeComponent
+    CompetitionsHomeComponent,
+    CompetitionsDetailComponent
   ]
 })
 export class HomeModule {

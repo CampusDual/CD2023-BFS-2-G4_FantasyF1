@@ -1,0 +1,23 @@
+
+<o-table title="COMP_USER_TITLE" show-title="false" attr="competitionsHomeTable" service="users_competitions"
+        entity="userCompetitionById" keys="COMP_ID" columns="UC_ID;COMP_ID;P1NAME;P1SURNAME;P2NAME;P2SURNAME;UC_AVAILABLE_MONEY;UC_POINTS"
+        visible-columns="UC_ID;COMP_ID;P1NAME;P1SURNAME;P2NAME;P2SURNAME;UC_AVAILABLE_MONEY;UC_POINTS" query-rows="15" horizontal-scroll="false" auto-adjust="true"
+        virtual-scroll="no" delete-button="no">
+        <o-table-column attr="UC_ID" title="UC_ID" content-align="center"></o-table-column>
+        <o-table-column attr="COMP_ID" title="COMP_ID" content-align="center"></o-table-column>
+        <o-table-column attr="P1NAME" title="P1NAME" content-align="center"></o-table-column>
+        <o-table-column attr="P1SURNAME" title="P1SURNAME" content-align="center"></o-table-column>
+        <o-table-column attr="P2NAME" title="P2NAME" content-align="center"></o-table-column>
+        <o-table-column attr="P2SURNAME" title="P2SURNAME" content-align="center"></o-table-column>
+        <o-table-column attr="UC_AVAILABLE_MONEY" title="UC_AVAILABLE_MONEY" content-align="center"></o-table-column>
+        <o-table-column attr="UC_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
+    </o-table>
+<!--
+  <o-form service="users_competitions" entity="userCompetitionById" keys="UC_ID" header-actions="D;U;R">
+  <o-integer-input attr="UC_ID" hidden></o-integer-input>
+  <o-text-input attr="UC_ID"></o-text-input>
+  <o-text-input attr="P1NAME"></o-text-input>
+  <o-text-input attr="TEAM_NAME"></o-text-input>
+  <o-text-input attr="UC_AVAILABLE_MONEY"></o-text-input>
+</o-form>
+-->

@@ -31,8 +31,9 @@
                 <![CDATA[
                     WITH USER_COMPETITION AS
                         (SELECT
+                            C.COMP_ID,
+                            C.COMP_NAME,
                             UC.UC_ID,
-                            UC.COMP_ID,
                             P1.PIL_NAME AS P1NAME,
                             P1.PIL_SURNAME AS P1SURNAME,
                             P2.pil_name,
@@ -41,14 +42,17 @@
                             T.TEAM_NAME,
                             UC.UC_AVAILABLE_MONEY,
                             UC.UC_POINTS
-                            FROM
-                            USERS_COMPETITIONS UC
-                            LEFT JOIN PILOTS P1 ON
+                        FROM
+                            COMPETITIONS C
+                        RIGHT JOIN USERS_COMPETITIONS UC ON
+                            C.COMP_ID = UC.COMP_ID
+                        RIGHT JOIN PILOTS P1 ON
                             UC.PIL_ID_1 = P1.PIL_ID
-                            LEFT JOIN PILOTS P2 ON
+                        RIGHT JOIN PILOTS P2 ON
                             UC.PIL_ID_2 = P2.PIL_ID
-                            LEFT JOIN TEAMS T ON
-                            UC.TEAM_ID = T.TEAM_ID)
+                        RIGHT JOIN TEAMS T ON
+                            UC.TEAM_ID = T.TEAM_ID
+                            )
                     SELECT #COLUMNS#
                     FROM USER_COMPETITION
                     #WHERE#

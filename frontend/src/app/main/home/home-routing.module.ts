@@ -15,7 +15,7 @@ const routes: Routes = [
     component: CompetitionsNewComponent
   },
   {
-    path: ':UC_ID',
+    path: ':COMP_ID',
     component: CompetitionsDetailComponent
   }
 ];

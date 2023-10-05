@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, LocalStorageService, NavigationService } from 'ontimize-web-ngx';
 import { Observable } from 'rxjs';
+import { ServiceLoginService } from '../shared/service-login.service';
 
 @Component({
   selector: 'login',
@@ -25,10 +26,11 @@ export class LoginComponent implements OnInit {
     @Inject(NavigationService) public navigation: NavigationService,
     @Inject(AuthService) private authService: AuthService,
     @Inject(LocalStorageService) private localStorageService,
-    public injector: Injector
+    public injector: Injector,
+    private serviceLoginService : ServiceLoginService
   ) {
     this.router = router;
-
+    
     const qParamObs: Observable<any> = this.actRoute.queryParams;
     qParamObs.subscribe(params => {
       if (params) {
@@ -59,6 +61,8 @@ export class LoginComponent implements OnInit {
   login() {
     const userName = this.loginForm.value.username;
     const password = this.loginForm.value.password;
+    this.serviceLoginService.setUser_(userName);
+    console.log(userName);
     if (userName && userName.length > 0 && password && password.length > 0) {
       const self = this;
       this.authService.login(userName, password)

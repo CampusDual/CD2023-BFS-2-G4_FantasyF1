@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceLoginService } from 'src/app/shared/service-login.service';
 
 @Component({
   selector: 'app-competitions-home',
@@ -7,7 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetitionsHomeComponent implements OnInit {
 
-  constructor() { }
+  username: string; 
+
+  constructor(private serviceLoginService : ServiceLoginService) {
+    this.username= serviceLoginService.getUserName();
+   }
 
   ngOnInit() {
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { OComboComponent, OTextInputComponent } from 'ontimize-web-ngx';
+import { ServiceLoginService } from 'src/app/shared/service-login.service';
 
 @Component({
   selector: 'app-new_competition',
@@ -23,7 +24,7 @@ export class CompetitionsNewComponent implements OnInit {
 
   public texto: string = this.asignarVar();
 
-  constructor() {
+  constructor(private serviceLoginService : ServiceLoginService) {
    }
 
   ngOnInit() {
@@ -31,7 +32,7 @@ export class CompetitionsNewComponent implements OnInit {
 
   asignarVar(): string{
     const date = new Date();
-    let varia:string = `${date}-${"nombreUsuario"}`;
+    let varia:string = `${date.getMinutes()}${date.getSeconds()}${date.getDay()}${date.getMonth()}${date.getFullYear()}${this.serviceLoginService.getUserName()}`;
     return varia;
   }
 

@@ -10,6 +10,7 @@
     <UpdateKeys>
         <Column>COMP_ID</Column>
     </UpdateKeys>
+    <GeneratedKey>comp_id</GeneratedKey>
     <Queries>
         <Query id="public">
             <Sentence>

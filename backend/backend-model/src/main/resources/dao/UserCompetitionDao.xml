@@ -15,7 +15,7 @@
             <Sentence>
                 <![CDATA[
                     WITH USER_COMPETITION AS
-                        (SELECT  uc.UC_ID, uc.USER_, c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION
+                        (SELECT  uc.UC_ID, uc.USER_, c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION, c.COMP_CODE
                         FROM ${mainschema}.USERS_COMPETITIONS uc
                         INNER JOIN COMPETITIONS c
                         ON c.COMP_ID = uc.COMP_ID)

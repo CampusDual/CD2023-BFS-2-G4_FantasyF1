@@ -2,6 +2,7 @@ package com.grupo4.model.core.service;
 
 import com.grupo4.api.core.service.IUserCompetitionService;
 import com.grupo4.model.core.dao.UserCompetitionDao;
+import com.grupo4.model.core.dao.UserDao;
 import com.ontimize.jee.common.dto.EntityResult;
 import com.ontimize.jee.common.exceptions.OntimizeJEERuntimeException;
 import com.ontimize.jee.server.dao.DefaultOntimizeDaoHelper;
@@ -29,20 +30,8 @@ public class UserCompetitionService implements IUserCompetitionService {
     @Override
     public EntityResult userCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        keysValues.put("USER_", authentication.getName());
+        keysValues.put(UserDao.ID, authentication.getName());
         return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap);
-    }
-
-    @Override
-    public EntityResult userCompetitionFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        keysValues.put("USER_", authentication.getName());
-        return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap,"filter");
-    }
-
-    @Override
-    public EntityResult userCompetitionByIdQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
-        return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap,"userCompetitionById");
     }
 
     @Override

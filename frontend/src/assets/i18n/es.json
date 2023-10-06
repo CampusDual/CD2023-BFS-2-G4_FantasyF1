@@ -33,5 +33,15 @@
   "COMP_ALL_TITLE": "Competiciones disponibles",
   "COMP_USER_TITLE": "Mis competiciones",
   "SEARCH_PRIVATE_LEAGUE": "Buscar competición privada",
-  "COMP_CODE": "Código de la competición (sólo para competiciones privadas)"
+  "COMP_CODE": "Código de la competición (sólo para competiciones privadas)",
+  "COMP_INFO": "Detalle de la competición",
+  "COMP_EDIT": "Editar mi equipo",
+  "USER_": "Usuario",
+  "COMP_ACCESS": "Unirme a la competición",
+  "P1SURNAME": "Piloto 1",
+  "P2SURNAME": "Piloto 2",
+  "TEAM_NAME": "Escudería",
+  "UC_AVAILABLE_MONEY": "Dinero disponible",
+  "UC_POINTS": "Puntos",
+  "COMP_CLASIF": "Clasificación"
 }

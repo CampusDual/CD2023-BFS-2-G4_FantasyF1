@@ -33,5 +33,15 @@
   "COMP_ALL_TITLE": "Available competitions",
   "COMP_USER_TITLE": "My competitions",
   "SEARCH_PRIVATE_LEAGUE": "Search private competition",
-  "COMP_CODE": "Competition code (only necessary for private competitions)"
+  "COMP_CODE": "Competition code (only necessary for private competitions)",
+  "COMP_INFO": "Competition info",
+  "COMP_EDIT": "Edit my team",
+  "USER_": "Username",
+  "COMP_ACCESS": "Join the competition",
+  "P1SURNAME": "Pilot 1",
+  "P2SURNAME": "Pilot 2",
+  "TEAM_NAME": "Team name",
+  "UC_AVAILABLE_MONEY": "Available money",
+  "UC_POINTS": "Points",
+  "COMP_CLASIF": "Ranking"
 }

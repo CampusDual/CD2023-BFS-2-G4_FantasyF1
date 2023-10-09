@@ -35,10 +35,6 @@ public class CompetitionService implements ICompetitionService {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap);
     }
 
-    public EntityResult publicCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
-        return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "public");
-    }
-
     public EntityResult publicCountCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "publicCount");
     }

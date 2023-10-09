@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
+import { OntimizeService } from 'ontimize-web-ngx';
 
 @Component({
   selector: 'app-competitions-all',
@@ -7,13 +8,41 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetitionsAllComponent implements OnInit {
 
-  constructor() { }
+  protected service: OntimizeService;
+  @ViewChild("informacion", { static: true }) codigo: ElementRef;
 
-  ngOnInit() {
+  constructor(protected injector: Injector) {
+
+    this.service = this.injector.get(OntimizeService);
+
   }
 
-  searchPrivate() {
-    prompt('Type...');
+  ngOnInit() {
+
+    this.configureService();
+
+  }
+
+  protected configureService() {
+
+    // Configure the service using the configuration defined in the `app.services.config.ts` file
+
+    const conf = this.service.getDefaultServiceConfiguration('competitions');
+
+    this.service.configureService(conf);
+
+  }
+
+  searchPrivate2() {
+
+    console.log(this.codigo.nativeElement.value);
+
+    this.service.query({ "COMP_CODE": this.codigo.nativeElement.value }, ["COMP_ID", "COMP_NAME"], "competition").subscribe(resp => {
+
+      console.log(resp);
+
+    })
+
   }
 
 }

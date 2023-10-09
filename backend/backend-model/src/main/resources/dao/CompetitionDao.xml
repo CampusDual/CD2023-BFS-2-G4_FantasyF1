@@ -12,22 +12,6 @@
     </UpdateKeys>
     <GeneratedKey>comp_id</GeneratedKey>
     <Queries>
-        <Query id="public">
-            <Sentence>
-                <![CDATA[
-                    WITH PUBLIC_COMPETITIONS AS
-                        (SELECT *
-                        FROM ${mainschema}.COMPETITIONS
-                        WHERE COMP_ISPUBLIC = true)
-                    SELECT
-                        #COLUMNS#
-                        FROM
-                        PUBLIC_COMPETITIONS
-                        #WHERE#
-                        #ORDER#;
-                ]]>
-            </Sentence>
-        </Query>
         <Query id="publicCount">
             <Sentence>
                 <![CDATA[

@@ -38,9 +38,9 @@
   "COMP_EDIT": "Edit my team",
   "USER_": "Username",
   "COMP_ACCESS": "Join the competition",
-  "P1SURNAME": "Pilot 1",
-  "P2SURNAME": "Pilot 2",
-  "TEAM_NAME": "Team name",
+  "P1SURNAME": "Driver 1",
+  "P2SURNAME": "Driver 2",
+  "TEAM_NAME": "Racing team name",
   "UC_AVAILABLE_MONEY": "Available money",
   "UC_POINTS": "Points",
   "COMP_CLASIF": "Ranking"

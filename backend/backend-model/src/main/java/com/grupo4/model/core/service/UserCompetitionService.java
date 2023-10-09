@@ -29,8 +29,6 @@ public class UserCompetitionService implements IUserCompetitionService {
 
     @Override
     public EntityResult userCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        keysValues.put(UserDao.ID, authentication.getName());
         return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap);
     }
 

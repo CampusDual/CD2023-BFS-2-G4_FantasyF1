@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ServiceLoginService } from 'src/app/shared/service-login.service';
 
 @Component({
   selector: 'app-competitions-detail',
@@ -7,9 +8,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetitionsDetailComponent implements OnInit {
 
-  constructor() { }
+  constructor(private serviceLoginService : ServiceLoginService) { }
 
   ngOnInit() {
   }
+
+  isEditable:boolean = false;
+
+  showButton(data){
+
+    for(let element of data){
+      if (element.USER_ === this.serviceLoginService.getUserName() ){
+        this.isEditable=true ;
+      }
+    }
+
+  }
+
+
 
 }

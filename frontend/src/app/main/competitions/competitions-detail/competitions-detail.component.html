@@ -13,10 +13,15 @@
       <span fxFlex="50">
         <o-text-input attr="COMP_CODE" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
       </span>
-      <span fxFlex="50">
-        <o-button attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
+      <span *ngIf=(isEditable)  fxFlex="50">
+        <o-button  attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
           [routerLink]="['main/home/join']"></o-button>
       </span>
+      <span *ngIf=(!isEditable)  fxFlex="50">
+          <o-button  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
+          [routerLink]="['main/home/join']"></o-button>
+      </span>
+    
     </o-row>
     <o-row>
       <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
@@ -26,7 +31,7 @@
     <o-table fxFlex service="competitions" entity="competitionById" parent-keys="COMP_ID"
       columns="COMP_ID;COMP_NAME;USER_;P1NAME;P1SURNAME;P2NAME;P2SURNAME;TEAM_NAME;UC_AVAILABLE_MONEY;UC_POINTS"
       visible-columns="USER_;P1SURNAME;P2SURNAME;TEAM_NAME;UC_AVAILABLE_MONEY;UC_POINTS" insert-button="no"
-      delete-button="no" query-rows="10">
+      delete-button="no" query-rows="10" (onDataLoaded)="showButton($event)">
       <o-table-column attr="USER_" title="USER_" class="center"></o-table-column>
       <o-table-column attr="P1SURNAME" title="P1SURNAME" class="center"></o-table-column>
       <o-table-column attr="P2SURNAME" title="P2SURNAME" class="center"></o-table-column>

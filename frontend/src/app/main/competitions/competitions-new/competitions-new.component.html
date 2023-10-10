@@ -7,7 +7,7 @@
       </o-row>
       <o-row>
         <o-combo #type_combo (onChange)="changeType()" attr="COMP_ISPUBLIC" data="Public" label="COMP_TYPE" [static-data]="staticData" value-column="value"
-          columns="value;name" visible-columns="name" read-only="no" required="yes"></o-combo>
+          columns="value;name" visible-columns="name" null-selection="no" read-only="no" required="yes"></o-combo>
       </o-row>
       <o-row>
         <o-textarea-input attr="COMP_DESCRIPTION" fxFlex></o-textarea-input>

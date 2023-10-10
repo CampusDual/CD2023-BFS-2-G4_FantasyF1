@@ -4,6 +4,7 @@ import { CompetitionsHomeComponent } from './competitions-home/competitions-home
 import { CompetitionsDetailComponent } from './competitions-detail/competitions-detail.component';
 import { CompetitionsAvailableComponent } from './competitions-available/competitions-available.component';
 import { CompetitionsSearchComponent } from './competitions-search/competitions-search.component';
+import { CompetitionsNewComponent } from './competitions-new/competitions-new.component';
 
 
 const routes: Routes = [{
@@ -13,8 +14,11 @@ const routes: Routes = [{
 {
   path: 'available',
   component: CompetitionsAvailableComponent
-}
-,
+},
+{
+  path: 'new',
+  component: CompetitionsNewComponent
+},
 {
   path: 'search',
   component: CompetitionsSearchComponent

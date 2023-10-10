@@ -12,8 +12,8 @@ export const routes: Routes = [
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
       { path: 'home', loadChildren: () => import('./home/home.module').then(m => m.HomeModule) },
-      { path: 'available', loadChildren: () => import('./available/available.module').then(m => m.AvailableModule) },
-      { path: 'search', loadChildren: () => import('./search/search.module').then(m => m.SearchModule) }
+      { path: 'competitions', loadChildren: () => import('./competitions/competitions.module').then(m => m.CompetitionsModule) },
+      { path: 'search', loadChildren: () => import('./competitions/competitions.module').then(m => m.CompetitionsModule) }
     ]
   }
 ];

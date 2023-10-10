@@ -3,11 +3,11 @@ import { Router } from '@angular/router';
 import { OntimizeService } from 'ontimize-web-ngx';
 
 @Component({
-  selector: 'app-search-private',
-  templateUrl: './search-private.component.html',
-  styleUrls: ['./search-private.component.css']
+  selector: 'app-competitions-search',
+  templateUrl: './competitions-search.component.html',
+  styleUrls: ['./competitions-search.component.scss']
 })
-export class SearchPrivateComponent implements OnInit {
+export class CompetitionsSearchComponent implements OnInit {
 
   protected service: OntimizeService;
   @ViewChild("privateComp", { static: true }) code: ElementRef;
@@ -18,10 +18,6 @@ export class SearchPrivateComponent implements OnInit {
 
   ngOnInit() {
     this.configureService();
-  }
-
-  onButtonClick() {
-    this.router.navigate(['/main/search']);
   }
 
   protected configureService() {

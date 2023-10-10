@@ -30,7 +30,7 @@
   "PIL_SURNAME": "Surname",
   "NEW_LEAGUE": "New league",
   "NUM_USERS": "Users registered",
-  "COMP_ALL_TITLE": "Available competitions",
+  "COMP_AVAILABLE_TITLE": "Available competitions",
   "COMP_USER_TITLE": "My competitions",
   "SEARCH_PRIVATE_LEAGUE": "Search private competition",
   "COMP_CODE": "Competition code (only necessary for private competitions)",

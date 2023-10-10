@@ -30,7 +30,7 @@
   "PIL_SURNAME": "Apellido",
   "NEW_LEAGUE": "Nueva liga",
   "NUM_USERS": "Usuarios registrados",
-  "COMP_ALL_TITLE": "Competiciones disponibles",
+  "COMP_AVAILABLE_TITLE": "Competiciones disponibles",
   "COMP_USER_TITLE": "Mis competiciones",
   "SEARCH_PRIVATE_LEAGUE": "Buscar competición privada",
   "COMP_CODE": "Código de la competición (sólo para competiciones privadas)",

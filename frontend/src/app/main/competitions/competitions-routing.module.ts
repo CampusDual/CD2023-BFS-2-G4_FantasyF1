@@ -7,8 +7,9 @@ import { CompetitionsDetailComponent } from './competitions-detail/competitions-
 const routes: Routes = [{
   path: '',
   component: CompetitionsHomeComponent
-}, {
-  path: ":COMP_ID",
+},
+{
+  path: ':COMP_ID',
   component: CompetitionsDetailComponent
 }
 ];

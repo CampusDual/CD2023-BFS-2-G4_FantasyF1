@@ -43,5 +43,7 @@
   "TEAM_NAME": "Racing team name",
   "UC_AVAILABLE_MONEY": "Available money",
   "UC_POINTS": "Points",
-  "COMP_CLASIF": "Ranking"
+  "COMP_CLASIF": "Ranking",
+  "INSERT_CODE": "Insert code",
+  "PRIVATE_LEAGUE": "Private competition"
 }

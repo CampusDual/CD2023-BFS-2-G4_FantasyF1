@@ -4,9 +4,8 @@ import { OntimizeWebModule } from 'ontimize-web-ngx';
 import { SharedModule } from '../../shared/shared.module';
 import { HomeRoutingModule } from './home-routing.module';
 import { HomeComponent } from './home.component';
-import { PilotComponent } from '../pilot/pilot.component';
 import { CompetitionsNewComponent } from '../competitions/competitions-new/competitions-new.component';
-import { CompetitionsAllComponent } from '../competitions/competitions-all/competitions-all.component';
+import { CompetitionsAvailableComponent } from '../competitions/competitions-available/competitions-available.component';
 import { CompetitionsHomeComponent } from '../competitions/competitions-home/competitions-home.component';
 import { CompetitionsDetailComponent } from '../competitions/competitions-detail/competitions-detail.component';
 
@@ -18,9 +17,8 @@ import { CompetitionsDetailComponent } from '../competitions/competitions-detail
   ],
   declarations: [
     HomeComponent,
-    PilotComponent,
     CompetitionsNewComponent,
-    CompetitionsAllComponent,
+    CompetitionsAvailableComponent,
     CompetitionsHomeComponent,
     CompetitionsDetailComponent
   ]

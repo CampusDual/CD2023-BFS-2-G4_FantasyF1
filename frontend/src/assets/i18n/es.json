@@ -1,5 +1,5 @@
 {
-  "APP_TITLE": "JEE seed",
+  "APP_TITLE": "Fantasy F1",
   "VERSION": "Versión",
   "EXAMPLE_LOGIN_INFO": "Usuario y contraseña de ejemplo",
   "USERNAME": "Usuario",
@@ -43,5 +43,7 @@
   "TEAM_NAME": "Escudería",
   "UC_AVAILABLE_MONEY": "Dinero disponible",
   "UC_POINTS": "Puntos",
-  "COMP_CLASIF": "Clasificación"
+  "COMP_CLASIF": "Clasificación",
+  "INSERT_CODE": "Introduce el código",
+  "PRIVATE_LEAGUE": "Competición privada"
 }

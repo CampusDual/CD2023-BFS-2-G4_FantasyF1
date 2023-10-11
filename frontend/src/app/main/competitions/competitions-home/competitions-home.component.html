@@ -1,8 +1,10 @@
+<h2 class=title>{{"COMP_USER_TITLE" | oTranslate}}</h2>
+
 <div fxFill fxLayout="column" fxLayoutAlign="start">
     <o-table title="COMP_USER_TITLE" show-title="false" attr="competitionsHomeTable" service="users_competitions"
         entity="userCompetitionFilter" keys="COMP_ID" key="COMP_ID" columns="UC_ID;COMP_ID;COMP_NAME;COMP_DESCRIPTION"
         visible-columns="COMP_NAME;COMP_DESCRIPTION" query-rows="15" horizontal-scroll="false" auto-adjust="true"
-        virtual-scroll="no" delete-button="no" insert-button="yes">
+        virtual-scroll="no" insert-button="no" delete-button="no">
         <o-table-column attr="COMP_NAME" title="COMP_NAME" content-align="center"></o-table-column>
         <o-table-column attr="COMP_DESCRIPTION" title="COMP_DESCRIPTION" content-align="center"></o-table-column>
     </o-table>

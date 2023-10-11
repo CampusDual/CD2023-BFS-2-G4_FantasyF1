@@ -32,8 +32,9 @@ export class CompetitionsNewComponent implements OnInit {
 
   asignarVar(): string{
     const date = new Date();
-    let varia:string = `${date.getMinutes()}${date.getSeconds()}${date.getDay()}${date.getMonth()}${date.getFullYear()}${this.serviceLoginService.getUserName()}`;
-    return varia;
+    let fecha:string = `${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getDate()}${(date.getMonth()+1)}${date.getFullYear()}` 
+    let code:string = `${fecha}${this.serviceLoginService.getUserName()}`;
+    return code;
   }
 
   changeType() {

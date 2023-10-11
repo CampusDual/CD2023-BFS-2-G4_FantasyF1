@@ -1,4 +1,5 @@
-<o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;U" show-header-navigation="no">
+<o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;U" show-header-navigation="no"
+(onDataLoaded)="showPanelCode($event)">
   <o-column title="{{ 'COMP_INFO' | oTranslate }}">
     <o-row>
       <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"
@@ -10,9 +11,15 @@
       </span>
     </o-row>
     <o-row>
+      <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+    </o-row>
+    <o-row>
       <span fxFlex="50">
-        <o-text-input attr="COMP_CODE" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+        <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
       </span>
+
+    </o-row>
+    <o-row>
       <span *ngIf=(isEditable)  fxFlex="50">
         <o-button  attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
           [routerLink]="['main/home/join']"></o-button>
@@ -21,11 +28,8 @@
           <o-button  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
           [routerLink]="['main/home/join']"></o-button>
       </span>
+    </o-row>
     
-    </o-row>
-    <o-row>
-      <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
-    </o-row>
   </o-column>
   <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
     <o-table fxFlex service="competitions" entity="competitionById" parent-keys="COMP_ID"

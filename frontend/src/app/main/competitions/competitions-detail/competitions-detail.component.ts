@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { OTextInputComponent } from 'ontimize-web-ngx';
 import { ServiceLoginService } from 'src/app/shared/service-login.service';
 
 @Component({
@@ -13,7 +14,11 @@ export class CompetitionsDetailComponent implements OnInit {
   ngOnInit() {
   }
 
+  @ViewChild("code_panel", { static: true }) code_panel: OTextInputComponent;
+
   isEditable:boolean = false;
+
+  isPrivate:boolean = true;
 
   showButton(data){
 
@@ -22,7 +27,13 @@ export class CompetitionsDetailComponent implements OnInit {
         this.isEditable=true ;
       }
     }
+  }
 
+  showPanelCode(data){
+    
+    if (data.COMP_CODE === "") {
+      this.isPrivate=false
+    } 
   }
 
 

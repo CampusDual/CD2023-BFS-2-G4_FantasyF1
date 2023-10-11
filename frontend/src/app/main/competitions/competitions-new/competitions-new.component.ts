@@ -39,11 +39,12 @@ export class CompetitionsNewComponent implements OnInit {
 
   changeType() {
     if(this.type_combo.getValue()===false){
-      this.isPrivate=true;
+      document.getElementById('codigo').classList.remove("code_form");
       this.league_code.setValue(this.texto);
     } else{
-      this.isPrivate=false;
+      document.getElementById('codigo').classList.add("code_form")
       this.league_code.setValue("");
+
     }
   }
 

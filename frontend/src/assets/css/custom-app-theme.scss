@@ -1,0 +1,51 @@
+@import 'node_modules/ontimize-web-ngx-theming/ontimize-theme.scss';
+
+/* Color definitions */
+$mat-custom-primary: (
+    50: #ffe7e9,
+    100: #ffc4c5,
+    200: #ff8b80,
+    300: #f35c51,
+    400: #f53725,
+    500: #f32600,
+    600: #e61100,
+    700: #d40000,
+    800: #c70000,
+    900: #b70000,
+    A100: #ffe7e9,
+    A200: #ff8b80,
+    A400: #f53725,
+    A700: #d40000,
+
+    contrast: (50: $black-87-opacity,
+        100: $black-87-opacity,
+        200: $black-87-opacity,
+        300: white,
+        400: white,
+        500: $white-87-opacity,
+        600: $white-87-opacity,
+        700: $white-87-opacity,
+        800: $white-87-opacity,
+        900: $white-87-opacity,
+        A100: $black-87-opacity,
+        A200: white,
+        A400: white,
+        A700: white,
+    )
+);
+
+/* Define a theme for your theme using the Material Design palettes available in palette.scss
+* (imported above). For each palette, you can optionally specify a default, lighter, and darker
+* hue. Available color palettes: https://material.io/design/color/ */
+$primary: mat-palette($mat-custom-primary);
+$accent: mat-palette($mat-deep-orange, A200, A100, A400);
+
+/* The warn palette is optional (defaults to red).*/
+$warn: mat-palette($mat-red);
+
+/* Create the theme object (a Sass map containing all of the palettes). */
+/* Light theme */
+$theme: o-mat-light-theme($primary, $accent, $warn);
+
+/* Dark theme */
+/*$theme: o-mat-dark-theme($primary, $accent, $warn);*/

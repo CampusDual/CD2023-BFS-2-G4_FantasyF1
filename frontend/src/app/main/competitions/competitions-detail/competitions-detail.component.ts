@@ -1,5 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { OTextInputComponent } from 'ontimize-web-ngx';
+import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
+import { OTextInputComponent, OntimizeService } from 'ontimize-web-ngx';
 import { ServiceLoginService } from 'src/app/shared/service-login.service';
 
 @Component({
@@ -9,16 +10,28 @@ import { ServiceLoginService } from 'src/app/shared/service-login.service';
 })
 export class CompetitionsDetailComponent implements OnInit {
 
-  constructor(private serviceLoginService : ServiceLoginService) { }
+  protected service: OntimizeService;
 
-  ngOnInit() {
-  }
+  dataCompetition: {}; 
 
   @ViewChild("code_panel", { static: true }) code_panel: OTextInputComponent;
 
   isEditable:boolean = false;
 
   isPrivate:boolean = true;
+  
+  constructor(private serviceLoginService : ServiceLoginService, protected injector: Injector, private router: Router) {
+    this.service = this.injector.get(OntimizeService);
+   }
+
+  ngOnInit() {
+    this.configureService();
+  }
+
+  protected configureService() {
+    const conf = this.service.getDefaultServiceConfiguration('users_competitions');
+    this.service.configureService(conf);
+  }
 
   showButton(data){
 
@@ -30,12 +43,19 @@ export class CompetitionsDetailComponent implements OnInit {
   }
 
   showPanelCode(data){
-    
+    this.dataCompetition=data;
     if (data.COMP_CODE === "") {
       this.isPrivate=false
     } 
   }
 
+  joinLeague(){
+    
+    this.service.insert({ "COMP_ID": this.dataCompetition["COMP_ID"], "USER_": this.serviceLoginService.getUserName()}, "userCompetition" ).
+    subscribe(resp => {
+      this.router.navigate(['/main/home/', this.dataCompetition["COMP_ID"]]);
+    });
+  }
 
 
 }

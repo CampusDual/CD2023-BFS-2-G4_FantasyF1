@@ -21,12 +21,12 @@
     </o-row>
     <o-row>
       <span *ngIf=(isEditable)  fxFlex="50">
-        <o-button  attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
-          [routerLink]="['main/home/join']"></o-button>
+        <o-button   attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
+         ></o-button>
       </span>
       <span *ngIf=(!isEditable)  fxFlex="50">
-          <o-button  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
-          [routerLink]="['main/home/join']"></o-button>
+          <o-button (click)="joinLeague()"  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
+         ></o-button>
       </span>
     </o-row>
     

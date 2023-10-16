@@ -41,7 +41,7 @@ public class UserCompetitionService implements IUserCompetitionService {
 
     @Override
     public EntityResult userCompetitionInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        return this.daoHelper.insert(userCompetitionDao, attributes);
+        return this.daoHelper.insert(this.userCompetitionDao, attributes);
     }
 
     @Override

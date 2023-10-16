@@ -10,6 +10,7 @@ import { OntimizeService } from 'ontimize-web-ngx';
 export class CompetitionsSearchComponent implements OnInit {
 
   protected service: OntimizeService;
+  
   @ViewChild("privateComp", { static: true }) code: ElementRef;
 
   constructor(protected injector: Injector, private router: Router) {

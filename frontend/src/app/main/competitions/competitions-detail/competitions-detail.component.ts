@@ -19,6 +19,8 @@ export class CompetitionsDetailComponent implements OnInit {
   isEditable:boolean = false;
 
   isPrivate:boolean = true;
+
+  isTabVisible: boolean = false;
   
   constructor(private serviceLoginService : ServiceLoginService, protected injector: Injector, private router: Router) {
     this.service = this.injector.get(OntimizeService);
@@ -55,6 +57,10 @@ export class CompetitionsDetailComponent implements OnInit {
     subscribe(resp => {
       this.router.navigate(['/main/home/', this.dataCompetition["COMP_ID"]]);
     });
+  }
+
+  editTeam(){
+    this.isTabVisible=true;
   }
 
 

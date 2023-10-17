@@ -1,47 +1,55 @@
-<o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;U" show-header-navigation="no"
-(onDataLoaded)="showPanelCode($event)">
-  <o-column title="{{ 'COMP_INFO' | oTranslate }}">
-    <o-row>
-      <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"
-        style="display: none;"></o-text-input>
-    </o-row>
-    <o-row>
-      <span fxFlex="50">
-        <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
-      </span>
-    </o-row>
-    <o-row>
-      <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
-    </o-row>
-    <o-row>
-      <span fxFlex="50">
-        <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
-      </span>
+<mat-tab-group animationDuration="1000ms">
+  <mat-tab label="Info de la competición">
 
-    </o-row>
-    <o-row>
-      <span *ngIf=(isEditable)  fxFlex="50">
-        <o-button   attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
-         ></o-button>
-      </span>
-      <span *ngIf=(!isEditable)  fxFlex="50">
-          <o-button (click)="joinLeague()"  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
-         ></o-button>
-      </span>
-    </o-row>
+    <o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;U" show-header-navigation="no"
+    (onDataLoaded)="showPanelCode($event)">
+      <o-column title="{{ 'COMP_INFO' | oTranslate }}">
+        <o-row>
+          <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"
+            style="display: none;"></o-text-input>
+        </o-row>
+        <o-row>
+          <span fxFlex="50">
+            <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+          </span>
+        </o-row>
+        <o-row>
+          <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+        </o-row>
+        <o-row>
+          <span fxFlex="50">
+            <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+          </span>
     
-  </o-column>
-  <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
-    <o-table fxFlex service="competitions" entity="competitionById" parent-keys="COMP_ID"
-      columns="COMP_ID;COMP_NAME;USER_;P1NAME;P1SURNAME;P2NAME;P2SURNAME;TEAM_NAME;UC_AVAILABLE_MONEY;UC_POINTS"
-      visible-columns="USER_;P1SURNAME;P2SURNAME;TEAM_NAME;UC_AVAILABLE_MONEY;UC_POINTS" insert-button="no"
-      delete-button="no" query-rows="10" (onDataLoaded)="showButton($event)">
-      <o-table-column attr="USER_" title="USER_" class="center"></o-table-column>
-      <o-table-column attr="P1SURNAME" title="P1SURNAME" class="center"></o-table-column>
-      <o-table-column attr="P2SURNAME" title="P2SURNAME" class="center"></o-table-column>
-      <o-table-column attr="TEAM_NAME" title="TEAM_NAME" class="center"></o-table-column>
-      <o-table-column attr="UC_AVAILABLE_MONEY" title="UC_AVAILABLE_MONEY" class="center"></o-table-column>
-      <o-table-column attr="UC_POINTS" title="UC_POINTS" class="center"></o-table-column>
-    </o-table>
-  </o-column>
-</o-form>
+        </o-row>
+        <o-row>
+          <span *ngIf=(isEditable)  fxFlex="50">
+            <o-button  (click)="editTeam()"  attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
+             ></o-button>
+          </span>
+          <span *ngIf=(!isEditable)  fxFlex="50">
+              <o-button (click)="joinLeague()"  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
+             ></o-button>
+          </span>
+        </o-row>
+        
+      </o-column>
+      <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
+        <o-table fxFlex service="competitions" entity="competitionById" parent-keys="COMP_ID"
+          columns="COMP_ID;COMP_NAME;USER_;P1NAME;P1SURNAME;P2NAME;P2SURNAME;TEAM_NAME;UC_AVAILABLE_MONEY;UC_POINTS"
+          visible-columns="USER_;P1SURNAME;P2SURNAME;TEAM_NAME;UC_AVAILABLE_MONEY;UC_POINTS" insert-button="no"
+          delete-button="no" query-rows="10" (onDataLoaded)="showButton($event)">
+          <o-table-column attr="USER_" title="USER_" class="center"></o-table-column>
+          <o-table-column attr="P1SURNAME" title="P1SURNAME" class="center"></o-table-column>
+          <o-table-column attr="P2SURNAME" title="P2SURNAME" class="center"></o-table-column>
+          <o-table-column attr="TEAM_NAME" title="TEAM_NAME" class="center"></o-table-column>
+          <o-table-column attr="UC_AVAILABLE_MONEY" title="UC_AVAILABLE_MONEY" class="center"></o-table-column>
+          <o-table-column attr="UC_POINTS" title="UC_POINTS" class="center"></o-table-column>
+        </o-table>
+      </o-column>
+    </o-form>
+  </mat-tab>
+  <mat-tab *ngIf="isTabVisible" label="Editar equipo">
+    
+  </mat-tab>
+</mat-tab-group>

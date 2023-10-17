@@ -1,6 +1,5 @@
 import { Component, OnInit, ViewChild  } from '@angular/core';
 import { OComboComponent, OTextInputComponent } from 'ontimize-web-ngx';
-import { ServiceLoginService } from 'src/app/shared/service-login.service';
 
 @Component({
   selector: 'app-new_competition',
@@ -24,7 +23,7 @@ export class CompetitionsNewComponent implements OnInit {
 
   public texto: string = this.asignarVar();
 
-  constructor(private serviceLoginService : ServiceLoginService) {
+  constructor() {
    }
 
   ngOnInit() {
@@ -32,8 +31,11 @@ export class CompetitionsNewComponent implements OnInit {
 
   asignarVar(): string{
     const date = new Date();
-    let fecha:string = `${date.getHours()}${date.getMinutes()}${date.getSeconds()}${date.getDate()}${(date.getMonth()+1)}${date.getFullYear()}` 
-    let code:string = `${fecha}${this.serviceLoginService.getUserName()}`;
+    let sessionData = localStorage.getItem("com.ontimize.web.ngx.jee.seed");
+    let sessionUser = JSON.parse(sessionData).session["user"];
+    let numRandom = Math.floor(Math.random() * (10000 - 0 + 1)) + 0;
+    let fecha:string = `${date.getHours()}${date.getMinutes()}${date.getSeconds()}${numRandom}${date.getDate()}${date.getMonth()}${date.getFullYear()}` 
+    let code:string = `${fecha}${sessionUser}`;
     return code;
   }
 

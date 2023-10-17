@@ -1,7 +1,4 @@
-<mat-tab-group animationDuration="1000ms">
-  <mat-tab label="Info de la competición">
-
-    <o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;U" show-header-navigation="no"
+<o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;U" show-header-navigation="no"
     (onDataLoaded)="showPanelCode($event)">
       <o-column title="{{ 'COMP_INFO' | oTranslate }}">
         <o-row>
@@ -48,8 +45,3 @@
         </o-table>
       </o-column>
     </o-form>
-  </mat-tab>
-  <mat-tab *ngIf="isTabVisible" label="Editar equipo">
-    
-  </mat-tab>
-</mat-tab-group>

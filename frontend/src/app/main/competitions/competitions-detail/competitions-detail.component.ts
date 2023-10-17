@@ -1,7 +1,6 @@
-import { Component, Injector, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OTextInputComponent, OntimizeService } from 'ontimize-web-ngx';
-import { ServiceLoginService } from 'src/app/shared/service-login.service';
 
 @Component({
   selector: 'app-competitions-detail',
@@ -10,21 +9,18 @@ import { ServiceLoginService } from 'src/app/shared/service-login.service';
 })
 export class CompetitionsDetailComponent implements OnInit {
 
-  protected service: OntimizeService;
-
-  dataCompetition: {}; 
-
   @ViewChild("code_panel", { static: true }) code_panel: OTextInputComponent;
 
+  dataCompetition: {}; 
+  arrayPilots: Array<any> = [];
+
   isEditable:boolean = false;
-
   isPrivate:boolean = true;
-
-  isTabVisible: boolean = false;
   
-  constructor(private serviceLoginService : ServiceLoginService, protected injector: Injector, private router: Router) {
-    this.service = this.injector.get(OntimizeService);
-   }
+  constructor(
+    protected service: OntimizeService,
+    private router: Router
+    ) {}
 
   ngOnInit() {
     this.configureService();
@@ -37,8 +33,11 @@ export class CompetitionsDetailComponent implements OnInit {
 
   showButton(data){
 
+    let sessionData = localStorage.getItem("com.ontimize.web.ngx.jee.seed");
+    let sessionUser = JSON.parse(sessionData).session["user"];
+
     for(let element of data){
-      if (element.USER_ === this.serviceLoginService.getUserName() ){
+      if (element.USER_ === sessionUser ){
         this.isEditable=true ;
       }
     }
@@ -52,15 +51,25 @@ export class CompetitionsDetailComponent implements OnInit {
   }
 
   joinLeague(){
-    
-    this.service.insert({ "COMP_ID": this.dataCompetition["COMP_ID"], "USER_": this.serviceLoginService.getUserName()}, "userCompetition" ).
-    subscribe(resp => {
+    let sessionData = localStorage.getItem("com.ontimize.web.ngx.jee.seed");
+    let sessionUser = JSON.parse(sessionData).session["user"];
+    this.service.insert({ "COMP_ID": this.dataCompetition["COMP_ID"], "USER_": sessionUser}, "userCompetition" )
+      .subscribe(resp => {
       this.router.navigate(['/main/home/', this.dataCompetition["COMP_ID"]]);
     });
   }
 
   editTeam(){
-    this.isTabVisible=true;
+   this.queryUserPilots();
+  }
+
+  queryUserPilots(){
+    this.service.query({},["P1SURNAME", "P2SURNAME", "UC_AVAILABLE_MONEY" ], "teamDetails").subscribe(resp => {
+      console.log("pilotos user ");
+      console.log(resp.data[0].P1SURNAME);
+      console.log(resp.data[0].P2SURNAME);
+      console.log(resp.data[0].UC_AVAILABLE_MONEY);  
+    })
   }
 
 

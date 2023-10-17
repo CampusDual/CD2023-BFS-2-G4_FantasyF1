@@ -33,6 +33,13 @@ public class UserCompetitionService implements IUserCompetitionService {
     }
 
     @Override
+    public EntityResult teamDetailsQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        keysValues.put(UserDao.ID, authentication.getName());
+        return this.daoHelper.query(this.userCompetitionDao, keysValues, attrMap,"teamDetails");
+    }
+
+    @Override
     public EntityResult userCompetitionFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         keysValues.put(UserDao.ID, authentication.getName());

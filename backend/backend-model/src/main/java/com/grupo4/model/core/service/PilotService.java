@@ -22,22 +22,22 @@ public class PilotService implements IPilotService {
     @Autowired
     private DefaultOntimizeDaoHelper daoHelper;
 
-
+    @Override
     public EntityResult pilotQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
         return this.daoHelper.query(this.pilotDao, keysValues, attributes);
     }
 
-
+    @Override
     public EntityResult pilotInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
         return null;
     }
 
-
+    @Override
     public EntityResult pilotUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException {
         return null;
     }
 
-
+    @Override
     public EntityResult pilotDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
         return null;
     }

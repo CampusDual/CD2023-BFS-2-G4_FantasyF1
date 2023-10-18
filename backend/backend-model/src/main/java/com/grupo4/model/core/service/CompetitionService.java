@@ -30,11 +30,12 @@ public class CompetitionService implements ICompetitionService {
     @Autowired
     private UserCompetitionService userCompetitionService;
 
-
+    @Override
     public EntityResult competitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap);
     }
 
+    @Override
     public EntityResult publicCountCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "publicCount");
     }
@@ -44,6 +45,7 @@ public class CompetitionService implements ICompetitionService {
         return this.daoHelper.query(this.competitionDao, keysValues, attrMap, "competitionById");
     }
 
+    @Override
     public EntityResult competitionInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
         Map<String, Object> keyMap = new HashMap<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
@@ -54,10 +56,12 @@ public class CompetitionService implements ICompetitionService {
         return res;
     }
 
+    @Override
     public EntityResult competitionUpdate(Map<String, Object> attrMap, Map<String, Object> keyMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.update(competitionDao, attrMap, keyMap);
     }
 
+    @Override
     public EntityResult competitionDelete(Map<String, Object> keyMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.delete(this.competitionDao, keyMap);
     }

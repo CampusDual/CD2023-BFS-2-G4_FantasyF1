@@ -14,6 +14,7 @@ public interface IUserCompetitionService {
     public EntityResult teamDetailsQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
     public EntityResult selectedTeamQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
     public EntityResult userCompetitionInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException;
+    public EntityResult userCompetitionJoinInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException;
     public EntityResult userCompetitionUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException;
     public EntityResult userCompetitionDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException;
     public EntityResult userCompetitionFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;

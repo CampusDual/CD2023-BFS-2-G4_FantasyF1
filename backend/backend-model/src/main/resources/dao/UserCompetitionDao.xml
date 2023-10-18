@@ -48,5 +48,22 @@
                 ]]>
             </Sentence>
         </Query>
+        <Query id="selectedTeam">
+            <Sentence>
+                <![CDATA[
+                    WITH COMPETI AS
+                        (SELECT
+                            UC.UC_ID, UC.COMP_ID, T.TEAM_ID, T.TEAM_NAME, T.TEAM_PRICE
+                        FROM
+                            TEAMS T
+                        RIGHT JOIN USERS_COMPETITIONS UC ON
+                            T.TEAM_ID = UC.TEAM_ID)
+                    SELECT #COLUMNS#
+                    FROM COMPETI
+                    #WHERE#
+                    #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

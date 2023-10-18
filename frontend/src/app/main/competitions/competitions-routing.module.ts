@@ -5,6 +5,7 @@ import { CompetitionsDetailComponent } from './competitions-detail/competitions-
 import { CompetitionsAvailableComponent } from './competitions-available/competitions-available.component';
 import { CompetitionsSearchComponent } from './competitions-search/competitions-search.component';
 import { CompetitionsNewComponent } from './competitions-new/competitions-new.component';
+import { CompetitionsTeamEditComponent } from './competitions-team-edit/competitions-team-edit.component';
 
 
 const routes: Routes = [{
@@ -22,6 +23,11 @@ const routes: Routes = [{
 {
   path: 'search',
   component: CompetitionsSearchComponent
+}
+,
+{
+  path: 'edit/:COMP_ID',
+  component: CompetitionsTeamEditComponent
 }
 ,
 {

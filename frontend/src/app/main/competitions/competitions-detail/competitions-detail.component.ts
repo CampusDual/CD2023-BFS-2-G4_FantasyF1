@@ -51,8 +51,6 @@ export class CompetitionsDetailComponent implements OnInit {
   }
 
   joinLeague(){
-    let sessionData = localStorage.getItem("com.ontimize.web.ngx.jee.seed");
-    let sessionUser = JSON.parse(sessionData).session["user"];
     this.service.insert({ "COMP_ID": this.dataCompetition["COMP_ID"] }, "userCompetitionJoin" )
       .subscribe(resp => {
       this.router.navigate(['/main/home/', this.dataCompetition["COMP_ID"]]);
@@ -60,17 +58,10 @@ export class CompetitionsDetailComponent implements OnInit {
   }
 
   editTeam(){
-   this.queryUserPilots();
+   this.router.navigate(['/main/competitions/edit', this.dataCompetition["COMP_ID"]]);
   }
 
-  queryUserPilots(){
-    this.service.query({},["P1SURNAME", "P2SURNAME", "UC_AVAILABLE_MONEY" ], "teamDetails").subscribe(resp => {
-      console.log("pilotos user ");
-      console.log(resp.data[0].P1SURNAME);
-      console.log(resp.data[0].P2SURNAME);
-      console.log(resp.data[0].UC_AVAILABLE_MONEY);  
-    })
-  }
+  
 
 
 }

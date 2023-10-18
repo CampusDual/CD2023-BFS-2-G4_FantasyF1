@@ -7,10 +7,11 @@ import { CompetitionsNewComponent } from './competitions-new/competitions-new.co
 import { CompetitionsSearchComponent } from './competitions-search/competitions-search.component';
 import { CompetitionsAvailableComponent } from './competitions-available/competitions-available.component';
 import { CompetitionsDetailComponent } from './competitions-detail/competitions-detail.component';
+import { CompetitionsTeamEditComponent } from './competitions-team-edit/competitions-team-edit.component';
 
 
 @NgModule({
-  declarations: [CompetitionsHomeComponent, CompetitionsNewComponent, CompetitionsSearchComponent, CompetitionsAvailableComponent, CompetitionsDetailComponent],
+  declarations: [CompetitionsHomeComponent, CompetitionsNewComponent, CompetitionsSearchComponent, CompetitionsAvailableComponent, CompetitionsDetailComponent, CompetitionsTeamEditComponent],
   imports: [
     CommonModule,
     OntimizeWebModule,

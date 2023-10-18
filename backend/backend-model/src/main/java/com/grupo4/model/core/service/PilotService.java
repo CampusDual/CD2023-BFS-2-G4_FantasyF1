@@ -29,7 +29,7 @@ public class PilotService implements IPilotService {
 
     @Override
     public EntityResult pilotInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        return null;
+        return this.daoHelper.insert(this.pilotDao, attributes);
     }
 
     @Override

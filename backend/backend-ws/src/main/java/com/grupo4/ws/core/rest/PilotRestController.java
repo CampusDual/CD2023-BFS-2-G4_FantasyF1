@@ -31,5 +31,4 @@ public class PilotRestController extends ORestController<IPilotService> {
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-
 }

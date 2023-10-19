@@ -1,6 +1,7 @@
 package com.grupo4.ws.core.rest;
 
 import com.grupo4.model.core.dao.PilotDao;
+import com.grupo4.model.core.dao.RaceDao;
 import com.grupo4.model.core.service.PilotService;
 import org.json.JSONArray;
 import org.json.JSONObject;

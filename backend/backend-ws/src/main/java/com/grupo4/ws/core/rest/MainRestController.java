@@ -3,6 +3,7 @@ package com.grupo4.ws.core.rest;
 import com.grupo4.model.core.dao.PilotDao;
 import com.grupo4.model.core.dao.RaceDao;
 import com.grupo4.model.core.service.PilotService;
+import com.grupo4.model.core.service.RaceService;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,9 @@ public class MainRestController {
 	@Autowired
 	PilotService pilotService;
 
+	@Autowired
+	RaceService raceService;
+
 	@RequestMapping(value = "/main", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String main() {
 		return "index";
@@ -31,6 +35,7 @@ public class MainRestController {
 	@RequestMapping(value = "/actualizarDatosApi", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
 	public String main2() {
 		//getPilots();
+		getRaces();
 		System.out.println("Actualizando datos de la api");
 		return "OK";
 	}
@@ -84,7 +89,7 @@ public class MainRestController {
 	}
 
 	public void getRaces(){
-		Map<String, Object> circuitMap = new HashMap<>();
+		Map<String, Object> raceMap = new HashMap<>();
 		JSONObject response = getConection("http://ergast.com/api/f1/current.json");
 		if (response == null){
 
@@ -94,12 +99,13 @@ public class MainRestController {
 		JSONArray racesArray = new JSONArray(jsonObjRaceTable.get("Races").toString());
 		for (Object r : racesArray) {
 			JSONObject jobj = (JSONObject) r;
-			circuitMap.put(RaceDao.RAC_ROUND, jobj.get("round"));
-			circuitMap.put(RaceDao.RAC_NAME, jobj.get("raceName"));
-			circuitMap.put(RaceDao.RAC_URL, jobj.get("url"));
+			raceMap.put(RaceDao.RAC_ROUND, jobj.get("round"));
+			raceMap.put(RaceDao.RAC_NAME, jobj.get("raceName"));
+			raceMap.put(RaceDao.RAC_URL, jobj.get("url"));
 			JSONObject jsonObjCircuit = (JSONObject) ((JSONObject)r).get("Circuit");
-			circuitMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
-			circuitMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
+			raceMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
+			raceMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
+			this.raceService.raceInsert(raceMap);
 		}
 	}
 

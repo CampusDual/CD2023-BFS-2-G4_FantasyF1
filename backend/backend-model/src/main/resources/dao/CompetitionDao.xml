@@ -33,22 +33,14 @@
         <Query id="competitionById">
             <Sentence>
                 <![CDATA[
-                    WITH COMPETI AS
-                        (SELECT C.COMP_ID, C.COMP_NAME, UC.USER_, UC.UC_ID, P1.PIL_NAME AS P1NAME, P1.PIL_SURNAME AS P1SURNAME,
-                                P2.PIL_NAME AS P2NAME, P2.PIL_SURNAME AS P2SURNAME, T.TEAM_NAME, UC.UC_AVAILABLE_MONEY,
-                                UC.UC_POINTS, c.COMP_DESCRIPTION, c.COMP_CODE
+                    WITH COMP_BY_ID AS
+                        (SELECT C.COMP_ID, C.COMP_NAME, UC.USER_, UC.UC_ID, UC.UC_AVAILABLE_MONEY, UC.UC_POINTS, c.COMP_DESCRIPTION, c.COMP_CODE
                         FROM COMPETITIONS C
                         LEFT JOIN USERS_COMPETITIONS UC
                         ON C.COMP_ID = UC.COMP_ID
-                        LEFT JOIN PILOTS P1
-                        ON UC.PIL_ID_1 = P1.PIL_ID
-                        LEFT JOIN PILOTS P2
-                        ON UC.PIL_ID_2 = P2.PIL_ID
-                        LEFT JOIN TEAMS T
-                        ON UC.TEAM_ID = T.TEAM_ID
                         ORDER BY UC.UC_POINTS DESC)
                     SELECT #COLUMNS#
-                    FROM COMPETI
+                    FROM COMP_BY_ID
                     #WHERE#
                     #ORDER#;
                 ]]>

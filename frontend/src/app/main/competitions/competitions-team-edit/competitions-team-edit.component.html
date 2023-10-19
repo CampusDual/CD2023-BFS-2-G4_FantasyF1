@@ -1,7 +1,7 @@
 <div class="hiddenTable" fxFill fxLayout="column" fxLayoutAlign="start">
-  <o-table (onDataLoaded)="loadData($event)" title="cambiar titulo" show-title="false" attr="competitionsEditTable" service="users_competitions"
-      entity="selectedTeam" keys="COMP_ID" key="COMP_ID" columns="UC_ID;COMP_ID;TEAM_ID;TEAM_NAME;TEAM_PRICE"
-      visible-columns="UC_ID;COMP_ID;TEAM_ID;TEAM_NAME;TEAM_PRICE" query-rows="15" horizontal-scroll="false" auto-adjust="true"
+  <o-table (onDataLoaded)="loadData($event)" title="cambiar titulo" show-title="false" attr="competitionsEditTable" service="competitions"
+      entity="competitionById" keys="COMP_ID" key="COMP_ID" columns="COMP_ID;COMP_NAME;USER_;UC_AVAILABLE_MONEY;UC_POINTS"
+      visible-columns="COMP_NAME;USER_;UC_AVAILABLE_MONEY;UC_POINTS" query-rows="15" horizontal-scroll="false" auto-adjust="true"
       virtual-scroll="no" insert-button="no" delete-button="no">
       
   </o-table>

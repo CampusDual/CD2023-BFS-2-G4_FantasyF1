@@ -1,0 +1,15 @@
+<JdbcEntitySetup
+        xmlns="http://www.ontimize.com/schema/jdbc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
+        catalog="" schema="${mainschema}" table="RESULTS"
+        datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
+    <DeleteKeys>
+        <Column>RES_ID</Column>
+    </DeleteKeys>
+    <UpdateKeys>
+        <Column>RES_ID</Column>
+    </UpdateKeys>
+    <Queries>
+    </Queries>
+</JdbcEntitySetup>

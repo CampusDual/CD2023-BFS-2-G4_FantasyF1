@@ -43,8 +43,8 @@ public class MainRestController {
 
     @RequestMapping(value = "/actualizarDatosApi", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String main2() {
-        getPilots();
-        //getRaces();
+        //getPilots();
+        getRaces();
         //getResults();
         System.out.println("Actualizando datos de la api");
         return "OK";
@@ -90,9 +90,7 @@ public class MainRestController {
             JSONObject jobj = (JSONObject) p;
 
             String st1 = jobj.get("driverId").toString();
-            System.out.println(st1);
             String st2 = getPilDriverId(st1).toString();
-            System.out.println(st2);
 
             if (st2.contains(st1)){
                 System.out.println("Piloto repetido");
@@ -120,16 +118,24 @@ public class MainRestController {
         JSONArray racesArray = new JSONArray(jsonObjRaceTable.get("Races").toString());
         for (Object r : racesArray) {
             JSONObject jobjRaces = (JSONObject) r;
-            raceMap.put(RaceDao.RAC_ROUND, jobjRaces.get("round"));
-            raceMap.put(RaceDao.RAC_NAME, jobjRaces.get("raceName"));
-            raceMap.put(RaceDao.RAC_URL, jobjRaces.get("url"));
             JSONObject jsonObjCircuit = (JSONObject) ((JSONObject) r).get("Circuit");
-            raceMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
-            raceMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
-            //Pendiente añadir los datos de la localización(lat, long, locality, country)
-            //JSONObject jsonLocation = (JSONObject) (jsonObjCircuit.get("Location"));
-            //jsonLocation.get("lat");
-            this.raceService.raceInsert(raceMap);
+
+            String st1 = jsonObjCircuit.get("circuitId").toString();
+            String st2 = getCircuitId(st1).toString();
+
+            if (st2.contains(st1)){
+                System.out.println("Circuito repetido");
+            } else {
+                raceMap.put(RaceDao.RAC_ROUND, jobjRaces.get("round"));
+                raceMap.put(RaceDao.RAC_NAME, jobjRaces.get("raceName"));
+                raceMap.put(RaceDao.RAC_URL, jobjRaces.get("url"));
+                raceMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
+                raceMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
+                //Pendiente añadir los datos de la localización(lat, long, locality, country)
+                //JSONObject jsonLocation = (JSONObject) (jsonObjCircuit.get("Location"));
+                //jsonLocation.get("lat");
+                this.raceService.raceInsert(raceMap);
+            }
         }
     }
 

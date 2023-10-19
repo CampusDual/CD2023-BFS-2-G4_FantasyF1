@@ -67,11 +67,11 @@ public class MainRestController {
 		if (response == null){
 
 		}
-		JSONObject jsonObj2 = (JSONObject) response.get("MRData");
-		JSONObject jsonObj3 = (JSONObject)(jsonObj2.get("DriverTable"));
-		JSONArray pilotsArray = new JSONArray(jsonObj3.get("Drivers").toString());
-		for(Object obj : pilotsArray){
-			JSONObject jobj = (JSONObject) obj;
+		JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
+		JSONObject jsonObjDriverTable = (JSONObject)(jsonObjMRD.get("DriverTable"));
+		JSONArray pilotsArray = new JSONArray(jsonObjDriverTable.get("Drivers").toString());
+		for(Object p : pilotsArray){
+			JSONObject jobj = (JSONObject) p;
 			pilotMap.put(PilotDao.PIL_DRIVER_ID, jobj.get("driverId"));
 			pilotMap.put(PilotDao.PIL_NAME, jobj.get("givenName"));
 			pilotMap.put(PilotDao.PIL_SURNAME, jobj.get("familyName"));
@@ -80,6 +80,26 @@ public class MainRestController {
 			pilotMap.put(PilotDao.PIL_URL, jobj.get("url"));
 			pilotMap.put(PilotDao.PIL_NUMBER, jobj.get("permanentNumber"));
 			this.pilotService.pilotInsert(pilotMap);
+		}
+	}
+
+	public void getRaces(){
+		Map<String, Object> circuitMap = new HashMap<>();
+		JSONObject response = getConection("http://ergast.com/api/f1/current.json");
+		if (response == null){
+
+		}
+		JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
+		JSONObject jsonObjRaceTable = (JSONObject)(jsonObjMRD.get("RaceTable"));
+		JSONArray racesArray = new JSONArray(jsonObjRaceTable.get("Races").toString());
+		for (Object r : racesArray) {
+			JSONObject jobj = (JSONObject) r;
+			circuitMap.put(RaceDao.RAC_ROUND, jobj.get("round"));
+			circuitMap.put(RaceDao.RAC_NAME, jobj.get("raceName"));
+			circuitMap.put(RaceDao.RAC_URL, jobj.get("url"));
+			JSONObject jsonObjCircuit = (JSONObject) ((JSONObject)r).get("Circuit");
+			circuitMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
+			circuitMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
 		}
 	}
 

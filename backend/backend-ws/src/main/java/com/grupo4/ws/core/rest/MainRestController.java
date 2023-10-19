@@ -1,6 +1,5 @@
 package com.grupo4.ws.core.rest;
 
-import com.grupo4.api.core.service.IPilotService;
 import com.grupo4.model.core.dao.PilotDao;
 import com.grupo4.model.core.service.PilotService;
 import org.json.JSONArray;

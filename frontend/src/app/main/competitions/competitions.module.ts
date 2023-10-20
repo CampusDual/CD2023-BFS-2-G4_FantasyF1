@@ -8,6 +8,7 @@ import { CompetitionsSearchComponent } from './competitions-search/competitions-
 import { CompetitionsAvailableComponent } from './competitions-available/competitions-available.component';
 import { CompetitionsDetailComponent } from './competitions-detail/competitions-detail.component';
 import { CompetitionsTeamEditComponent } from './competitions-team-edit/competitions-team-edit.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import { CompetitionsTeamEditComponent } from './competitions-team-edit/competit
   imports: [
     CommonModule,
     OntimizeWebModule,
-    CompetitionsRoutingModule
+    CompetitionsRoutingModule,
+    SharedModule
   ],
   exports: [
     CompetitionsNewComponent,

@@ -1,7 +1,13 @@
 <div fxFill fxLayout="column" fxLayoutAlign="start">
   <o-table (onDataLoaded)="loadData($event)" title="cambiar titulo" show-title="false" attr="competitionsEditTable" service="users_competitions_pilots"
       entity="userCompetitionPilotFilter" keys="COMP_ID" key="COMP_ID" columns="UCP_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID;COMP_ID"
-      visible-columns="PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_" query-rows="15" horizontal-scroll="false" auto-adjust="true"
+      visible-columns="PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_" query-rows="22" horizontal-scroll="false" auto-adjust="true"
       virtual-scroll="no" insert-button="no" delete-button="no">
+      <o-table-column attr="PIL_NAME" title="PIL_NAME" content-align="center"></o-table-column>
+      <o-table-column attr="PIL_SURNAME" title="PIL_SURNAME" content-align="center"></o-table-column>
+      <o-table-column attr="PIL_PRICE" title="PIL_PRICE" content-align="center"></o-table-column>
+      <o-table-column attr="USER_" title="USER_" content-align="center">
+        <app-competitions-edit-type-column-renderer></app-competitions-edit-type-column-renderer>
+      </o-table-column>
   </o-table>
 </div>

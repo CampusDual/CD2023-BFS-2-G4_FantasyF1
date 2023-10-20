@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { OTextInputComponent, OntimizeService } from 'ontimize-web-ngx';
+import { DialogService, OTextInputComponent, OntimizeService } from 'ontimize-web-ngx';
 
 @Component({
   selector: 'app-competitions-detail',
@@ -12,6 +12,7 @@ export class CompetitionsDetailComponent implements OnInit {
   @ViewChild("code_panel", { static: true }) code_panel: OTextInputComponent;
 
   dataCompetition: {}; 
+  dataTable: any; 
   arrayPilots: Array<any> = [];
 
   isEditable:boolean = false;
@@ -19,7 +20,8 @@ export class CompetitionsDetailComponent implements OnInit {
   
   constructor(
     protected service: OntimizeService,
-    private router: Router
+    private router: Router,
+    protected dialogService: DialogService
     ) {}
 
   ngOnInit() {
@@ -50,11 +52,19 @@ export class CompetitionsDetailComponent implements OnInit {
     } 
   }
 
+  loadDataTable(data){
+    this.dataTable=data;
+  }
+
   joinLeague(){
-    this.service.insert({ "COMP_ID": this.dataCompetition["COMP_ID"] }, "userCompetitionJoin" )
+    if(this.dataTable.length>9){
+      this.dialogService.info("UNAVAILABLE_LEAGUE_TITLE",  "UNAVAILABLE_LEAGUE_LIMIT_USERS")
+    } else{
+      this.service.insert({ "COMP_ID": this.dataCompetition["COMP_ID"] }, "userCompetitionJoin" )
       .subscribe(resp => {
       this.router.navigate(['/main/home/', this.dataCompetition["COMP_ID"]]);
     });
+    }
   }
 
   editTeam(){

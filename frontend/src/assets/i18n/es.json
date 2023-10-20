@@ -47,5 +47,7 @@
   "COMP_CLASIF": "Clasificación",
   "INSERT_CODE": "Introduce el código",
   "PRIVATE_LEAGUE": "Competición privada",
-  "FOOTER_IMG": "Fotografía de Pedrik (flikr), distribuída bajo licencia CC-BY 2.0."
+  "FOOTER_IMG": "Fotografía de Pedrik (flikr), distribuída bajo licencia CC-BY 2.0.",
+  "UNAVAILABLE_LEAGUE_TITLE": "Competición no disponible actualmente.",
+  "UNAVAILABLE_LEAGUE_LIMIT_USERS": "La competición ha llegado al límite de usuarios."
 }

@@ -24,14 +24,14 @@
              ></o-button>
           </span>
           <span *ngIf=(!isEditable)  fxFlex="50">
-              <o-button (click)="joinLeague()"  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
+              <o-button id="joinButton" (click)="joinLeague()"  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
              ></o-button>
           </span>
         </o-row>
         
       </o-column>
       <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
-        <o-table fxFlex service="competitions" entity="competitionById" parent-keys="COMP_ID"
+        <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" entity="competitionById" parent-keys="COMP_ID"
           columns="COMP_ID;COMP_NAME;USER_;UC_AVAILABLE_MONEY;UC_POINTS"
           visible-columns="USER_;UC_AVAILABLE_MONEY;UC_POINTS" insert-button="no"
           delete-button="no" query-rows="10" (onDataLoaded)="showButton($event)">

@@ -34,17 +34,15 @@ public class MainRestController {
     @Autowired
     ResultService resultService;
 
-
-
     @RequestMapping(value = "/main", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String main() {
         return "index";
     }
 
     @RequestMapping(value = "/actualizarDatosApi", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public String main2() {
-        //getPilots();
-        //getRaces();
+    public String updateAPI() {
+        getPilots();
+        getRaces();
         getResults();
         System.out.println("Actualizando datos de la api");
         return "OK";
@@ -79,30 +77,31 @@ public class MainRestController {
     public void getPilots() {
         Map<String, Object> pilotMap = new HashMap<>();
         JSONObject response = getConection("http://ergast.com/api/f1/2023/drivers.json");
-        if (response == null) {
+        if (response != null) {
+            JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
+            JSONObject jsonObjDriverTable = (JSONObject) (jsonObjMRD.get("DriverTable"));
+            JSONArray pilotsArray = new JSONArray(jsonObjDriverTable.get("Drivers").toString());
+            for (Object p : pilotsArray) {
 
-        }
-        JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
-        JSONObject jsonObjDriverTable = (JSONObject) (jsonObjMRD.get("DriverTable"));
-        JSONArray pilotsArray = new JSONArray(jsonObjDriverTable.get("Drivers").toString());
-        for (Object p : pilotsArray) {
+                JSONObject jobj = (JSONObject) p;
 
-            JSONObject jobj = (JSONObject) p;
+                String st1 = jobj.get("driverId").toString();
 
-            String st1 = jobj.get("driverId").toString();
-
-            if (existsPilot(st1)){
-                System.out.println("Piloto repetido");
-            } else {
-                pilotMap.put(PilotDao.PIL_DRIVER_ID, jobj.get("driverId"));
-                pilotMap.put(PilotDao.PIL_NAME, jobj.get("givenName"));
-                pilotMap.put(PilotDao.PIL_SURNAME, jobj.get("familyName"));
-                pilotMap.put(PilotDao.PIL_NATIONALITY, jobj.get("nationality"));
-                pilotMap.put(PilotDao.PIL_BIRTHDAY, jobj.get("dateOfBirth"));
-                pilotMap.put(PilotDao.PIL_URL, jobj.get("url"));
-                pilotMap.put(PilotDao.PIL_NUMBER, jobj.get("permanentNumber"));
-                this.pilotService.pilotInsert(pilotMap);
+                if (existsPilot(st1)){
+                    System.out.println("Piloto repetido");
+                } else {
+                    pilotMap.put(PilotDao.PIL_DRIVER_ID, jobj.get("driverId"));
+                    pilotMap.put(PilotDao.PIL_NAME, jobj.get("givenName"));
+                    pilotMap.put(PilotDao.PIL_SURNAME, jobj.get("familyName"));
+                    pilotMap.put(PilotDao.PIL_NATIONALITY, jobj.get("nationality"));
+                    pilotMap.put(PilotDao.PIL_BIRTHDAY, jobj.get("dateOfBirth"));
+                    pilotMap.put(PilotDao.PIL_URL, jobj.get("url"));
+                    pilotMap.put(PilotDao.PIL_NUMBER, jobj.get("permanentNumber"));
+                    this.pilotService.pilotInsert(pilotMap);
+                }
             }
+        } else {
+            System.out.println("No se han obtenido resultados");
         }
     }
 
@@ -114,7 +113,7 @@ public class MainRestController {
             JSONArray racesArray = new JSONArray(jsonObjRaceTable.get("Races").toString());
             for (Object r : racesArray) {
                 JSONObject jobjRaces = (JSONObject) r;
-                JSONObject jsonObjCircuit = (JSONObject) ((JSONObject) r).get("Circuit");
+                JSONObject jsonObjCircuit = (JSONObject)jobjRaces.get("Circuit");
 
                 String st1 = jsonObjCircuit.get("circuitId").toString();
 
@@ -233,7 +232,6 @@ public class MainRestController {
 
     public boolean existsResult(String resultIdParam){
         Map<String, Object> mapParamRace = new HashMap<>();
-        Map<String, Object> mapParamResult = new HashMap<>();
         mapParamRace.put(RaceDao.RAC_CIRCUIT_ID, resultIdParam);
         ArrayList<String> listAtributesRace = new ArrayList<>();
         ArrayList<String> listAtributesResult = new ArrayList<>();

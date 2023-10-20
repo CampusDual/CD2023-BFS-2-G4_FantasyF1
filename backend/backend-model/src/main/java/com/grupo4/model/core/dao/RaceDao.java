@@ -16,8 +16,12 @@ public class RaceDao extends OntimizeJdbcDaoSupport {
     public static final String RAC_CIRCUIT_NAME = "RAC_CIRCUIT_NAME";
     public static final String RAC_CIRCUIT_ID = "RAC_CIRCUIT_ID";
     public static final String RAC_ROUND = "RAC_ROUND";
-    public static final String RAC_LOCATION = "RAC_LOCATION";
+    public static final String RAC_DATE = "RAC_DATE";
     public static final String RAC_URL = "RAC_URL";
+    public static final String RAC_LOCALITY = "RAC_LOCALITY";
+    public static final String RAC_COUNTRY = "RAC_COUNTRY";
+
+
 
 
 }

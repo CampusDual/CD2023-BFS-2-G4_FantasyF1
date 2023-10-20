@@ -44,8 +44,8 @@ public class MainRestController {
     @RequestMapping(value = "/actualizarDatosApi", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String main2() {
         //getPilots();
-        getRaces();
-        //getResults();
+        //getRaces();
+        getResults();
         System.out.println("Actualizando datos de la api");
         return "OK";
     }
@@ -90,9 +90,8 @@ public class MainRestController {
             JSONObject jobj = (JSONObject) p;
 
             String st1 = jobj.get("driverId").toString();
-            String st2 = getPilDriverId(st1).toString();
 
-            if (st2.contains(st1)){
+            if (existsPilot(st1)){
                 System.out.println("Piloto repetido");
             } else {
                 pilotMap.put(PilotDao.PIL_DRIVER_ID, jobj.get("driverId"));
@@ -108,35 +107,40 @@ public class MainRestController {
     }
 
     public void getRaces() {
-        Map<String, Object> raceMap = new HashMap<>();
         JSONObject response = getConection("http://ergast.com/api/f1/current.json");
-        if (response == null) {
+        if (response != null) {
+            JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
+            JSONObject jsonObjRaceTable = (JSONObject) (jsonObjMRD.get("RaceTable"));
+            JSONArray racesArray = new JSONArray(jsonObjRaceTable.get("Races").toString());
+            for (Object r : racesArray) {
+                JSONObject jobjRaces = (JSONObject) r;
+                JSONObject jsonObjCircuit = (JSONObject) ((JSONObject) r).get("Circuit");
 
-        }
-        JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
-        JSONObject jsonObjRaceTable = (JSONObject) (jsonObjMRD.get("RaceTable"));
-        JSONArray racesArray = new JSONArray(jsonObjRaceTable.get("Races").toString());
-        for (Object r : racesArray) {
-            JSONObject jobjRaces = (JSONObject) r;
-            JSONObject jsonObjCircuit = (JSONObject) ((JSONObject) r).get("Circuit");
+                String st1 = jsonObjCircuit.get("circuitId").toString();
 
-            String st1 = jsonObjCircuit.get("circuitId").toString();
-            String st2 = getCircuitId(st1).toString();
+                if (existsCircuit(st1)){
+                    System.out.println("Circuito repetido");
+                } else {
+                    Map<String, Object> raceMap = new HashMap<>();
+                    raceMap.put(RaceDao.RAC_ROUND, jobjRaces.get("round"));
+                    raceMap.put(RaceDao.RAC_NAME, jobjRaces.get("raceName"));
+                    raceMap.put(RaceDao.RAC_URL, jobjRaces.get("url"));
+                    raceMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
+                    raceMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
 
-            if (st2.contains(st1)){
-                System.out.println("Circuito repetido");
-            } else {
-                raceMap.put(RaceDao.RAC_ROUND, jobjRaces.get("round"));
-                raceMap.put(RaceDao.RAC_NAME, jobjRaces.get("raceName"));
-                raceMap.put(RaceDao.RAC_URL, jobjRaces.get("url"));
-                raceMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
-                raceMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
-                //Pendiente añadir los datos de la localización(lat, long, locality, country)
-                //JSONObject jsonLocation = (JSONObject) (jsonObjCircuit.get("Location"));
-                //jsonLocation.get("lat");
-                this.raceService.raceInsert(raceMap);
+                    JSONObject jsonLocation = (JSONObject) (jsonObjCircuit.get("Location"));
+                    raceMap.put(RaceDao.RAC_LOCALITY, jsonLocation.get("locality"));
+                    raceMap.put(RaceDao.RAC_COUNTRY, jsonLocation.get("country"));
+
+                    raceMap.put(RaceDao.RAC_DATE, jobjRaces.get("date"));
+
+                    this.raceService.raceInsert(raceMap);
+                }
             }
+        } else {
+            System.out.println("No se ha obtenido ningun resultado");
         }
+
     }
 
     public void updatePilotPrice() {
@@ -162,15 +166,8 @@ public class MainRestController {
     }
 
     public void getResults(){
-        Map<String, Object> resultsMap = new HashMap<>();
-        ArrayList<String> listAtributesPilot = new ArrayList<>();
-        listAtributesPilot.add(PilotDao.PIL_ID);
-        ArrayList<String> listAtributesRace = new ArrayList<>();
-        listAtributesRace.add(RaceDao.RAC_ID);
         JSONObject response = getConection("http://ergast.com/api/f1/current/last/results.json");
-        if (response == null){
-
-        } else {
+        if (response != null){
             JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
             JSONObject jsonObjRaceT = (JSONObject)(jsonObjMRD.get("RaceTable"));
             JSONArray races = new JSONArray(jsonObjRaceT.get("Races").toString());
@@ -178,57 +175,73 @@ public class MainRestController {
                 JSONObject objRaces = (JSONObject) r;
                 JSONObject jsonCircuit = (JSONObject) (objRaces.get("Circuit"));
                 JSONArray racesResults = new JSONArray(objRaces.get("Results").toString());
-                for (Object result: racesResults){
-                    Map<String, Object> idPilotMap = new HashMap<>();
-                    Map<String, Object> idCircuitMap = new HashMap<>();
-                    JSONObject resultObject = (JSONObject) result;
-                    JSONObject driver = (JSONObject) resultObject.get("Driver");
+                String st1 = jsonCircuit.get("circuitId").toString();
+                if (existsResult(st1)) {
+                    System.out.println("Resultado repetido");
+                } else {
+                    for (Object result: racesResults) {
+                        Map<String, Object> resultsMap = new HashMap<>();
+                        ArrayList<String> listAtributesPilot = new ArrayList<>();
+                        listAtributesPilot.add(PilotDao.PIL_ID);
+                        ArrayList<String> listAtributesRace = new ArrayList<>();
+                        listAtributesRace.add(RaceDao.RAC_ID);
+                        Map<String, Object> idPilotMap = new HashMap<>();
+                        Map<String, Object> idCircuitMap = new HashMap<>();
+                        JSONObject resultObject = (JSONObject) result;
+                        JSONObject driver = (JSONObject) resultObject.get("Driver");
 
-                    resultsMap.put(ResultDao.RES_POINTS, resultObject.get("points"));
-                    resultsMap.put(ResultDao.RES_POSITION, resultObject.get("position"));
-                    resultsMap.put(ResultDao.RES_POSITION_TEXT, resultObject.get("positionText"));
+                        resultsMap.put(ResultDao.RES_POINTS, resultObject.get("points"));
+                        resultsMap.put(ResultDao.RES_POSITION, resultObject.get("position"));
+                        resultsMap.put(ResultDao.RES_POSITION_TEXT, resultObject.get("positionText"));
 
-                    idPilotMap.put(PilotDao.PIL_DRIVER_ID, driver.get("driverId"));
-                    EntityResult resPilot = this.pilotService.pilotQuery(idPilotMap, listAtributesPilot);
+                        idPilotMap.put(PilotDao.PIL_DRIVER_ID, driver.get("driverId"));
+                        EntityResult resPilot = this.pilotService.pilotQuery(idPilotMap, listAtributesPilot);
 
-                    resultsMap.put(ResultDao.PIL_ID, resPilot.get(PilotDao.PIL_ID));
+                        resultsMap.put(ResultDao.PIL_ID, resPilot.get(PilotDao.PIL_ID));
 
-                    idCircuitMap.put(RaceDao.RAC_CIRCUIT_ID,  jsonCircuit.get("circuitId"));
+                        idCircuitMap.put(RaceDao.RAC_CIRCUIT_ID, jsonCircuit.get("circuitId"));
 
-                    EntityResult resRace =this.raceService.raceQuery(idCircuitMap, listAtributesRace);
-                    resultsMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
+                        EntityResult resRace = this.raceService.raceQuery(idCircuitMap, listAtributesRace);
+                        resultsMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
 
-                    this.resultService.resultInsert(resultsMap);
+                        this.resultService.resultInsert(resultsMap);
+                    }
                 }
             }
+        } else {
+            System.out.println("No se han obtenido resultados");
         }
     }
 
-    public Object getPilDriverId(String driverIdParam){
+    public boolean existsPilot(String driverIdParam){
         Map<String, Object> mapParam = new HashMap<>();
         mapParam.put(PilotDao.PIL_DRIVER_ID, driverIdParam);
         ArrayList<String> listAtributesPilot = new ArrayList<>();
         listAtributesPilot.add(PilotDao.PIL_DRIVER_ID);
         EntityResult result =  this.pilotService.pilotQuery(mapParam, listAtributesPilot);
-        if (result.isEmpty()){
-            return "";
-        } else {
-            return result.get(PilotDao.PIL_DRIVER_ID);
-        }
+        return !result.isEmpty();
     }
 
-    public Object getCircuitId(String circuitIdParam){
+    public boolean existsCircuit(String circuitIdParam){
         Map<String, Object> mapParam = new HashMap<>();
         mapParam.put(RaceDao.RAC_CIRCUIT_ID, circuitIdParam);
         ArrayList<String> listAtributesRace = new ArrayList<>();
         listAtributesRace.add(RaceDao.RAC_CIRCUIT_ID);
         EntityResult result =  this.raceService.raceQuery(mapParam, listAtributesRace);
-        if (result.isEmpty()){
-            return "";
-        } else {
-            return result.get(RaceDao.RAC_CIRCUIT_ID);
-        }
+        return !result.isEmpty();
     }
 
+    public boolean existsResult(String resultIdParam){
+        Map<String, Object> mapParamRace = new HashMap<>();
+        Map<String, Object> mapParamResult = new HashMap<>();
+        mapParamRace.put(RaceDao.RAC_CIRCUIT_ID, resultIdParam);
+        ArrayList<String> listAtributesRace = new ArrayList<>();
+        ArrayList<String> listAtributesResult = new ArrayList<>();
+        listAtributesRace.add(RaceDao.RAC_ID);
+        EntityResult resultRaceID =  this.raceService.raceQuery(mapParamRace, listAtributesRace);
+        listAtributesResult.add(ResultDao.RES_ID);
+        EntityResult result = this.resultService.resultQuery(resultRaceID.getRecordValues(0), listAtributesResult);
 
+        return !result.isEmpty();
+    }
 }

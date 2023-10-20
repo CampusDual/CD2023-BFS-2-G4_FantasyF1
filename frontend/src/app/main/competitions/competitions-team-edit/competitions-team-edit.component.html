@@ -1,7 +1,7 @@
-<div class="hiddenTable" fxFill fxLayout="column" fxLayoutAlign="start">
+<div fxFill fxLayout="column" fxLayoutAlign="start">
   <o-table (onDataLoaded)="loadData($event)" title="cambiar titulo" show-title="false" attr="competitionsEditTable" service="users_competitions_pilots"
       entity="userCompetitionPilotFilter" keys="COMP_ID" key="COMP_ID" columns="UCP_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID;COMP_ID"
-      visible-columns="UCP_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID;COMP_ID" query-rows="15" horizontal-scroll="false" auto-adjust="true"
+      visible-columns="PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_" query-rows="15" horizontal-scroll="false" auto-adjust="true"
       virtual-scroll="no" insert-button="no" delete-button="no">
   </o-table>
 </div>

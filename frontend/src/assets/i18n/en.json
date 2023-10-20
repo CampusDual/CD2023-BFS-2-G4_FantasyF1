@@ -49,5 +49,6 @@
   "PRIVATE_LEAGUE": "Private competition",
   "FOOTER_IMG": "Photograph by Pedrik (flikr), distributed under a CC-BY 2.0 license.",
   "UNAVAILABLE_LEAGUE_TITLE": "Competition currently unavailable.",
-  "UNAVAILABLE_LEAGUE_LIMIT_USERS": "The competition has reached its limit os users."
+  "UNAVAILABLE_LEAGUE_LIMIT_USERS": "The competition has reached its limit os users.",
+  "PIL_PRICE": "Price"
 }

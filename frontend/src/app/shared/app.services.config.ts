@@ -10,5 +10,8 @@ export const SERVICE_CONFIG: Object = {
   },
   'users_competitions': {
     'path': '/users_competitions'
+  },
+  'users_competitions_pilots': {
+    'path': '/users_competitions_pilots'
   }
 };

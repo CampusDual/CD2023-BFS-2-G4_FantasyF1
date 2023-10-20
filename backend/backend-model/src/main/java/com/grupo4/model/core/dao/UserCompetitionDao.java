@@ -15,8 +15,6 @@ public class UserCompetitionDao extends OntimizeJdbcDaoSupport {
     public static final String UC_ID = "UC_ID";
     public static final String COMP_ID = "COMP_ID";
     public static final String USER_ = "USER_";
-    public static final String PIL_ID_1 = "PIL_ID_1";
-    public static final String PIL_ID_2 = "PIL_ID_2";
     public static final String TEAM_ID = "TEAM_ID";
     public static final String UC_AVAILABLE_MONEY = "UC_AVAILABLE_MONEY";
     public static final String UC_POINTS = "UC_POINTS";

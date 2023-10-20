@@ -1,0 +1,51 @@
+<JdbcEntitySetup
+        xmlns="http://www.ontimize.com/schema/jdbc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
+        catalog="" schema="${mainschema}" table="USERS_COMPETITIONS_PILOTS"
+        datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
+    <DeleteKeys>
+        <Column>UCP_ID</Column>
+    </DeleteKeys>
+    <UpdateKeys>
+        <Column>UCP_ID</Column>
+    </UpdateKeys>
+    <Queries>
+        <Query id="filter">
+            <Sentence>
+                <![CDATA[
+                    WITH FILTER AS (
+                        SELECT UCP.UCP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, P.PIL_PRICE, UC.USER_, UC.UC_ID, UC.COMP_ID
+                        FROM PILOTS P
+                        LEFT JOIN USERS_COMPETITIONS_PILOTS UCP
+                        ON P.PIL_ID = UCP.PIL_ID
+                        LEFT JOIN USERS_COMPETITIONS UC
+                        ON UCP.UCP_ID = UC.UC_ID
+	                    )
+                    SELECT #COLUMNS#
+                    FROM FILTER
+                    #WHERE#
+                    #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="filter2">
+            <Sentence>
+                <![CDATA[
+                    WITH FILTER2 AS (
+                        SELECT UC.COMP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, P.PIL_PRICE, UC.USER_, UC.UC_ID, UCP.UCP_ID
+                        FROM USERS_COMPETITIONS UC
+                        RIGHT JOIN USERS_COMPETITIONS_PILOTS UCP
+                        ON UCP.UC_ID = UC.UC_ID
+                        RIGHT JOIN PILOTS P
+                        ON P.PIL_ID = UCP.PIL_ID
+	                    )
+                    SELECT #COLUMNS#
+                    FROM FILTER2
+                    #WHERE#
+                    #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
+    </Queries>
+</JdbcEntitySetup>

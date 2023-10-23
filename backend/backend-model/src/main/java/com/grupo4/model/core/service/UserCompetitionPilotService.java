@@ -31,7 +31,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
-        return this.daoHelper.query(this.userCompetitionPilotDao, keysValues, attrMap,"filter2");
+        return this.daoHelper.query(this.userCompetitionPilotDao, keysValues, attrMap,"filter");
     }
 
     @Override

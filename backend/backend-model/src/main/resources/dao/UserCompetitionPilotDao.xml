@@ -15,25 +15,7 @@
             <Sentence>
                 <![CDATA[
                     WITH FILTER AS (
-                        SELECT UCP.UCP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, P.PIL_PRICE, UC.USER_, UC.UC_ID, UC.COMP_ID
-                        FROM PILOTS P
-                        LEFT JOIN USERS_COMPETITIONS_PILOTS UCP
-                        ON P.PIL_ID = UCP.PIL_ID
-                        LEFT JOIN USERS_COMPETITIONS UC
-                        ON UCP.UCP_ID = UC.UC_ID
-	                    )
-                    SELECT #COLUMNS#
-                    FROM FILTER
-                    #WHERE#
-                    #ORDER#;
-                ]]>
-            </Sentence>
-        </Query>
-        <Query id="filter2">
-            <Sentence>
-                <![CDATA[
-                    WITH FILTER2 AS (
-                        SELECT UC.COMP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, P.PIL_PRICE, UC.USER_, UC.UC_ID, UCP.UCP_ID
+                        SELECT UC.COMP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, P.PIL_PRICE, UC.USER_, UC.UC_ID, UCP.UCP_ID, UC.UC_AVAILABLE_MONEY
                         FROM USERS_COMPETITIONS UC
                         RIGHT JOIN USERS_COMPETITIONS_PILOTS UCP
                         ON UCP.UC_ID = UC.UC_ID
@@ -41,7 +23,7 @@
                         ON P.PIL_ID = UCP.PIL_ID
 	                    )
                     SELECT #COLUMNS#
-                    FROM FILTER2
+                    FROM FILTER
                     #WHERE#
                     #ORDER#;
                 ]]>

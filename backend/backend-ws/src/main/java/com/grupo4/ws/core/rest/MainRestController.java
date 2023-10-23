@@ -166,6 +166,10 @@ public class MainRestController {
 
     public void getResults(){
         JSONObject response = getConection("http://ergast.com/api/f1/current/last/results.json");
+        ArrayList<String> listAtributesPilot = new ArrayList<>();
+        listAtributesPilot.add(PilotDao.PIL_ID);
+        ArrayList<String> listAtributesRace = new ArrayList<>();
+        listAtributesRace.add(RaceDao.RAC_ID);
         if (response != null){
             JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
             JSONObject jsonObjRaceT = (JSONObject)(jsonObjMRD.get("RaceTable"));
@@ -180,10 +184,6 @@ public class MainRestController {
                 } else {
                     for (Object result: racesResults) {
                         Map<String, Object> resultsMap = new HashMap<>();
-                        ArrayList<String> listAtributesPilot = new ArrayList<>();
-                        listAtributesPilot.add(PilotDao.PIL_ID);
-                        ArrayList<String> listAtributesRace = new ArrayList<>();
-                        listAtributesRace.add(RaceDao.RAC_ID);
                         Map<String, Object> idPilotMap = new HashMap<>();
                         Map<String, Object> idCircuitMap = new HashMap<>();
                         JSONObject resultObject = (JSONObject) result;

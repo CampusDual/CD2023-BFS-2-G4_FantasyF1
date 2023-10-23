@@ -1,4 +1,7 @@
 <ng-template #templateref let-cellvalue="cellvalue" let-rowvalue="rowvalue">
-    <span *ngIf="rowvalue['USER_']">PILOT_SELECTED_BY {{rowvalue["USER_"]}}</span>
-    <o-button *ngIf="!rowvalue['USER_']" label="BUY_DRIVER" attr="stroked3" type="STROKED" (click)="buyDriver()"></o-button>
+    <span *ngIf="rowvalue['USER_'] && rowvalue['USER_'] != username">PILOT_SELECTED_BY {{rowvalue["USER_"]}}</span>
+    <span> <o-button *ngIf="!rowvalue['USER_']" style="background-color: rgba(255, 247, 0, 0.865);" label="BUY_DRIVER" attr="stroked3" type="STROKED" (click)="buyDriver()"></o-button></span>
+    <span> <o-button *ngIf="rowvalue['USER_'] == username" style="background-color: rgba(58, 171, 199, 0.938);" label="SELL_DRIVER" attr="stroked3" type="STROKED" (click)="sellDriver()"></o-button></span>
+   
+   
 </ng-template>

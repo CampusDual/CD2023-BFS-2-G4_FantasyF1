@@ -1,5 +1,5 @@
 import { Component, Injector, TemplateRef, ViewChild } from '@angular/core';
-import { OBaseTableCellRenderer } from 'ontimize-web-ngx';
+import { OBaseTableCellRenderer, OntimizeService } from 'ontimize-web-ngx';
 
 @Component({
   selector: 'app-competitions-edit-type-column-renderer',
@@ -10,15 +10,33 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
 
   @ViewChild('templateref', { read: TemplateRef, static: false }) public templateref: TemplateRef<any>;
 
-  constructor(protected injector: Injector) {
+  protected service: OntimizeService;
+
+  username: string = "";
+
+  constructor(protected injector2: Injector, protected injector: Injector) {
     super(injector);
+    this.service = this.injector2.get(OntimizeService);
   }
 
   ngOnInit() {
+    let sessionData = localStorage.getItem("com.ontimize.web.ngx.jee.seed");
+    this.username = JSON.parse(sessionData).session["user"];
+    this.configureService();
+  }
+
+  protected configureService() {
+    const conf = this.service.getDefaultServiceConfiguration('users_competitions_pilots');
+    this.service.configureService(conf);
   }
 
   buyDriver(){
-    alert("Holi");
+    //this.service.insert( "": , "userCompetitionPilot", )
   }
+
+  sellDriver(){
+    alert("vendido")
+  }
+
 
 }

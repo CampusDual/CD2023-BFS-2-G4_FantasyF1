@@ -13,8 +13,12 @@ export class CompetitionsTeamEditComponent implements OnInit {
   }
 
   loadData(data){
-    console.log(data);
-    
+    //console.log(data);
+  }
+
+  loadMoney(data){
+
+    console.log(data.UC_AVAILABLE_MONEY);
   }
 
 }

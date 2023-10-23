@@ -46,5 +46,21 @@
                 ]]>
             </Sentence>
         </Query>
+        <Query id="availableMoneyFilter">
+            <Sentence>
+                <![CDATA[
+                    WITH AVAIL_MONEY AS
+                        (SELECT C.COMP_ID, C.COMP_NAME, UC.USER_, UC.UC_ID, UC.UC_AVAILABLE_MONEY, UC.UC_POINTS, c.COMP_DESCRIPTION, c.COMP_CODE
+                        FROM COMPETITIONS C
+                        LEFT JOIN USERS_COMPETITIONS UC
+                        ON C.COMP_ID = UC.COMP_ID
+                        ORDER BY UC.UC_POINTS DESC)
+                    SELECT #COLUMNS#
+                    FROM AVAIL_MONEY
+                    #WHERE#
+                    #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

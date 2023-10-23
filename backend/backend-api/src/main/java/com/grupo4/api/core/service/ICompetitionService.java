@@ -16,5 +16,6 @@ public interface ICompetitionService {
     public EntityResult competitionDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException;
     public EntityResult publicCountCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
     public EntityResult competitionByIdQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
+    public EntityResult availableMoneyFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException;
 
 }

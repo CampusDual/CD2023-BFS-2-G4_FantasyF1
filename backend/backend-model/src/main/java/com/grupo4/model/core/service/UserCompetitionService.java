@@ -65,7 +65,7 @@ public class UserCompetitionService implements IUserCompetitionService {
 
     @Override
     public EntityResult userCompetitionUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException {
-        return null;
+        return this.daoHelper.update(userCompetitionDao, attributes, KeyValues);
     }
 
     @Override

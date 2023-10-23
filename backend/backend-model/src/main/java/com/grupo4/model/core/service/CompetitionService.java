@@ -46,6 +46,13 @@ public class CompetitionService implements ICompetitionService {
     }
 
     @Override
+    public EntityResult availableMoneyFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        keysValues.put(UserDao.ID, authentication.getName());
+        return this.daoHelper.query(this.competitionDao, keysValues, attrMap,"availableMoneyFilter");
+    }
+
+    @Override
     public EntityResult competitionInsert(Map<String, Object> attrMap) throws OntimizeJEERuntimeException {
         Map<String, Object> keyMap = new HashMap<>();
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

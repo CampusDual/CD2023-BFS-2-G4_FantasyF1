@@ -1,5 +1,6 @@
 import { Component, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
 import { OBaseTableCellRenderer, OntimizeService } from 'ontimize-web-ngx';
+import { CompetitionData } from '../competition-data.service';
 
 @Component({
   selector: 'app-competitions-edit-type-column-renderer',
@@ -15,7 +16,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
 
   username: string = "";
 
-  constructor(protected injector2: Injector, protected injector: Injector) {
+  constructor(protected injector2: Injector, protected injector: Injector, public childService: CompetitionData) {
     super(injector);
     this.service = this.injector2.get(OntimizeService);
   }
@@ -31,8 +32,8 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
     this.service.configureService(conf);
   }
 
-  buyDriver(pilId, ucId){
-    console.log(pilId, ucId, this.childMessage);
+  buyDriver(pilId){
+    console.log(pilId, this.childService.compID, this.childService.moneyUser);
     //this.service.insert("PIL_ID": pilId, "UC_ID": ucId, "userCompetitionPilot", )
     
     

@@ -8,7 +8,7 @@
       required="yes"></o-text-input>
   </o-row>
 <div fxFill fxLayout="column" fxLayoutAlign="start">
-  <o-table title="BUY_SELL_DRIVERS_TITLE" show-title="true" 
+  <o-table #table_team_edit title="BUY_SELL_DRIVERS_TITLE" show-title="true" 
   attr="competitionsEditTable" service="users_competitions_pilots"
       entity="userCompetitionPilotFilter"  parent-keys="COMP_ID" 
       columns="COMP_ID;UCP_ID;PIL_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID"

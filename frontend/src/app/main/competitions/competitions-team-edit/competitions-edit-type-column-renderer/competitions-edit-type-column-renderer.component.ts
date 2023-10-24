@@ -38,14 +38,14 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
       this.dialogService.warn("ERROR", "NOT_ENOUGH_MONEY");
     } else{
         this.service.insert({ "UC_ID": this.childService.ucID ,  "PIL_ID": pilId }, "userCompetitionPilot").subscribe(resp => {
-          this.router.navigate(['/main/home/', this.childService.compID]); //TODO conseguir que navegue a la página de edición de equipo
+          this.childService.triggerDataUpdate();
         })
     }
   }
 
   sellDriver(ucpId){
     this.service.delete({ "UCP_ID": ucpId }, "userCompetitionPilot").subscribe(resp => {
-      this.router.navigate(['/main/home/', this.childService.compID]); //TODO conseguir que navegue a la página de edición de equipo
+      this.childService.triggerDataUpdate();
     })
   }
 

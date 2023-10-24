@@ -1,5 +1,5 @@
 import { Component, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
-import { DialogService, OBaseTableCellRenderer, OntimizeService } from 'ontimize-web-ngx';
+import { DialogService, OBaseTableCellRenderer, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
 import { CompetitionData } from '../competition-data.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
 
   username: string = "";
 
-  constructor(protected injector2: Injector, protected injector: Injector, public childService: CompetitionData, private router: Router, protected dialogService: DialogService) {
+  constructor(protected injector2: Injector, protected injector: Injector, public childService: CompetitionData, private router: Router, protected snackService: SnackBarService) {
     super(injector);
     this.service = this.injector2.get(OntimizeService);
   }
@@ -34,17 +34,25 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   }
 
   buyDriver(pilId, pilPrice){
-    if (this.childService.moneyUser < pilPrice){
-      this.dialogService.warn("ERROR", "NOT_ENOUGH_MONEY");
+    if (this.childService.getPilotsUserCount()>=2) {
+      this.snackService.open( "ALREADY_2_DRIVERS");
+     }
+    else{
+      if (this.childService.moneyUser < pilPrice){
+      this.snackService.open( "NOT_ENOUGH_MONEY");
     } else{
         this.service.insert({ "UC_ID": this.childService.ucID ,  "PIL_ID": pilId }, "userCompetitionPilot").subscribe(resp => {
+          this.snackService.open("PILOT_PURCHASED");
           this.childService.triggerDataUpdate();
+
         })
-    }
+      }
+     }
   }
 
   sellDriver(ucpId){
     this.service.delete({ "UCP_ID": ucpId }, "userCompetitionPilot").subscribe(resp => {
+      this.snackService.open("PILOT_SOLD");
       this.childService.triggerDataUpdate();
     })
   }

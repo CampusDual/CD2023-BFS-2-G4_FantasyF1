@@ -55,5 +55,8 @@
   "PILOT_SELECTED_BY": "Driver selected by",
   "NOT_ENOUGH_MONEY": "You don't have enough money",
   "SELL_DRIVER": "Sell driver",
-  "BUY_DRIVER": "Buy driver"
+  "BUY_DRIVER": "Buy driver",
+  "ALREADY_2_DRIVERS": "You already have 2 pilots",
+  "PILOT_PURCHASED": "Pilot purchased",
+  "PILOT_SOLD": "Pilot sold"
 }

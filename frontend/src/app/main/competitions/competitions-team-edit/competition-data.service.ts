@@ -8,6 +8,7 @@ export class CompetitionData {
     moneyUser: number;
     compID: number;
     ucID: number;
+    count_pilots_user: number=0; 
 
     private dataUpdated = new Subject<void>();
     dataUpdated$ = this.dataUpdated.asObservable();
@@ -41,6 +42,14 @@ export class CompetitionData {
 
     getUcId() {
         return this.ucID;
+    }
+
+    setPilotsUserCount(users_count: number){
+    this.count_pilots_user=users_count;
+    }
+
+    getPilotsUserCount(){
+        return this.count_pilots_user;
     }
 
    

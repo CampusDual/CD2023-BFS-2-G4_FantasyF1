@@ -14,17 +14,15 @@
         <Query id="filter">
             <Sentence>
                 <![CDATA[
-                    WITH FILTER AS (
-                        SELECT UC.COMP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, P.PIL_PRICE, UC.USER_, UC.UC_ID, UCP.UCP_ID, UC.UC_AVAILABLE_MONEY
-                        FROM USERS_COMPETITIONS UC
-                        RIGHT JOIN USERS_COMPETITIONS_PILOTS UCP
-                        ON UCP.UC_ID = UC.UC_ID
-                        RIGHT JOIN PILOTS P
-                        ON P.PIL_ID = UCP.PIL_ID
-	                    )
                     SELECT #COLUMNS#
-                    FROM FILTER
-                    #WHERE#
+                    FROM PILOTS P
+                    LEFT JOIN (
+                        SELECT UC.COMP_ID, PS.PIL_ID, UC.USER_, UC.UC_ID, UCP.UCP_ID
+                        FROM PILOTS PS
+                        LEFT OUTER JOIN USERS_COMPETITIONS_PILOTS UCP ON PS.PIL_ID = UCP.PIL_ID
+                        LEFT OUTER JOIN USERS_COMPETITIONS UC ON UCP.UC_ID = UC.UC_ID
+                        #WHERE#)
+                    T ON P.PIL_ID = T.PIL_ID
                     #ORDER#;
                 ]]>
             </Sentence>

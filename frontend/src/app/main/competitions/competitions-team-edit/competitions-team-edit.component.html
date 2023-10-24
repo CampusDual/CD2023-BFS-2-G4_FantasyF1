@@ -1,18 +1,17 @@
 <o-form (onDataLoaded)="loadMoney($event)" service="competitions" entity="availableMoneyFilter" keys="COMP_ID" 
    show-header-navigation="no" keys-sql-types="INTEGER">
    <o-row>
-    <o-text-input class="input-padding" attr="UC_AVAILABLE_MONEY" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"
-      style="display: none;"></o-text-input>
+    <o-text-input class="input-padding" attr="UC_AVAILABLE_MONEY" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"></o-text-input>
   </o-row>
 
 <div fxFill fxLayout="column" fxLayoutAlign="start">
-  <o-table (onDataLoaded)="loadData($event)" title="cambiar titulo" show-title="true" 
+  <o-table (onDataLoaded)="loadData($event)" title="BUY_SELL_DRIVERS_TITLE" show-title="true" 
   attr="competitionsEditTable" service="users_competitions_pilots"
       entity="userCompetitionPilotFilter"  parent-keys="COMP_ID" 
-      columns="UCP_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID;COMP_ID;UC_AVAILABLE_MONEY"
-      visible-columns="UC_AVAILABLE_MONEY;PIL_SURNAME;PIL_PRICE;USER_" query-rows="22" horizontal-scroll="false" auto-adjust="true"
+      columns="COMP_ID;UCP_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID"
+      visible-columns="PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_" query-rows="22" horizontal-scroll="false" auto-adjust="true"
       virtual-scroll="no" insert-button="no" delete-button="no">
-      <o-table-column attr="UC_AVAILABLE_MONEY" title="UC_AVAILABLE_MONEY" content-align="center"></o-table-column>
+      <o-table-column attr="PIL_NAME" title="PIL_NAME" content-align="center"></o-table-column>
       <o-table-column attr="PIL_SURNAME" title="PIL_SURNAME" content-align="center"></o-table-column>
       <o-table-column attr="PIL_PRICE" title="PIL_PRICE" content-align="center"></o-table-column>
       <o-table-column attr="USER_" title="USER_" content-align="center">

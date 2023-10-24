@@ -14,12 +14,9 @@ export class CompetitionsTeamEditComponent implements OnInit {
   }
 
   loadData(data){
-    console.log(data.UC_AVAILABLE_MONEY);
-    console.log(data.COMP_ID);
-    console.log(typeof data.UC_AVAILABLE_MONEY);
-    console.log(typeof data.COMP_ID);
     this.parentService.setCompId(data.COMP_ID)
     this.parentService.setMoneyUser(data.UC_AVAILABLE_MONEY);
+    this.parentService.setUcId(data.UC_ID);
     console.log(this.parentService);
   }
 

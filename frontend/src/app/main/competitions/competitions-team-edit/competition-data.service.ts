@@ -6,6 +6,7 @@ import { Injectable } from "@angular/core";
 export class CompetitionData {
     moneyUser: number;
     compID: number;
+    ucID: number;
 
     constructor() { }
 
@@ -23,5 +24,13 @@ export class CompetitionData {
 
     getCompId() {
         return this.compID;
+    }
+
+    setUcId(id: number) {
+        this.ucID = id;
+    }
+
+    getUcId() {
+        return this.ucID;
     }
 }

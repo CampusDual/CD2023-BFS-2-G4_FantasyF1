@@ -1,7 +1,6 @@
 package com.grupo4.model.core.service;
 
 import com.grupo4.api.core.service.IUserCompetitionPilotService;
-import com.grupo4.model.core.dao.CompetitionDao;
 import com.grupo4.model.core.dao.UserCompetitionPilotDao;
 import com.ontimize.jee.common.dto.EntityResult;
 import com.ontimize.jee.common.exceptions.OntimizeJEERuntimeException;
@@ -22,7 +21,6 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Autowired
     private DefaultOntimizeDaoHelper daoHelper;
-
 
     @Override
     public EntityResult userCompetitionPilotQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
@@ -46,6 +44,6 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
-        return null;
+        return this.daoHelper.delete(this.userCompetitionPilotDao, keyValues);
     }
 }

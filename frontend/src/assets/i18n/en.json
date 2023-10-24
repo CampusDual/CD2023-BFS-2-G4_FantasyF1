@@ -51,5 +51,9 @@
   "UNAVAILABLE_LEAGUE_TITLE": "Competition currently unavailable.",
   "UNAVAILABLE_LEAGUE_LIMIT_USERS": "The competition has reached its limit os users.",
   "PIL_PRICE": "Price",
-  "BUY_SELL_DRIVERS_TITLE": "Buy and sell drivers"
+  "BUY_SELL_DRIVERS_TITLE": "Buy and sell drivers",
+  "PILOT_SELECTED_BY": "Driver selected by",
+  "NOT_ENOUGH_MONEY": "You don't have enough money",
+  "SELL_DRIVER": "Sell driver",
+  "BUY_DRIVER": "Buy driver"
 }

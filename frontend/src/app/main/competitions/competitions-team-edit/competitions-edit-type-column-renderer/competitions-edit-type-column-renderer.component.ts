@@ -1,5 +1,5 @@
 import { Component, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
-import { OBaseTableCellRenderer, OntimizeService } from 'ontimize-web-ngx';
+import { DialogService, OBaseTableCellRenderer, OntimizeService } from 'ontimize-web-ngx';
 import { CompetitionData } from '../competition-data.service';
 import { Router } from '@angular/router';
 
@@ -17,7 +17,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
 
   username: string = "";
 
-  constructor(protected injector2: Injector, protected injector: Injector, public childService: CompetitionData, private router: Router) {
+  constructor(protected injector2: Injector, protected injector: Injector, public childService: CompetitionData, private router: Router, protected dialogService: DialogService) {
     super(injector);
     this.service = this.injector2.get(OntimizeService);
   }
@@ -33,10 +33,14 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
     this.service.configureService(conf);
   }
 
-  buyDriver(pilId){
-    this.service.insert({ "UC_ID": this.childService.ucID ,  "PIL_ID": pilId }, "userCompetitionPilot").subscribe(resp => {
-      this.router.navigate(['/main/home/', this.childService.compID]); //TODO conseguir que navegue a la página de edición de equipo
-    })
+  buyDriver(pilId, pilPrice){
+    if (this.childService.moneyUser < pilPrice){
+      this.dialogService.warn("ERROR", "NOT_ENOUGH_MONEY");
+    } else{
+        this.service.insert({ "UC_ID": this.childService.ucID ,  "PIL_ID": pilId }, "userCompetitionPilot").subscribe(resp => {
+          this.router.navigate(['/main/home/', this.childService.compID]); //TODO conseguir que navegue a la página de edición de equipo
+        })
+    }
   }
 
   sellDriver(ucpId){

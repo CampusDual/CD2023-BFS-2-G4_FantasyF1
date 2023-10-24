@@ -1,4 +1,4 @@
-import { Component, Injector, TemplateRef, ViewChild } from '@angular/core';
+import { Component, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
 import { OBaseTableCellRenderer, OntimizeService } from 'ontimize-web-ngx';
 
 @Component({
@@ -8,6 +8,7 @@ import { OBaseTableCellRenderer, OntimizeService } from 'ontimize-web-ngx';
 })
 export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellRenderer {
 
+  @Input() childMessage: number;
   @ViewChild('templateref', { read: TemplateRef, static: false }) public templateref: TemplateRef<any>;
 
   protected service: OntimizeService;
@@ -30,11 +31,14 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
     this.service.configureService(conf);
   }
 
-  buyDriver(){
-    //this.service.insert( "": , "userCompetitionPilot", )
+  buyDriver(pilId, ucId){
+    console.log(pilId, ucId, this.childMessage);
+    //this.service.insert("PIL_ID": pilId, "UC_ID": ucId, "userCompetitionPilot", )
+    
+    
   }
 
-  sellDriver(){
+  sellDriver(pilId){
     alert("vendido")
   }
 

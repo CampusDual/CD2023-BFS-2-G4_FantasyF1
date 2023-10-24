@@ -7,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetitionsTeamEditComponent implements OnInit {
 
+  parentMessage = 0;
+
   constructor() { }
 
   ngOnInit() {
@@ -17,8 +19,9 @@ export class CompetitionsTeamEditComponent implements OnInit {
   }
 
   loadMoney(data){
-
     console.log(data.UC_AVAILABLE_MONEY);
+    console.log(data.COMP_ID);
+    console.log(data.UC_ID);
   }
 
 }

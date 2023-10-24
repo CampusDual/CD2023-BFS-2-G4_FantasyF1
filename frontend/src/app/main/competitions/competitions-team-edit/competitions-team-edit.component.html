@@ -8,7 +8,7 @@
   <o-table (onDataLoaded)="loadData($event)" title="BUY_SELL_DRIVERS_TITLE" show-title="true" 
   attr="competitionsEditTable" service="users_competitions_pilots"
       entity="userCompetitionPilotFilter"  parent-keys="COMP_ID" 
-      columns="COMP_ID;UCP_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID"
+      columns="COMP_ID;UCP_ID;PIL_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID"
       visible-columns="PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_" query-rows="22" horizontal-scroll="false" auto-adjust="true"
       virtual-scroll="no" insert-button="no" delete-button="no">
       <o-table-column attr="PIL_NAME" title="PIL_NAME" content-align="center"></o-table-column>

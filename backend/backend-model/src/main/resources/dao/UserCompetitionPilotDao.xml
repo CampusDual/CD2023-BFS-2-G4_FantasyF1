@@ -17,12 +17,12 @@
                     SELECT #COLUMNS#
                     FROM PILOTS P
                     LEFT JOIN (
-                        SELECT UC.COMP_ID, PS.PIL_ID, UC.USER_, UC.UC_ID, UCP.UCP_ID
+                        SELECT UC.COMP_ID, PS.PIL_ID AS PIL, UC.USER_, UC.UC_ID, UCP.UCP_ID
                         FROM PILOTS PS
                         LEFT OUTER JOIN USERS_COMPETITIONS_PILOTS UCP ON PS.PIL_ID = UCP.PIL_ID
                         LEFT OUTER JOIN USERS_COMPETITIONS UC ON UCP.UC_ID = UC.UC_ID
                         #WHERE#)
-                    T ON P.PIL_ID = T.PIL_ID
+                    T ON P.PIL_ID = T.PIL
                     #ORDER#;
                 ]]>
             </Sentence>

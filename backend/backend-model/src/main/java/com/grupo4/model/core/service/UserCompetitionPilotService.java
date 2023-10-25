@@ -59,7 +59,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
             userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
             return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
         } else {
-            System.out.println("Not nough money");
+            System.out.println("Not enough money");
         }
         return null;
     }

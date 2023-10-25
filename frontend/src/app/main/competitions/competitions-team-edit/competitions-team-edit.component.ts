@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { CompetitionData } from './competition-data.service';
-import { OTableComponent } from 'ontimize-web-ngx';
+import { OFormComponent, OTableComponent } from 'ontimize-web-ngx';
 
 @Component({
   selector: 'app-competitions-team-edit',
@@ -11,17 +11,19 @@ export class CompetitionsTeamEditComponent implements OnInit {
 
   @ViewChild('table_team_edit', {static:true}) table_team_edit: OTableComponent;
 
+  @ViewChild('form_team_edit', {static:true}) form_team_edit: OFormComponent;
+
   constructor(public parentService: CompetitionData) { }
   
   ngOnInit() {
     this.parentService.dataUpdated$.subscribe(() => {
-      this.reloadTable();
+      this.reloadTableAndForm();
       });
   }
 
-  reloadTable() {
+  reloadTableAndForm() {
     this.table_team_edit.reloadData(false);
-    
+    this.form_team_edit.reload(true);
   }
 
   loadData(data){

@@ -9,26 +9,22 @@
           <span fxFlex="50">
             <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
           </span>
+          <span fxFlex="50">
+            <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50"
+              read-only="yes"></o-text-input>
+          </span>
+          <span *ngIf=(isEditable) fxFlex="50">
+            <o-button (click)="editTeam()" attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding
+              color="primary"></o-button>
+          </span>
+          <span *ngIf=(!isEditable) fxFlex="50">
+            <o-button id="joinButton" (click)="joinLeague()" attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding
+              color="primary"></o-button>
+          </span>
         </o-row>
         <o-row>
           <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
         </o-row>
-        <o-row>
-          <span fxFlex="50">
-            <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
-          </span>
-        </o-row>
-        <o-row>
-          <span *ngIf=(isEditable)  fxFlex="50">
-            <o-button  (click)="editTeam()"  attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding color="primary"
-             ></o-button>
-          </span>
-          <span *ngIf=(!isEditable)  fxFlex="50">
-              <o-button id="joinButton" (click)="joinLeague()"  attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding color="primary"
-             ></o-button>
-          </span>
-        </o-row>
-        
       </o-column>
       <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
         <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" virtual-scroll="no" pagination-controls="no" entity="competitionById" parent-keys="COMP_ID"

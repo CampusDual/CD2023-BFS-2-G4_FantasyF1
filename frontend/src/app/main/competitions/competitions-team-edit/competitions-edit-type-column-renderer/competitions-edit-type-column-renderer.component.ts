@@ -25,6 +25,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   ngOnInit() {
     let sessionData = localStorage.getItem("com.ontimize.web.ngx.jee.seed");
     this.username = JSON.parse(sessionData).session["user"];
+    
     this.configureService();
   }
 
@@ -41,7 +42,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
       if (this.childService.moneyUser < pilPrice){
       this.snackService.open( "NOT_ENOUGH_MONEY");
     } else{
-        this.service.insert({ "UC_ID": this.childService.ucID ,  "PIL_ID": pilId }, "userCompetitionPilot").subscribe(resp => {
+        this.service.insert({ "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser, "PIL_ID":pilId, "PIL_PRICE":pilPrice}, "userCompetitionPilot").subscribe(resp => {
           this.snackService.open("PILOT_PURCHASED");
           this.childService.triggerDataUpdate();
 
@@ -50,8 +51,8 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
      }
   }
 
-  sellDriver(ucpId){
-    this.service.delete({ "UCP_ID": ucpId }, "userCompetitionPilot").subscribe(resp => {
+  sellDriver(ucpId, pilId, pilPrice){
+    this.service.delete({ "UCP_ID": ucpId, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser, "PIL_ID":pilId, "PIL_PRICE":pilPrice }, "userCompetitionPilot").subscribe(resp => {
       this.snackService.open("PILOT_SOLD");
       this.childService.triggerDataUpdate();
     })

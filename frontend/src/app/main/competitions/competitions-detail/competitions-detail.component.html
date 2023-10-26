@@ -28,12 +28,13 @@
       </o-column>
       <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
         <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" virtual-scroll="no" pagination-controls="no" entity="competitionById" parent-keys="COMP_ID"
-          columns="COMP_ID;COMP_NAME;USER_;UC_AVAILABLE_MONEY;UC_POINTS"
-          visible-columns="USER_;UC_AVAILABLE_MONEY;UC_POINTS" insert-button="no"
+          columns="COMP_ID;COMP_NAME;USER_;UC_POINTS;UC_AVAILABLE_MONEY"
+          visible-columns="USER_;UC_POINTS;UC_AVAILABLE_MONEY" insert-button="no"
           delete-button="no" query-rows="10" (onDataLoaded)="showButton($event)">
-          <o-table-column attr="USER_" title="USER_" class="center"></o-table-column>
-          <o-table-column attr="UC_AVAILABLE_MONEY" title="UC_AVAILABLE_MONEY" class="center"></o-table-column>
-          <o-table-column attr="UC_POINTS" title="UC_POINTS" class="center"></o-table-column>
+          <o-table-column attr="USER_" title="USER_" content-align="center"></o-table-column>
+          <o-table-column attr="UC_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
+          <o-table-column attr="UC_AVAILABLE_MONEY" title="UC_AVAILABLE_MONEY" content-align="center" type="currency"
+            thousand-separator="." decimal-separator="," currency-symbol="€" currency-symbol-position="right"></o-table-column>
         </o-table>
       </o-column>
     </o-form>

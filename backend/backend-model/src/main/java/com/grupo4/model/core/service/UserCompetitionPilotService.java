@@ -1,10 +1,12 @@
 package com.grupo4.model.core.service;
 
 import com.grupo4.api.core.service.IUserCompetitionPilotService;
+import com.grupo4.model.core.dao.CompetitionDao;
 import com.grupo4.model.core.dao.PilotDao;
 import com.grupo4.model.core.dao.UserCompetitionDao;
 import com.grupo4.model.core.dao.UserCompetitionPilotDao;
 import com.ontimize.jee.common.dto.EntityResult;
+import com.ontimize.jee.common.dto.EntityResultMapImpl;
 import com.ontimize.jee.common.exceptions.OntimizeJEERuntimeException;
 import com.ontimize.jee.server.dao.DefaultOntimizeDaoHelper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,25 +45,46 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
     }
 
     @Override
+    public EntityResult userCompetitionIdQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.userCompetitionPilotDao, keysValues, attrMap,"userCompetitionId");
+    }
+
+    @Override
     public EntityResult userCompetitionPilotInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
         int ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
         int availableMoney = (Integer) attributes.get(UserCompetitionDao.UC_AVAILABLE_MONEY);
         int pilotPrice = (Integer) attributes.get(PilotDao.PIL_PRICE);
+        ArrayList<String> listAttr = new ArrayList<>();
+        listAttr.add(UserCompetitionPilotDao.UC_ID);
+        Map<String, Object> mapCompetitionIdQuery = new HashMap<>();
+        mapCompetitionIdQuery.put(UserCompetitionPilotDao.PIL_ID,attributes.get(UserCompetitionPilotDao.PIL_ID));
+        mapCompetitionIdQuery.put(CompetitionDao.COMP_ID,attributes.get(CompetitionDao.COMP_ID));
 
-        if(availableMoney >= pilotPrice){
-            availableMoney -= pilotPrice;
-            Map<String, Object> attributesToUpdate = new HashMap<>();
-            attributesToUpdate.put(UserCompetitionDao.UC_AVAILABLE_MONEY, availableMoney);
+        EntityResult resultCompetitionIdQuery = userCompetitionIdQuery(mapCompetitionIdQuery, listAttr);
 
-            Map<String, Object> keysForUpdate = new HashMap<>();
-            keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
+        if (resultCompetitionIdQuery.isEmpty()){
+            if(availableMoney >= pilotPrice){
+                availableMoney -= pilotPrice;
+                Map<String, Object> attributesToUpdate = new HashMap<>();
+                attributesToUpdate.put(UserCompetitionDao.UC_AVAILABLE_MONEY, availableMoney);
 
-            userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
-            return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
+                Map<String, Object> keysForUpdate = new HashMap<>();
+                keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
+
+                userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
+                return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
+            } else {
+                System.out.println("Not enough money");
+                return null;
+            }
         } else {
-            System.out.println("Not enough money");
+            System.out.println("El registro ya existe, no se inserta nada");
+            EntityResult notFound = new EntityResultMapImpl();
+            notFound.setCode(EntityResult.OPERATION_WRONG);
+            notFound.setMessage("Not Found");
+            return notFound;
         }
-        return null;
+
     }
 
     @Override

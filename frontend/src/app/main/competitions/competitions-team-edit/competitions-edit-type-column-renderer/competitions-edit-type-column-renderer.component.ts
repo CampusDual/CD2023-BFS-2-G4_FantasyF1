@@ -35,6 +35,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   }
 
   buyDriver(pilId, pilPrice){
+   
     if (this.childService.getPilotsUserCount()>=2) {
       this.snackService.open( "ALREADY_2_DRIVERS");
      }
@@ -42,11 +43,19 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
       if (this.childService.moneyUser < pilPrice){
       this.snackService.open( "NOT_ENOUGH_MONEY");
     } else{
-        this.service.insert({ "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser, "PIL_ID":pilId, "PIL_PRICE":pilPrice}, "userCompetitionPilot").subscribe(resp => {
+      console.log("PreInsert");
+      
+     let resultado = this.service.insert({ "COMP_ID": this.childService.compID, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser, "PIL_ID":pilId, "PIL_PRICE":pilPrice}, "userCompetitionPilot").subscribe(resp => {
+      
           this.snackService.open("PILOT_PURCHASED");
           this.childService.triggerDataUpdate();
-
-        })
+         
+        },
+        err => { console.log("Este es el error "+ err);
+        this.snackService.open("ALGUIEN TIENE EL PILOTO");
+        this.childService.triggerDataUpdate();
+          }
+        )
       }
      }
   }

@@ -26,7 +26,7 @@ export class CompetitionsTeamEditComponent implements OnInit {
     this.form_team_edit.reload(true);
   }
 
-  loadData(data){
+  loadDataForm(data){
     this.parentService.setCompId(data.COMP_ID)
     this.parentService.setMoneyUser(data.UC_AVAILABLE_MONEY);
     this.parentService.setUcId(data.UC_ID);
@@ -42,6 +42,7 @@ export class CompetitionsTeamEditComponent implements OnInit {
       if(user.USER_===username){
         counter_pilots++;
       }
+      
     }
     this.parentService.setPilotsUserCount(counter_pilots);
 

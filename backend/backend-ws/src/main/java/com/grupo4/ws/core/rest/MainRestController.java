@@ -46,7 +46,7 @@ public class MainRestController {
     public String updateAPI() {
         //getPilots();
         //getRaces();
-        getResults(1);
+        getResults(3);
         System.out.println("Actualizando datos de la api");
         return "OK";
     }
@@ -193,7 +193,6 @@ public class MainRestController {
                         Map<String, Object> idPilotMap = new HashMap<>();
                         Map<String, Object> idCircuitMap = new HashMap<>();
                         Map<String, Object> racePointPilotMap = new HashMap<>();
-                        Map<String, Object> racePointMap = new HashMap<>();
                         JSONObject resultObject = (JSONObject) result;
                         JSONObject driver = (JSONObject) resultObject.get("Driver");
 
@@ -213,28 +212,23 @@ public class MainRestController {
                         EntityResult resRace = this.raceService.raceQuery(idCircuitMap, listAtributesRace);
                         resultsMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
 
+                        this.resultService.resultInsert(resultsMap);
+
                         //----------- Añadiendo puntuaciones a usuarios ------------//
 
                         //Recogemos UCP_ID
 
-                        racePointPilotMap.put(PilotDao.PIL_ID, resPilot.get(PilotDao.PIL_ID));
-                        System.out.println(idPilotMap);
-                        System.out.println(idCircuitMap);
-                        System.out.println(resultsMap);
-                        System.out.println(racePointPilotMap);
-
+                        racePointPilotMap.put(PilotDao.PIL_ID, resPilot.getRecordValues(0).get(PilotDao.PIL_ID));
                         EntityResult resUcpId = this.userCompetitionPilotService.userCompetitionPilotQuery(racePointPilotMap, listAtributesUCP);
-                        System.out.println(resUcpId);
+                        System.out.println(resUcpId.calculateRecordNumber());
 
-                        racePointMap.put(RacePointDao.RP_POINTS, resultObject.get("points"));
-                        racePointMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
-                        racePointMap.put(UserCompetitionPilotDao.UCP_ID, resUcpId.get(UserCompetitionPilotDao.UCP_ID));
-
-                        System.out.println(resultsMap);
-                        System.out.println(racePointMap);
-                        System.out.println("Parar");
-                        this.resultService.resultInsert(resultsMap);
-                        this.racePointService.racePointInsert(racePointMap);
+                        for (int i = 0; i < resUcpId.calculateRecordNumber(); i++) {
+                            Map<String, Object> racePointMap = new HashMap<>();
+                            racePointMap.put(RacePointDao.RP_POINTS, resultObject.get("points"));
+                            racePointMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
+                            racePointMap.put(UserCompetitionPilotDao.UCP_ID, resUcpId.getRecordValues(i).get(UserCompetitionPilotDao.UCP_ID));
+                            this.racePointService.racePointInsert(racePointMap);
+                        }
 
                     }
                 }

@@ -59,5 +59,6 @@
   "ALREADY_2_DRIVERS": "You already have 2 drivers",
   "PILOT_PURCHASED": "Driver purchased",
   "PILOT_SOLD": "Driver sold",
-  "USER_HAS_PILOT_CHECK": "The driver has been purchased by another user"
+  "USER_HAS_PILOT_CHECK": "The driver has been purchased by another user",
+  "AVAILABLE_ACTIONS": "Available actions"
 }

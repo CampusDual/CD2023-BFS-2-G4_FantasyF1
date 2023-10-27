@@ -1,11 +1,7 @@
 package com.grupo4.ws.core.rest;
 
-import com.grupo4.model.core.dao.PilotDao;
-import com.grupo4.model.core.dao.RaceDao;
-import com.grupo4.model.core.dao.ResultDao;
-import com.grupo4.model.core.service.PilotService;
-import com.grupo4.model.core.service.RaceService;
-import com.grupo4.model.core.service.ResultService;
+import com.grupo4.model.core.dao.*;
+import com.grupo4.model.core.service.*;
 import com.ontimize.jee.common.dto.EntityResult;
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -21,6 +17,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -34,6 +31,12 @@ public class MainRestController {
     @Autowired
     ResultService resultService;
 
+    @Autowired
+    RacePointService racePointService;
+
+    @Autowired
+    UserCompetitionPilotService userCompetitionPilotService;
+
     @RequestMapping(value = "/main", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String main() {
         return "index";
@@ -41,9 +44,9 @@ public class MainRestController {
 
     @RequestMapping(value = "/actualizarDatosApi", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String updateAPI() {
-        getPilots();
-        getRaces();
-        getResults();
+        //getPilots();
+        //getRaces();
+        getResults(1);
         System.out.println("Actualizando datos de la api");
         return "OK";
     }
@@ -134,6 +137,7 @@ public class MainRestController {
                     raceMap.put(RaceDao.RAC_DATE, jobjRaces.get("date"));
 
                     this.raceService.raceInsert(raceMap);
+
                 }
             }
         } else {
@@ -164,12 +168,14 @@ public class MainRestController {
         }
     }
 
-    public void getResults(){
-        JSONObject response = getConection("http://ergast.com/api/f1/current/last/results.json");
+    public void getResults(int round){
+        JSONObject response = getConection("http://ergast.com/api/f1/2023/" + round + "/results.json");
         ArrayList<String> listAtributesPilot = new ArrayList<>();
         listAtributesPilot.add(PilotDao.PIL_ID);
         ArrayList<String> listAtributesRace = new ArrayList<>();
         listAtributesRace.add(RaceDao.RAC_ID);
+        ArrayList<String> listAtributesUCP = new ArrayList<>();
+        listAtributesUCP.add(UserCompetitionPilotDao.UCP_ID);
         if (response != null){
             JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
             JSONObject jsonObjRaceT = (JSONObject)(jsonObjMRD.get("RaceTable"));
@@ -186,6 +192,8 @@ public class MainRestController {
                         Map<String, Object> resultsMap = new HashMap<>();
                         Map<String, Object> idPilotMap = new HashMap<>();
                         Map<String, Object> idCircuitMap = new HashMap<>();
+                        Map<String, Object> racePointPilotMap = new HashMap<>();
+                        Map<String, Object> racePointMap = new HashMap<>();
                         JSONObject resultObject = (JSONObject) result;
                         JSONObject driver = (JSONObject) resultObject.get("Driver");
 
@@ -193,17 +201,41 @@ public class MainRestController {
                         resultsMap.put(ResultDao.RES_POSITION, resultObject.get("position"));
                         resultsMap.put(ResultDao.RES_POSITION_TEXT, resultObject.get("positionText"));
 
+                        //Recogemos PIL_ID
+
                         idPilotMap.put(PilotDao.PIL_DRIVER_ID, driver.get("driverId"));
                         EntityResult resPilot = this.pilotService.pilotQuery(idPilotMap, listAtributesPilot);
-
                         resultsMap.put(ResultDao.PIL_ID, resPilot.get(PilotDao.PIL_ID));
 
-                        idCircuitMap.put(RaceDao.RAC_CIRCUIT_ID, jsonCircuit.get("circuitId"));
+                        //Recogemos RAC_ID
 
+                        idCircuitMap.put(RaceDao.RAC_CIRCUIT_ID, jsonCircuit.get("circuitId"));
                         EntityResult resRace = this.raceService.raceQuery(idCircuitMap, listAtributesRace);
                         resultsMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
 
+                        //----------- Añadiendo puntuaciones a usuarios ------------//
+
+                        //Recogemos UCP_ID
+
+                        racePointPilotMap.put(PilotDao.PIL_ID, resPilot.get(PilotDao.PIL_ID));
+                        System.out.println(idPilotMap);
+                        System.out.println(idCircuitMap);
+                        System.out.println(resultsMap);
+                        System.out.println(racePointPilotMap);
+
+                        EntityResult resUcpId = this.userCompetitionPilotService.userCompetitionPilotQuery(racePointPilotMap, listAtributesUCP);
+                        System.out.println(resUcpId);
+
+                        racePointMap.put(RacePointDao.RP_POINTS, resultObject.get("points"));
+                        racePointMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
+                        racePointMap.put(UserCompetitionPilotDao.UCP_ID, resUcpId.get(UserCompetitionPilotDao.UCP_ID));
+
+                        System.out.println(resultsMap);
+                        System.out.println(racePointMap);
+                        System.out.println("Parar");
                         this.resultService.resultInsert(resultsMap);
+                        this.racePointService.racePointInsert(racePointMap);
+
                     }
                 }
             }

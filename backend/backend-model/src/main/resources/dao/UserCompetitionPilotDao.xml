@@ -27,5 +27,16 @@
                 ]]>
             </Sentence>
         </Query>
+        <Query id="userCompetitionId">
+            <Sentence>
+                <![CDATA[
+                    SELECT UCP.PIL_ID, UCP.UC_ID, UC.COMP_ID
+                    FROM USERS_COMPETITIONS_PILOTS UCP
+                    INNER JOIN
+                        USERS_COMPETITIONS UC ON UCP.UC_ID = UC.UC_ID
+                        #WHERE#
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

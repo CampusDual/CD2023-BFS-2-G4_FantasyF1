@@ -1,7 +1,7 @@
 <o-form #form_team_edit (onDataLoaded)="loadDataForm($event)" show-header="no" service="competitions" entity="availableMoneyFilter" keys="COMP_ID" 
    show-header-navigation="no" keys-sql-types="INTEGER">
    <o-row>
-    <o-currency-input class="input-padding" attr="UC_AVAILABLE_MONEY" thousand-separator="." decimal-separator="," sql-type="INTEGER" enabled="no" fxFlex="15" required="yes" ></o-currency-input>
+    <o-currency-input class="input-padding" attr="UC_AVAILABLE_MONEY" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes" ></o-currency-input>
   </o-row>
   <o-row>
     <o-text-input class="hidden" attr="UC_ID" sql-type="INTEGER" enabled="no" fxFlex="15"

@@ -79,10 +79,10 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
             }
         } else {
             System.out.println("El registro ya existe, no se inserta nada");
-            EntityResult notFound = new EntityResultMapImpl();
-            notFound.setCode(EntityResult.OPERATION_WRONG);
-            notFound.setMessage("Not Found");
-            return notFound;
+            EntityResult recordAlreadyExists = new EntityResultMapImpl();
+            recordAlreadyExists.setCode(EntityResult.OPERATION_WRONG);
+            recordAlreadyExists.setMessage("Record already exists");
+            return recordAlreadyExists;
         }
 
     }

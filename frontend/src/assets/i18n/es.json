@@ -58,5 +58,6 @@
   "BUY_DRIVER": "Comprar piloto",
   "ALREADY_2_DRIVERS": "Ya tienes dos pilotos",
   "PILOT_PURCHASED": "Piloto comprado",
-  "PILOT_SOLD": "Piloto vendido"
+  "PILOT_SOLD": "Piloto vendido",
+  "USER_HAS_PILOT_CHECK": "El piloto ya ha sido comprado por otro usuario"
 }

@@ -1,5 +1,5 @@
 import { Component, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
-import { DialogService, OBaseTableCellRenderer, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
+import { OBaseTableCellRenderer, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
 import { CompetitionData } from '../competition-data.service';
 import { Router } from '@angular/router';
 
@@ -12,12 +12,13 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
 
   @Input() childMessage: number;
   @ViewChild('templateref', { read: TemplateRef, static: false }) public templateref: TemplateRef<any>;
-
   protected service: OntimizeService;
-
   username: string = "";
 
-  constructor(protected injector2: Injector, protected injector: Injector, public childService: CompetitionData, private router: Router, protected snackService: SnackBarService) {
+  constructor(protected injector2: Injector, protected injector: Injector,
+    public childService: CompetitionData, private router: Router,
+    protected snackService: SnackBarService
+    ){
     super(injector);
     this.service = this.injector2.get(OntimizeService);
   }
@@ -43,16 +44,17 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
       if (this.childService.moneyUser < pilPrice){
       this.snackService.open( "NOT_ENOUGH_MONEY");
     } else{
-      console.log("PreInsert");
       
-     let resultado = this.service.insert({ "COMP_ID": this.childService.compID, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser, "PIL_ID":pilId, "PIL_PRICE":pilPrice}, "userCompetitionPilot").subscribe(resp => {
-      
+     this.service.insert({
+      "COMP_ID": this.childService.compID,"UC_ID": this.childService.ucID,
+      "UC_AVAILABLE_MONEY":this.childService.moneyUser,"PIL_ID":pilId, "PIL_PRICE":pilPrice},
+      "userCompetitionPilot").subscribe(
+        resp => {
           this.snackService.open("PILOT_PURCHASED");
           this.childService.triggerDataUpdate();
-         
-        },
-        err => { console.log("Este es el error "+ err);
-        this.snackService.open("ALGUIEN TIENE EL PILOTO");
+        }, 
+        err => {
+        this.snackService.open("USER_HAS_PILOT_CHECK");
         this.childService.triggerDataUpdate();
           }
         )
@@ -61,7 +63,9 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   }
 
   sellDriver(ucpId, pilId, pilPrice){
-    this.service.delete({ "UCP_ID": ucpId, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser, "PIL_ID":pilId, "PIL_PRICE":pilPrice }, "userCompetitionPilot").subscribe(resp => {
+    this.service.delete(
+      {"UCP_ID": ucpId, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser,
+      "PIL_ID":pilId, "PIL_PRICE":pilPrice }, "userCompetitionPilot").subscribe(resp => {
       this.snackService.open("PILOT_SOLD");
       this.childService.triggerDataUpdate();
     })

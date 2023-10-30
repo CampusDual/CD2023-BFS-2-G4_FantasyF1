@@ -46,19 +46,18 @@ public class MainRestController {
     public String updateAPI() {
         //getPilots();
         //getRaces();
-        getResults(3);
+        getResults(1);
         System.out.println("Actualizando datos de la api");
         return "OK";
     }
 
-    public static JSONObject getConection(String direction) {
+    public static JSONObject getConnection(String direction) {
         //Solicitar peticion
         try {
             URL url = new URL(direction);
             HttpURLConnection conn = (HttpURLConnection) url.openConnection();
             conn.setRequestMethod("GET");
             conn.connect();
-
             //Comprobar peticion
             int responseCode = conn.getResponseCode();
             if (responseCode != 200) {
@@ -70,7 +69,6 @@ public class MainRestController {
                 JSONObject jsonObj = new JSONObject(cntJson);
                 return jsonObj;
             }
-
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
@@ -79,17 +77,14 @@ public class MainRestController {
 
     public void getPilots() {
         Map<String, Object> pilotMap = new HashMap<>();
-        JSONObject response = getConection("http://ergast.com/api/f1/2023/drivers.json");
+        JSONObject response = getConnection("http://ergast.com/api/f1/2023/drivers.json");
         if (response != null) {
             JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
             JSONObject jsonObjDriverTable = (JSONObject) (jsonObjMRD.get("DriverTable"));
             JSONArray pilotsArray = new JSONArray(jsonObjDriverTable.get("Drivers").toString());
             for (Object p : pilotsArray) {
-
                 JSONObject jobj = (JSONObject) p;
-
                 String st1 = jobj.get("driverId").toString();
-
                 if (existsPilot(st1)){
                     System.out.println("Piloto repetido");
                 } else {
@@ -109,7 +104,7 @@ public class MainRestController {
     }
 
     public void getRaces() {
-        JSONObject response = getConection("http://ergast.com/api/f1/current.json");
+        JSONObject response = getConnection("http://ergast.com/api/f1/current.json");
         if (response != null) {
             JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
             JSONObject jsonObjRaceTable = (JSONObject) (jsonObjMRD.get("RaceTable"));
@@ -117,9 +112,7 @@ public class MainRestController {
             for (Object r : racesArray) {
                 JSONObject jobjRaces = (JSONObject) r;
                 JSONObject jsonObjCircuit = (JSONObject)jobjRaces.get("Circuit");
-
                 String st1 = jsonObjCircuit.get("circuitId").toString();
-
                 if (existsCircuit(st1)){
                     System.out.println("Circuito repetido");
                 } else {
@@ -129,31 +122,24 @@ public class MainRestController {
                     raceMap.put(RaceDao.RAC_URL, jobjRaces.get("url"));
                     raceMap.put(RaceDao.RAC_CIRCUIT_NAME, jsonObjCircuit.get("circuitName"));
                     raceMap.put(RaceDao.RAC_CIRCUIT_ID, jsonObjCircuit.get("circuitId"));
-
                     JSONObject jsonLocation = (JSONObject) (jsonObjCircuit.get("Location"));
                     raceMap.put(RaceDao.RAC_LOCALITY, jsonLocation.get("locality"));
                     raceMap.put(RaceDao.RAC_COUNTRY, jsonLocation.get("country"));
-
                     raceMap.put(RaceDao.RAC_DATE, jobjRaces.get("date"));
-
                     this.raceService.raceInsert(raceMap);
-
                 }
             }
         } else {
             System.out.println("No se ha obtenido ningun resultado");
         }
-
     }
 
     public void updatePilotPrice() {
         Map<String, Object> classificationChampionship = new HashMap<>();
         Map<String, Object> pricePilot = new HashMap<>();
-        //int[] ArrarrayPrices = [12,656];
-        JSONObject response = getConection("http://ergast.com/api/f1/current/driverStandings.json");
-        if (response == null) {
-
-        } else {
+        //int[] ArrayPrices = [12,656];
+        JSONObject response = getConnection("http://ergast.com/api/f1/current/driverStandings.json");
+        if (response != null) {
             JSONObject jsonObj2 = (JSONObject) response.get("MRData");
             JSONObject jsonObj3 = (JSONObject) (jsonObj2.get("StandingsTable"));
             JSONArray standingsLists = new JSONArray(jsonObj3.get("StandingsLists").toString());
@@ -169,13 +155,17 @@ public class MainRestController {
     }
 
     public void getResults(int round){
-        JSONObject response = getConection("http://ergast.com/api/f1/2023/" + round + "/results.json");
-        ArrayList<String> listAtributesPilot = new ArrayList<>();
-        listAtributesPilot.add(PilotDao.PIL_ID);
-        ArrayList<String> listAtributesRace = new ArrayList<>();
-        listAtributesRace.add(RaceDao.RAC_ID);
-        ArrayList<String> listAtributesUCP = new ArrayList<>();
-        listAtributesUCP.add(UserCompetitionPilotDao.UCP_ID);
+        JSONObject response = getConnection("http://ergast.com/api/f1/2023/" + round + "/results.json");
+        ArrayList<String> attrPilId = new ArrayList<>();
+        attrPilId.add(PilotDao.PIL_ID);
+        ArrayList<String> attrRacId = new ArrayList<>();
+        attrRacId.add(RaceDao.RAC_ID);
+        ArrayList<String> attrUcpId = new ArrayList<>();
+        attrUcpId.add(UserCompetitionPilotDao.UCP_ID);
+        ArrayList<String> attrDateSold = new ArrayList<>();
+        attrDateSold.add(UserCompetitionPilotDao.UCP_DATE_SOLD);
+        ArrayList<String> attrResId = new ArrayList<>();
+        attrResId.add(ResultDao.RES_ID);
         if (response != null){
             JSONObject jsonObjMRD = (JSONObject) response.get("MRData");
             JSONObject jsonObjRaceT = (JSONObject)(jsonObjMRD.get("RaceTable"));
@@ -193,43 +183,42 @@ public class MainRestController {
                         Map<String, Object> idPilotMap = new HashMap<>();
                         Map<String, Object> idCircuitMap = new HashMap<>();
                         Map<String, Object> racePointPilotMap = new HashMap<>();
+                        Map<String, Object> racePilotId = new HashMap<>();
                         JSONObject resultObject = (JSONObject) result;
                         JSONObject driver = (JSONObject) resultObject.get("Driver");
-
                         resultsMap.put(ResultDao.RES_POINTS, resultObject.get("points"));
                         resultsMap.put(ResultDao.RES_POSITION, resultObject.get("position"));
                         resultsMap.put(ResultDao.RES_POSITION_TEXT, resultObject.get("positionText"));
 
                         //Recogemos PIL_ID
-
                         idPilotMap.put(PilotDao.PIL_DRIVER_ID, driver.get("driverId"));
-                        EntityResult resPilot = this.pilotService.pilotQuery(idPilotMap, listAtributesPilot);
-                        resultsMap.put(ResultDao.PIL_ID, resPilot.get(PilotDao.PIL_ID));
+                        EntityResult resPilot = this.pilotService.pilotQuery(idPilotMap, attrPilId);
+                        resultsMap.put(PilotDao.PIL_ID, resPilot.get(PilotDao.PIL_ID));
 
                         //Recogemos RAC_ID
-
                         idCircuitMap.put(RaceDao.RAC_CIRCUIT_ID, jsonCircuit.get("circuitId"));
-                        EntityResult resRace = this.raceService.raceQuery(idCircuitMap, listAtributesRace);
-                        resultsMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
-
+                        EntityResult resRace = this.raceService.raceQuery(idCircuitMap, attrRacId);
+                        resultsMap.put(RaceDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
                         this.resultService.resultInsert(resultsMap);
 
                         //----------- Añadiendo puntuaciones a usuarios ------------//
-
                         //Recogemos UCP_ID
-
                         racePointPilotMap.put(PilotDao.PIL_ID, resPilot.getRecordValues(0).get(PilotDao.PIL_ID));
-                        EntityResult resUcpId = this.userCompetitionPilotService.userCompetitionPilotQuery(racePointPilotMap, listAtributesUCP);
-                        System.out.println(resUcpId.calculateRecordNumber());
-
-                        for (int i = 0; i < resUcpId.calculateRecordNumber(); i++) {
-                            Map<String, Object> racePointMap = new HashMap<>();
-                            racePointMap.put(RacePointDao.RP_POINTS, resultObject.get("points"));
-                            racePointMap.put(ResultDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
-                            racePointMap.put(UserCompetitionPilotDao.UCP_ID, resUcpId.getRecordValues(i).get(UserCompetitionPilotDao.UCP_ID));
-                            this.racePointService.racePointInsert(racePointMap);
+                        EntityResult resUcpId = this.userCompetitionPilotService.userCompetitionPilotQuery(racePointPilotMap, attrUcpId);
+                        EntityResult resDateSold = this.userCompetitionPilotService.userCompetitionPilotQuery(racePointPilotMap, attrDateSold);
+                        racePilotId.put(RaceDao.RAC_ID, resRace.get(RaceDao.RAC_ID));
+                        racePilotId.put(PilotDao.PIL_ID, resPilot.getRecordValues(0).get(PilotDao.PIL_ID));
+                        EntityResult resId = resultService.resultQuery(racePilotId, attrResId);
+                        System.out.println(resId);
+                        if (resDateSold.get(UserCompetitionPilotDao.UCP_DATE_SOLD) != null){
+                            for (int i = 0; i < resUcpId.calculateRecordNumber(); i++) {
+                                Map<String, Object> racePointMap = new HashMap<>();
+                                racePointMap.put(RacePointDao.RP_POINTS, resultObject.get("points"));
+                                racePointMap.put(UserCompetitionPilotDao.UCP_ID, resUcpId.getRecordValues(i).get(UserCompetitionPilotDao.UCP_ID));
+                                racePointMap.put(ResultDao.RES_ID, resId.get(ResultDao.RES_ID)); //TODO recoger res_id
+                                this.racePointService.racePointInsert(racePointMap);
+                            }
                         }
-
                     }
                 }
             }
@@ -241,31 +230,30 @@ public class MainRestController {
     public boolean existsPilot(String driverIdParam){
         Map<String, Object> mapParam = new HashMap<>();
         mapParam.put(PilotDao.PIL_DRIVER_ID, driverIdParam);
-        ArrayList<String> listAtributesPilot = new ArrayList<>();
-        listAtributesPilot.add(PilotDao.PIL_DRIVER_ID);
-        EntityResult result =  this.pilotService.pilotQuery(mapParam, listAtributesPilot);
+        ArrayList<String> attrPilot = new ArrayList<>();
+        attrPilot.add(PilotDao.PIL_DRIVER_ID);
+        EntityResult result =  this.pilotService.pilotQuery(mapParam, attrPilot);
         return !result.isEmpty();
     }
 
     public boolean existsCircuit(String circuitIdParam){
         Map<String, Object> mapParam = new HashMap<>();
         mapParam.put(RaceDao.RAC_CIRCUIT_ID, circuitIdParam);
-        ArrayList<String> listAtributesRace = new ArrayList<>();
-        listAtributesRace.add(RaceDao.RAC_CIRCUIT_ID);
-        EntityResult result =  this.raceService.raceQuery(mapParam, listAtributesRace);
+        ArrayList<String> attrRace = new ArrayList<>();
+        attrRace.add(RaceDao.RAC_CIRCUIT_ID);
+        EntityResult result =  this.raceService.raceQuery(mapParam, attrRace);
         return !result.isEmpty();
     }
 
     public boolean existsResult(String resultIdParam){
         Map<String, Object> mapParamRace = new HashMap<>();
         mapParamRace.put(RaceDao.RAC_CIRCUIT_ID, resultIdParam);
-        ArrayList<String> listAtributesRace = new ArrayList<>();
-        ArrayList<String> listAtributesResult = new ArrayList<>();
-        listAtributesRace.add(RaceDao.RAC_ID);
-        EntityResult resultRaceID =  this.raceService.raceQuery(mapParamRace, listAtributesRace);
-        listAtributesResult.add(ResultDao.RES_ID);
-        EntityResult result = this.resultService.resultQuery(resultRaceID.getRecordValues(0), listAtributesResult);
-
+        ArrayList<String> attrRace = new ArrayList<>();
+        ArrayList<String> attrResult = new ArrayList<>();
+        attrRace.add(RaceDao.RAC_ID);
+        EntityResult resultRaceID =  this.raceService.raceQuery(mapParamRace, attrRace);
+        attrResult.add(ResultDao.RES_ID);
+        EntityResult result = this.resultService.resultQuery(resultRaceID.getRecordValues(0), attrResult);
         return !result.isEmpty();
     }
 }

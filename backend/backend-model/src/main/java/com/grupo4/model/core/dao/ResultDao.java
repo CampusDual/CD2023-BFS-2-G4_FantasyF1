@@ -12,8 +12,6 @@ import org.springframework.stereotype.Repository;
         configurationFilePlaceholder = "dao/placeholders.properties")
 public class ResultDao extends OntimizeJdbcDaoSupport {
     public static final String RES_ID = "RES_ID";
-    public static final String PIL_ID = "PIL_ID";
-    public static final String RAC_ID = "RAC_ID";
     public static final String RES_POINTS = "RES_POINTS";
     public static final String RES_POSITION = "RES_POSITION";
     public static final String RES_POSITION_TEXT = "RES_POSITION_TEXT";

@@ -14,7 +14,5 @@ public class RacePointDao extends OntimizeJdbcDaoSupport {
 
     public static final String RP_ID = "RP_ID";
     public static final String RP_POINTS = "RP_POINTS";
-    public static final String UCP_ID = "UCP_ID";
-    public static final String RAC_ID = "RAC_ID";
 
 }

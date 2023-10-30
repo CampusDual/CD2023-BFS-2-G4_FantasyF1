@@ -59,9 +59,9 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
         int availableMoney = getUserAvailableMoney(ucId);
 
         ArrayList<String> listAttr = new ArrayList<>();
-        listAttr.add(UserCompetitionPilotDao.UC_ID);
+        listAttr.add(UserCompetitionDao.UC_ID);
         Map<String, Object> mapCompetitionIdQuery = new HashMap<>();
-        mapCompetitionIdQuery.put(UserCompetitionPilotDao.PIL_ID,attributes.get(UserCompetitionPilotDao.PIL_ID));
+        mapCompetitionIdQuery.put(PilotDao.PIL_ID,attributes.get(PilotDao.PIL_ID));
         mapCompetitionIdQuery.put(CompetitionDao.COMP_ID,attributes.get(CompetitionDao.COMP_ID));
 
         EntityResult resultCompetitionIdQuery = userCompetitionIdQuery(mapCompetitionIdQuery, listAttr);

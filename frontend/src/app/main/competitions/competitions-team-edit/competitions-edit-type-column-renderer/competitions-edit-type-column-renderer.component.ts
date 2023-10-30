@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellRenderer {
 
+  @Input() childMessage: number;
   @ViewChild('templateref', { read: TemplateRef, static: false }) public templateref: TemplateRef<any>;
   protected service: OntimizeService;
   username: string = "";
@@ -17,7 +18,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   constructor(protected injector2: Injector, protected injector: Injector,
     public childService: CompetitionData, private router: Router,
     protected snackService: SnackBarService
-    ){
+  ) {
     super(injector);
     this.service = this.injector2.get(OntimizeService);
   }
@@ -25,7 +26,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   ngOnInit() {
     let sessionData = localStorage.getItem("com.ontimize.web.ngx.jee.seed");
     this.username = JSON.parse(sessionData).session["user"];
-    
+
     this.configureService();
   }
 
@@ -34,43 +35,46 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
     this.service.configureService(conf);
   }
 
-  buyDriver(pilId, pilPrice){
-   
-    if (this.childService.getPilotsUserCount()>=2) {
-      this.snackService.open( "ALREADY_2_DRIVERS");
-     }
-    else{
-      if (this.childService.moneyUser < pilPrice){
-      this.snackService.open( "NOT_ENOUGH_MONEY");
-    } else{
-      
-     this.service.insert({
-      "COMP_ID": this.childService.compID,"UC_ID": this.childService.ucID,
-      "UC_AVAILABLE_MONEY":this.childService.moneyUser,"PIL_ID":pilId, "PIL_PRICE":pilPrice},
-      "userCompetitionPilot").subscribe(
-        resp => {
-          this.snackService.open("PILOT_PURCHASED");
-          this.childService.triggerDataUpdate();
-          console.log("Compra y recarga realizada");
-          
-        }, 
-        err => {
-        this.snackService.open("USER_HAS_PILOT_CHECK");
-        this.childService.triggerDataUpdate();
-        console.log("No compra pero recarga realizada");
-          }
-        )
+  buyDriver(pilId, pilPrice) {
+
+    if (this.childService.getPilotsUserCount() >= 2) {
+      this.snackService.open("ALREADY_2_DRIVERS");
+    }
+    else {
+      if (this.childService.moneyUser < pilPrice) {
+        this.snackService.open("NOT_ENOUGH_MONEY");
+      } else {
+
+        this.service.insert({
+          "COMP_ID": this.childService.compID, "UC_ID": this.childService.ucID,
+          "PIL_ID": pilId, "PIL_PRICE": pilPrice
+        },
+          "userCompetitionPilot").subscribe(
+            resp => {
+              this.snackService.open("PILOT_PURCHASED");
+              this.childService.triggerDataUpdate();
+              console.log("Compra y recarga realizada");
+
+            },
+            err => {
+              this.snackService.open("USER_HAS_PILOT_CHECK");
+              this.childService.triggerDataUpdate();
+              console.log("No compra pero recarga realizada");
+            }
+          )
       }
-     }
+    }
   }
 
-  sellDriver(ucpId, pilId, pilPrice){
+  sellDriver(ucpId, pilId, pilPrice) {
     this.service.delete(
-      {"UCP_ID": ucpId, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY":this.childService.moneyUser,
-      "PIL_ID":pilId, "PIL_PRICE":pilPrice }, "userCompetitionPilot").subscribe(resp => {
-      this.snackService.open("PILOT_SOLD");
-      this.childService.triggerDataUpdate();
-    })
+      {
+        "UCP_ID": ucpId, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY": this.childService.moneyUser,
+        "PIL_ID": pilId, "PIL_PRICE": pilPrice
+      }, "userCompetitionPilot").subscribe(resp => {
+        this.snackService.open("PILOT_SOLD");
+        this.childService.triggerDataUpdate();
+      })
   }
 
 

@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,9 +52,17 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        int ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
-        int availableMoney = (Integer) attributes.get(UserCompetitionDao.UC_AVAILABLE_MONEY);
-        int pilotPrice = (Integer) attributes.get(PilotDao.PIL_PRICE);
+        int uc_Id = (Integer) attributes.get(UserCompetitionDao.UC_ID);
+        int pil_id = (Integer) attributes.get(PilotDao.PIL_ID);
+        System.out.println("El id del piloto es : " + pil_id);
+        System.out.println("El ucid es : " + uc_Id);
+
+        int pilotPrice = getPilotPrice(pil_id);
+        System.out.println("El precio del piloto es: " + pilotPrice);
+
+        int availableMoney = getUserAvailableMoney(uc_Id);
+        System.out.println("El dinero disponible es: " + availableMoney);
+
         ArrayList<String> listAttr = new ArrayList<>();
         listAttr.add(UserCompetitionPilotDao.UC_ID);
         Map<String, Object> mapCompetitionIdQuery = new HashMap<>();
@@ -69,7 +78,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
                 attributesToUpdate.put(UserCompetitionDao.UC_AVAILABLE_MONEY, availableMoney);
 
                 Map<String, Object> keysForUpdate = new HashMap<>();
-                keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
+                keysForUpdate.put(UserCompetitionDao.UC_ID, uc_Id);
 
                 userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
                 return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
@@ -84,7 +93,6 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
             recordAlreadyExists.setMessage("Record already exists");
             return recordAlreadyExists;
         }
-
     }
 
     @Override
@@ -112,5 +120,27 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
         userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
 
         return this.daoHelper.delete(this.userCompetitionPilotDao, keyValues);
+    }
+
+    public int getPilotPrice(int pil_id){
+        Map<String, Object> pilIdMap = new HashMap<>();
+        pilIdMap.put(PilotDao.PIL_ID, pil_id);
+        ArrayList<String> listAttr = new ArrayList<>();
+        listAttr.add(PilotDao.PIL_PRICE);
+        EntityResult res = this.pilotService.pilotQuery(pilIdMap, listAttr);
+        int result = (Integer) res.getRecordValues(0).get(PilotDao.PIL_PRICE);
+        return result;
+    }
+
+    public int getUserAvailableMoney(int uc_id){
+        Map<String, Object> ucIdMap = new HashMap<>();
+        ucIdMap.put(UserCompetitionDao.UC_ID, uc_id);
+        ArrayList<String> listAttr = new ArrayList<>();
+        listAttr.add(UserCompetitionDao.UC_AVAILABLE_MONEY);
+        EntityResult res = this.userCompetitionService.userCompetitionQuery(ucIdMap, listAttr);
+        BigDecimal result = (BigDecimal) res.getRecordValues(0).get(UserCompetitionDao.UC_AVAILABLE_MONEY);
+        //From BigDecimal to int
+        int r = result.intValue();
+        return r;
     }
 }

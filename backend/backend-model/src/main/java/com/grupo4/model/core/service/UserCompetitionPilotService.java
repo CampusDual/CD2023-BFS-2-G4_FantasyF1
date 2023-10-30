@@ -14,10 +14,9 @@ import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.*;
 
 @Lazy
 @Service("UserCompetitionPilotService")
@@ -52,16 +51,12 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        int uc_Id = (Integer) attributes.get(UserCompetitionDao.UC_ID);
-        int pil_id = (Integer) attributes.get(PilotDao.PIL_ID);
-        System.out.println("El id del piloto es : " + pil_id);
-        System.out.println("El ucid es : " + uc_Id);
+        int ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
+        int pilid = (Integer) attributes.get(PilotDao.PIL_ID);
 
-        int pilotPrice = getPilotPrice(pil_id);
-        System.out.println("El precio del piloto es: " + pilotPrice);
+        int pilotPrice = getPilotPrice(pilid);
 
-        int availableMoney = getUserAvailableMoney(uc_Id);
-        System.out.println("El dinero disponible es: " + availableMoney);
+        int availableMoney = getUserAvailableMoney(ucId);
 
         ArrayList<String> listAttr = new ArrayList<>();
         listAttr.add(UserCompetitionPilotDao.UC_ID);
@@ -78,7 +73,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
                 attributesToUpdate.put(UserCompetitionDao.UC_AVAILABLE_MONEY, availableMoney);
 
                 Map<String, Object> keysForUpdate = new HashMap<>();
-                keysForUpdate.put(UserCompetitionDao.UC_ID, uc_Id);
+                keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
 
                 userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
                 return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
@@ -103,11 +98,11 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
     @Override
     public EntityResult userCompetitionPilotDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
         int ucId = (Integer) keyValues.get(UserCompetitionDao.UC_ID);
+        int pilId = (Integer) keyValues.get(PilotDao.PIL_ID);
+        int ucpId = (Integer) keyValues.get(UserCompetitionPilotDao.UCP_ID);
 
-        //ENVIAR EL DINERO DESDE EL BACK,NO FRONT
-        int availableMoney = (Integer) keyValues.get(UserCompetitionDao.UC_AVAILABLE_MONEY);
-        
-        int pilotPrice = (Integer) keyValues.get(PilotDao.PIL_PRICE);
+        int pilotPrice = getPilotPrice(pilId);
+        int availableMoney = getUserAvailableMoney(ucId);
 
         availableMoney += pilotPrice;
 
@@ -138,9 +133,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
         ArrayList<String> listAttr = new ArrayList<>();
         listAttr.add(UserCompetitionDao.UC_AVAILABLE_MONEY);
         EntityResult res = this.userCompetitionService.userCompetitionQuery(ucIdMap, listAttr);
-        BigDecimal result = (BigDecimal) res.getRecordValues(0).get(UserCompetitionDao.UC_AVAILABLE_MONEY);
-        //From BigDecimal to int
-        int r = result.intValue();
-        return r;
+        int result = (Integer) res.getRecordValues(0).get(UserCompetitionDao.UC_AVAILABLE_MONEY);
+        return result;
     }
 }

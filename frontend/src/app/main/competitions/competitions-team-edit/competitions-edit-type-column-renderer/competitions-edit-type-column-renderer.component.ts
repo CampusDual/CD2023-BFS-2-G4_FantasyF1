@@ -66,11 +66,11 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
     }
   }
 
-  sellDriver(ucpId, pilId, pilPrice) {
+  sellDriver(ucpId, pilId) {
     this.service.delete(
       {
-        "UCP_ID": ucpId, "UC_ID": this.childService.ucID, "UC_AVAILABLE_MONEY": this.childService.moneyUser,
-        "PIL_ID": pilId, "PIL_PRICE": pilPrice
+        "UCP_ID": ucpId, "UC_ID": this.childService.ucID,
+        "PIL_ID": pilId
       }, "userCompetitionPilot").subscribe(resp => {
         this.snackService.open("PILOT_SOLD");
         this.childService.triggerDataUpdate();

@@ -51,12 +51,11 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        int ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
-        int pilid = (Integer) attributes.get(PilotDao.PIL_ID);
-
-        int pilotPrice = getPilotPrice(pilid);
-
-        int availableMoney = getUserAvailableMoney(ucId);
+        Integer ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
+        Integer pilId = (Integer) attributes.get(PilotDao.PIL_ID);
+        Integer pilotPrice = getPilotPrice(pilId);
+        Integer availableMoney = getUserAvailableMoney(ucId);
+        LocalDate purchaseDate = LocalDate.now();
 
         ArrayList<String> listAttr = new ArrayList<>();
         listAttr.add(UserCompetitionDao.UC_ID);
@@ -74,7 +73,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
                 Map<String, Object> keysForUpdate = new HashMap<>();
                 keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
-
+                attributes.put(UserCompetitionPilotDao.UCP_DATE_PURCHASED, purchaseDate);
                 userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
                 return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
             } else {
@@ -92,17 +91,12 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException {
-        return null;
-    }
-
-    @Override
-    public EntityResult userCompetitionPilotDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
-        int ucId = (Integer) keyValues.get(UserCompetitionDao.UC_ID);
-        int pilId = (Integer) keyValues.get(PilotDao.PIL_ID);
-        int ucpId = (Integer) keyValues.get(UserCompetitionPilotDao.UCP_ID);
-
+        int ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
+        int pilId = (Integer) attributes.get(PilotDao.PIL_ID);
+        int ucpId = (Integer) attributes.get(UserCompetitionPilotDao.UCP_ID);
         int pilotPrice = getPilotPrice(pilId);
         int availableMoney = getUserAvailableMoney(ucId);
+        LocalDate sellDate = LocalDate.now();
 
         availableMoney += pilotPrice;
 
@@ -111,9 +105,15 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
         Map<String, Object> keysForUpdate = new HashMap<>();
         keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
+        keysForUpdate.put(UserCompetitionPilotDao.UCP_DATE_SOLD, sellDate);
 
         userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
 
+        return this.daoHelper.update(this.userCompetitionPilotDao, attributes, KeyValues);
+    }
+
+    @Override
+    public EntityResult userCompetitionPilotDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
         return this.daoHelper.delete(this.userCompetitionPilotDao, keyValues);
     }
 

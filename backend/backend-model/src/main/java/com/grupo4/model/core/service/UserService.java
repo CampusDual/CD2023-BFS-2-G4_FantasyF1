@@ -46,7 +46,6 @@ public class UserService implements IUserService {
 	}
 
 	public EntityResult userDelete(Map<?, ?> keyMap) {
-
 		return this.daoHelper.delete(this.userDao, keyMap);
 	}
 

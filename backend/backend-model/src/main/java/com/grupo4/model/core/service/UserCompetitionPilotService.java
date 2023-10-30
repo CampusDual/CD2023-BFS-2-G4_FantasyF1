@@ -95,7 +95,10 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
     @Override
     public EntityResult userCompetitionPilotDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
         int ucId = (Integer) keyValues.get(UserCompetitionDao.UC_ID);
+
+        //ENVIAR EL DINERO DESDE EL BACK,NO FRONT
         int availableMoney = (Integer) keyValues.get(UserCompetitionDao.UC_AVAILABLE_MONEY);
+        
         int pilotPrice = (Integer) keyValues.get(PilotDao.PIL_PRICE);
 
         availableMoney += pilotPrice;

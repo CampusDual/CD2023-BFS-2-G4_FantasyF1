@@ -10,7 +10,6 @@ import { Router } from '@angular/router';
 })
 export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellRenderer {
 
-  @Input() childMessage: number;
   @ViewChild('templateref', { read: TemplateRef, static: false }) public templateref: TemplateRef<any>;
   protected service: OntimizeService;
   username: string = "";

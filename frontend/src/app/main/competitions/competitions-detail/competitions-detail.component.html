@@ -1,4 +1,4 @@
-<o-form service="competitions" entity="competition" keys="COMP_ID" show-header-actions="no" header-actions="R" show-header-navigation="no"
+<o-form #form_component service="competitions" entity="competition" keys="COMP_ID" show-header-actions="no" header-actions="R" show-header-navigation="no"
     (onDataLoaded)="showPanelCode($event)">
       <o-column title="{{ 'COMP_INFO' | oTranslate }}">
         <o-row>

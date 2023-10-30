@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogService, OTextInputComponent, OntimizeService } from 'ontimize-web-ngx';
+import { DialogService, OFormComponent, OTextInputComponent, OntimizeService } from 'ontimize-web-ngx';
 
 @Component({
   selector: 'app-competitions-detail',
@@ -10,6 +10,7 @@ import { DialogService, OTextInputComponent, OntimizeService } from 'ontimize-we
 export class CompetitionsDetailComponent implements OnInit {
 
   @ViewChild("code_panel", { static: true }) code_panel: OTextInputComponent;
+  @ViewChild("form_component", { static: true }) form_component: OFormComponent;
 
   dataCompetition: {}; 
   dataTable: any; 
@@ -54,6 +55,7 @@ export class CompetitionsDetailComponent implements OnInit {
 
   loadDataTable(data){
     this.dataTable=data;
+    
   }
 
   joinLeague(){
@@ -62,7 +64,7 @@ export class CompetitionsDetailComponent implements OnInit {
     } else{
       this.service.insert({ "COMP_ID": this.dataCompetition["COMP_ID"] }, "userCompetitionJoin" )
       .subscribe(resp => {
-      this.router.navigate(['/main/home/', this.dataCompetition["COMP_ID"]]);
+        this.form_component.reload(true);
     });
     }
   }

@@ -44,7 +44,6 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
       if (this.childService.moneyUser < pilPrice) {
         this.snackService.open("NOT_ENOUGH_MONEY");
       } else {
-
         this.service.insert({
           "COMP_ID": this.childService.compID, "UC_ID": this.childService.ucID,
           "PIL_ID": pilId, "PIL_PRICE": pilPrice
@@ -54,7 +53,6 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
               this.snackService.open("PILOT_PURCHASED");
               this.childService.triggerDataUpdate();
               console.log("Compra y recarga realizada");
-
             },
             err => {
               this.snackService.open("USER_HAS_PILOT_CHECK");
@@ -67,15 +65,13 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   }
 
   sellDriver(ucpId, pilId) {
-    this.service.delete(
+    this.service.update(
+      { "UCP_ID": ucpId },
       {
-        "UCP_ID": ucpId, "UC_ID": this.childService.ucID,
-        "PIL_ID": pilId
+        "UC_ID": this.childService.ucID, "PIL_ID": pilId
       }, "userCompetitionPilot").subscribe(resp => {
         this.snackService.open("PILOT_SOLD");
         this.childService.triggerDataUpdate();
       })
   }
-
-
 }

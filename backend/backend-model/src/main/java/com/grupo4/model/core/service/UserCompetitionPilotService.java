@@ -62,10 +62,17 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
         Map<String, Object> mapCompetitionIdQuery = new HashMap<>();
         mapCompetitionIdQuery.put(PilotDao.PIL_ID,attributes.get(PilotDao.PIL_ID));
         mapCompetitionIdQuery.put(CompetitionDao.COMP_ID,attributes.get(CompetitionDao.COMP_ID));
-
         EntityResult resultCompetitionIdQuery = userCompetitionIdQuery(mapCompetitionIdQuery, listAttr);
 
-        if (resultCompetitionIdQuery.isEmpty()){
+        ArrayList<String> listAttr2 = new ArrayList<>();
+        listAttr2.add(UserCompetitionPilotDao.UCP_DATE_SOLD);
+        Map<String, Object> mapCompetitionIdQuery2 = new HashMap<>();
+        mapCompetitionIdQuery2.put(PilotDao.PIL_ID,attributes.get(PilotDao.PIL_ID));
+        mapCompetitionIdQuery2.put(UserCompetitionDao.UC_ID, resultCompetitionIdQuery.getRecordValues(0).get(UserCompetitionDao.UC_ID));
+        EntityResult query = userCompetitionPilotQuery(mapCompetitionIdQuery2, listAttr2);
+
+
+        if (resultCompetitionIdQuery.isEmpty() || !query.isEmpty()){
             if(availableMoney >= pilotPrice){
                 availableMoney -= pilotPrice;
                 Map<String, Object> attributesToUpdate = new HashMap<>();
@@ -74,6 +81,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
                 Map<String, Object> keysForUpdate = new HashMap<>();
                 keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
                 attributes.put(UserCompetitionPilotDao.UCP_DATE_PURCHASED, purchaseDate);
+                attributes.put(UserCompetitionPilotDao.UCP_PRICE_PURCHASED, pilotPrice);
                 userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
                 return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
             } else {
@@ -93,22 +101,17 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
     public EntityResult userCompetitionPilotUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException {
         int ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
         int pilId = (Integer) attributes.get(PilotDao.PIL_ID);
-        int ucpId = (Integer) attributes.get(UserCompetitionPilotDao.UCP_ID);
         int pilotPrice = getPilotPrice(pilId);
         int availableMoney = getUserAvailableMoney(ucId);
         LocalDate sellDate = LocalDate.now();
-
         availableMoney += pilotPrice;
-
         Map<String, Object> attributesToUpdate = new HashMap<>();
         attributesToUpdate.put(UserCompetitionDao.UC_AVAILABLE_MONEY, availableMoney);
-
         Map<String, Object> keysForUpdate = new HashMap<>();
         keysForUpdate.put(UserCompetitionDao.UC_ID, ucId);
-        keysForUpdate.put(UserCompetitionPilotDao.UCP_DATE_SOLD, sellDate);
-
         userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
-
+        attributes.put(UserCompetitionPilotDao.UCP_DATE_SOLD, sellDate);
+        attributes.put(UserCompetitionPilotDao.UCP_PRICE_SOLD, pilotPrice);
         return this.daoHelper.update(this.userCompetitionPilotDao, attributes, KeyValues);
     }
 

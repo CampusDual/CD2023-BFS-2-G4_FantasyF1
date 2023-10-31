@@ -11,6 +11,33 @@
         <Column>UCP_ID</Column>
     </UpdateKeys>
     <Queries>
+        <Query id="pilotsByCompetition">
+            <AmbiguousColumns>
+                <AmbiguousColumn name="PIL_ID" prefix="P" />
+                <AmbiguousColumn name="UC_ID" prefix="T" />
+                <AmbiguousColumn name="UCP_ID" prefix="T" />
+            </AmbiguousColumns>
+            <Sentence>
+                <![CDATA[
+                    WITH T AS (
+                        WITH AVAILABLE_PILOTS AS (
+                            SELECT PS.PIL_ID, UCP.UCP_ID, UCP.UCP_DATE_SOLD, UCP.UC_ID
+                            FROM PILOTS PS
+                            LEFT JOIN USERS_COMPETITIONS_PILOTS UCP ON PS.PIL_ID = UCP.PIL_ID
+                            WHERE UCP.UCP_DATE_SOLD IS NOT NULL
+                            )
+                            SELECT UC.COMP_ID, UC.USER_, UC.UC_ID, APS.PIL_ID, APS.UCP_ID
+                            FROM AVAILABLE_PILOTS APS
+                            LEFT OUTER JOIN USERS_COMPETITIONS UC ON APS.UC_ID = UC.UC_ID
+                            #WHERE#
+                       )
+                    SELECT #COLUMNS#
+                    FROM PILOTS P
+                    LEFT JOIN T ON P.PIL_ID = T.PIL_ID
+                    #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
         <Query id="filter">
             <Sentence>
                 <![CDATA[
@@ -29,6 +56,9 @@
             </Sentence>
         </Query>
         <Query id="userCompetitionId">
+            <AmbiguousColumns>
+                <AmbiguousColumn name="UC_ID" prefix="UC" />
+            </AmbiguousColumns>
             <Sentence>
                 <![CDATA[
                     SELECT #COLUMNS#

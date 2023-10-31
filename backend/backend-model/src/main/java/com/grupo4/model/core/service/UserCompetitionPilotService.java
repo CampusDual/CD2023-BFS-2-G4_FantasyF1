@@ -51,29 +51,21 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
+        Integer compId = (Integer) attributes.get(CompetitionDao.COMP_ID);
         Integer ucId = (Integer) attributes.get(UserCompetitionDao.UC_ID);
         Integer pilId = (Integer) attributes.get(PilotDao.PIL_ID);
         Integer pilotPrice = this.getPilotPrice(pilId);
         Integer availableMoney = this.getUserAvailableMoney(ucId);
         LocalDate purchaseDate = LocalDate.now();
 
-        ArrayList<String> attrUcId = new ArrayList<>(); //TODO eliminar esta parte, ya tenemos ucId
-        attrUcId.add(UserCompetitionDao.UC_ID);
-        Map<String, Object> compPilIdMap = new HashMap<>();
-        compPilIdMap.put(PilotDao.PIL_ID,attributes.get(PilotDao.PIL_ID));
-        compPilIdMap.put(CompetitionDao.COMP_ID,attributes.get(CompetitionDao.COMP_ID));
-        EntityResult resultCompetitionIdQuery = userCompetitionIdQuery(compPilIdMap, attrUcId);
+        //Para saber que tiene fecha de venta
+        EntityResult getDateSoldRes = getDateSold(pilId, ucId);
+        boolean isPurchased = getDateSoldRes.isEmpty();
 
-        ArrayList<String> attrDateSold = new ArrayList<>();
-        attrDateSold.add(UserCompetitionPilotDao.UCP_DATE_SOLD);
-        Map<String, Object> pilUcIdMap = new HashMap<>();
-        pilUcIdMap.put(PilotDao.PIL_ID, pilId);
-        pilUcIdMap.put(UserCompetitionDao.UC_ID,ucId);
-        EntityResult availablePilotsRes = userCompetitionPilotQuery(pilUcIdMap, attrDateSold);
+        //Obtener el UC_ID para comprobar que no existe ningun piloto con ese id y poder crearlo
+        EntityResult ucIdExists = getUcId(pilId, compId);
 
-        Boolean nunca_ha_sido_comprado_en_esta_competicion =availablePilotsRes.isEmpty();
-
-        if (resultCompetitionIdQuery.isEmpty() || !nunca_ha_sido_comprado_en_esta_competicion){
+        if (ucIdExists.isEmpty() || !isPurchased){
             if(availableMoney >= pilotPrice){
                 availableMoney -= pilotPrice;
                 Map<String, Object> attributesToUpdate = new HashMap<>();
@@ -139,5 +131,23 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
         EntityResult res = this.userCompetitionService.userCompetitionQuery(ucIdMap, listAttr);
         int result = (Integer) res.getRecordValues(0).get(UserCompetitionDao.UC_AVAILABLE_MONEY);
         return result;
+    }
+
+    public EntityResult getUcId(int pilId, int compId){
+        ArrayList<String> attrUcId = new ArrayList<>();
+        attrUcId.add(UserCompetitionDao.UC_ID);
+        Map<String, Object> compPilIdMap = new HashMap<>();
+        compPilIdMap.put(PilotDao.PIL_ID,pilId);
+        compPilIdMap.put(CompetitionDao.COMP_ID,compId);
+        return userCompetitionIdQuery(compPilIdMap, attrUcId);
+    }
+
+    public EntityResult getDateSold(int pilId, int ucId){
+        ArrayList<String> attrDateSold = new ArrayList<>();
+        attrDateSold.add(UserCompetitionPilotDao.UCP_DATE_SOLD);
+        Map<String, Object> pilUcIdMap = new HashMap<>();
+        pilUcIdMap.put(PilotDao.PIL_ID, pilId);
+        pilUcIdMap.put(UserCompetitionDao.UC_ID,ucId);
+        return userCompetitionPilotQuery(pilUcIdMap, attrDateSold);
     }
 }

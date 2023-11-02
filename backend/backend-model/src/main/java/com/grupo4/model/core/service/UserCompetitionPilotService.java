@@ -60,7 +60,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
         //Para saber que tiene fecha de venta
         EntityResult getDateSoldRes = getDateSold(pilId, ucId);
-        boolean isPurchased = getDateSoldRes.isEmpty();
+        boolean isPurchased = getDateSoldRes.isEmpty(); //TODO está mal, revisar método (sería isAvailable?)
 
         //Obtener el UC_ID para comprobar que no existe ningun piloto con ese id y poder crearlo
         EntityResult ucIdExists = getUcId(pilId, compId);

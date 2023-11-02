@@ -41,12 +41,17 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
 
     @Override
     public EntityResult userCompetitionPilotFilterQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
-        return this.daoHelper.query(this.userCompetitionPilotDao, keysValues, attrMap,"filter");
+        return this.daoHelper.query(this.userCompetitionPilotDao, keysValues, attrMap,"pilotsByCompetition");
     }
 
     @Override
     public EntityResult userCompetitionIdQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
         return this.daoHelper.query(this.userCompetitionPilotDao, keysValues, attrMap,"userCompetitionId");
+    }
+
+    @Override
+    public EntityResult ownedPilotByCompetitionQuery(Map<String, Object> keysValues, List<String> attrMap) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.userCompetitionPilotDao, keysValues, attrMap,"ownedPilotByCompetition");
     }
 
     @Override
@@ -58,14 +63,7 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
         Integer availableMoney = this.getUserAvailableMoney(ucId);
         LocalDate purchaseDate = LocalDate.now();
 
-        //Para saber que tiene fecha de venta
-        EntityResult getDateSoldRes = getDateSold(pilId, ucId);
-        boolean isPurchased = getDateSoldRes.isEmpty(); //TODO está mal, revisar método (sería isAvailable?)
-
-        //Obtener el UC_ID para comprobar que no existe ningun piloto con ese id y poder crearlo
-        EntityResult ucIdExists = getUcId(pilId, compId);
-
-        if (ucIdExists.isEmpty() || !isPurchased){
+        if (this.isPilotAvailable(pilId, compId)){
             if(availableMoney >= pilotPrice){
                 availableMoney -= pilotPrice;
                 Map<String, Object> attributesToUpdate = new HashMap<>();
@@ -133,21 +131,18 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
         return result;
     }
 
-    public EntityResult getUcId(int pilId, int compId){
-        ArrayList<String> attrUcId = new ArrayList<>();
-        attrUcId.add(UserCompetitionDao.UC_ID);
-        Map<String, Object> compPilIdMap = new HashMap<>();
-        compPilIdMap.put(PilotDao.PIL_ID,pilId);
-        compPilIdMap.put(CompetitionDao.COMP_ID,compId);
-        return userCompetitionIdQuery(compPilIdMap, attrUcId);
-    }
-
-    public EntityResult getDateSold(int pilId, int ucId){
+    public boolean isPilotAvailable(int pilId, int compId){
         ArrayList<String> attrDateSold = new ArrayList<>();
         attrDateSold.add(UserCompetitionPilotDao.UCP_DATE_SOLD);
         Map<String, Object> pilUcIdMap = new HashMap<>();
         pilUcIdMap.put(PilotDao.PIL_ID, pilId);
-        pilUcIdMap.put(UserCompetitionDao.UC_ID,ucId);
-        return userCompetitionPilotQuery(pilUcIdMap, attrDateSold);
+        pilUcIdMap.put(CompetitionDao.COMP_ID,compId);
+        EntityResult ownedPilotRes = ownedPilotByCompetitionQuery(pilUcIdMap, attrDateSold);
+
+        if (ownedPilotRes.calculateRecordNumber() > 0){
+            return false;
+        }
+        return true;
     }
+
 }

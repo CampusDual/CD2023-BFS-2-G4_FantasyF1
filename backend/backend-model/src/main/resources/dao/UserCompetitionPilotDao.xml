@@ -20,17 +20,17 @@
             <Sentence>
                 <![CDATA[
                     WITH T AS (
-                        WITH AVAILABLE_PILOTS AS (
+                        WITH OWNED_PILOTS AS (
                             SELECT PS.PIL_ID, UCP.UCP_ID, UCP.UCP_DATE_SOLD, UCP.UC_ID
                             FROM PILOTS PS
                             LEFT JOIN USERS_COMPETITIONS_PILOTS UCP ON PS.PIL_ID = UCP.PIL_ID
-                            WHERE UCP.UCP_DATE_SOLD IS NOT NULL
-                            )
-                            SELECT UC.COMP_ID, UC.USER_, UC.UC_ID, APS.PIL_ID, APS.UCP_ID
-                            FROM AVAILABLE_PILOTS APS
-                            LEFT OUTER JOIN USERS_COMPETITIONS UC ON APS.UC_ID = UC.UC_ID
-                            #WHERE#
-                       )
+                            WHERE UCP.UCP_DATE_SOLD IS NULL
+                        )
+                        SELECT UC.COMP_ID, UC.USER_, UC.UC_ID, APS.PIL_ID, APS.UCP_ID
+                        FROM OWNED_PILOTS APS
+                        LEFT OUTER JOIN USERS_COMPETITIONS UC ON APS.UC_ID = UC.UC_ID
+                        #WHERE#
+                   )
                     SELECT #COLUMNS#
                     FROM PILOTS P
                     LEFT JOIN T ON P.PIL_ID = T.PIL_ID
@@ -65,6 +65,25 @@
                     FROM USERS_COMPETITIONS_PILOTS UCP
                     INNER JOIN USERS_COMPETITIONS UC ON UCP.UC_ID = UC.UC_ID
                     #WHERE#
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="ownedPilotByCompetition">
+            <AmbiguousColumns>
+                <AmbiguousColumn name="UC_ID" prefix="UCP" />
+            </AmbiguousColumns>
+            <Sentence>
+                <![CDATA[
+                    WITH OWNED_PILOTS AS (
+                        select UCP.*, UC.comp_id
+                        from USERS_COMPETITIONS_PILOTS UCP
+                        LEFT JOIN USERS_COMPETITIONS UC ON UCP.UC_ID = UC.UC_ID
+                        WHERE UCP.UCP_DATE_SOLD IS NULL
+                    )
+                    SELECT #COLUMNS#
+                    FROM OWNED_PILOTS
+                    #WHERE#
+                    #ORDER#;
                 ]]>
             </Sentence>
         </Query>

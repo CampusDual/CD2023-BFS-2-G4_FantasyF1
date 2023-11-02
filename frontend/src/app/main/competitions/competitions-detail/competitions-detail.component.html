@@ -1,40 +1,38 @@
-<o-form #form_component service="competitions" entity="competition" keys="COMP_ID" show-header-actions="no" header-actions="R" show-header-navigation="no"
-    (onDataLoaded)="showPanelCode($event)">
-      <o-column title="{{ 'COMP_INFO' | oTranslate }}">
-        <o-row>
-          <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"
-            style="display: none;"></o-text-input>
-        </o-row>
-        <o-row>
-          <span fxFlex="50">
-            <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
-          </span>
-          <span fxFlex="50">
-            <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50"
-              read-only="yes"></o-text-input>
-          </span>
-          <span *ngIf=(isEditable) fxFlex="50">
-            <o-button (click)="editTeam()" attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding
-              color="primary"></o-button>
-          </span>
-          <span *ngIf=(!isEditable) fxFlex="50">
-            <o-button id="joinButton" (click)="joinLeague()" attr="stroked2" type="STROKED" label="COMP_ACCESS" layout-padding
-              color="primary"></o-button>
-          </span>
-        </o-row>
-        <o-row>
-          <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
-        </o-row>
-      </o-column>
-      <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
-        <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" virtual-scroll="no" pagination-controls="no" entity="competitionById" parent-keys="COMP_ID"
-          columns="COMP_ID;COMP_NAME;USER_;UC_POINTS;UC_AVAILABLE_MONEY"
-          visible-columns="USER_;UC_POINTS;UC_AVAILABLE_MONEY" insert-button="no"
-          delete-button="no" query-rows="10" (onDataLoaded)="showButton($event)">
-          <o-table-column attr="USER_" title="USER_" content-align="center"></o-table-column>
-          <o-table-column attr="UC_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
-          <o-table-column attr="UC_AVAILABLE_MONEY" title="UC_AVAILABLE_MONEY" content-align="center" type="currency"
-            thousand-separator="." decimal-separator="," currency-symbol="€" currency-symbol-position="right"></o-table-column>
-        </o-table>
-      </o-column>
-    </o-form>
+<o-form #form_component service="competitions" entity="competition" keys="COMP_ID" show-header-actions="no"
+  header-actions="R" show-header-navigation="no" (onDataLoaded)="showPanelCode($event)">
+  <o-column title="{{ 'COMP_INFO' | oTranslate }}">
+    <o-row>
+      <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"
+        style="display: none;"></o-text-input>
+    </o-row>
+    <o-row>
+      <span fxFlex="50">
+        <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+      </span>
+      <span fxFlex="50">
+        <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50"
+          read-only="yes"></o-text-input>
+      </span>
+      <span *ngIf=(isEditable) fxFlex="50">
+        <o-button (click)="editTeam()" attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding
+          color="primary"></o-button>
+      </span>
+      <span *ngIf=(!isEditable) fxFlex="50">
+        <o-button id="joinButton" (click)="joinLeague()" attr="stroked2" type="STROKED" label="COMP_ACCESS"
+          layout-padding color="primary"></o-button>
+      </span>
+    </o-row>
+    <o-row>
+      <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+    </o-row>
+  </o-column>
+  <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
+    <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" virtual-scroll="no"
+      pagination-controls="no" entity="rankingById" parent-keys="COMP_ID" keys="USER_" columns="COMP_ID;USER_;TOTAL_POINTS"
+      visible-columns="USER_;TOTAL_POINTS" insert-button="no" delete-button="no" query-rows="10"
+      (onDataLoaded)="showButton($event)">
+        <o-table-column attr="USER_" title="USER_" content-align="center"></o-table-column>
+        <o-table-column attr="TOTAL_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
+    </o-table>
+  </o-column>
+</o-form>

@@ -9,10 +9,11 @@ import { CompetitionsAvailableComponent } from './competitions-available/competi
 import { CompetitionsDetailComponent } from './competitions-detail/competitions-detail.component';
 import { CompetitionsTeamEditComponent } from './competitions-team-edit/competitions-team-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { CompetitionsResultsHistoryComponent } from './competitions-results-history/competitions-results-history.component';
 
 
 @NgModule({
-  declarations: [CompetitionsHomeComponent, CompetitionsNewComponent, CompetitionsSearchComponent, CompetitionsAvailableComponent, CompetitionsDetailComponent, CompetitionsTeamEditComponent],
+  declarations: [CompetitionsHomeComponent, CompetitionsNewComponent, CompetitionsSearchComponent, CompetitionsAvailableComponent, CompetitionsDetailComponent, CompetitionsTeamEditComponent, CompetitionsResultsHistoryComponent],
   imports: [
     CommonModule,
     OntimizeWebModule,

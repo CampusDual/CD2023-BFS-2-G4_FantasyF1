@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { HomeComponent } from './home.component';
 import { CompetitionsDetailComponent } from '../competitions/competitions-detail/competitions-detail.component';
+import { CompetitionsResultsHistoryComponent } from '../competitions/competitions-results-history/competitions-results-history.component';
 
 const routes: Routes = [
   {
@@ -12,6 +13,10 @@ const routes: Routes = [
   {
     path: ':COMP_ID',
     component: CompetitionsDetailComponent
+  },
+  {
+    path: ':COMP_ID/:USER_',
+    component: CompetitionsResultsHistoryComponent
   }
 ];
 

@@ -54,8 +54,7 @@ export class CompetitionsDetailComponent implements OnInit {
   }
 
   loadDataTable(data){
-    this.dataTable=data;
-    
+    this.dataTable = data;
   }
 
   joinLeague(){
@@ -72,8 +71,5 @@ export class CompetitionsDetailComponent implements OnInit {
   editTeam(){
    this.router.navigate(['/main/competitions/edit', this.dataCompetition["COMP_ID"]]);
   }
-
-  
-
 
 }

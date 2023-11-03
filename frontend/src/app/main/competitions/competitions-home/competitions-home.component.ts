@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-competitions-home',
@@ -9,10 +10,18 @@ export class CompetitionsHomeComponent implements OnInit {
 
   username: string; 
 
-  constructor() {
+  constructor(private router: Router) {
    }
 
   ngOnInit() {
+  }
+
+  newLeagueRoute(){
+    this.router.navigate(['/main/home/new']);
+  }
+
+  searchPrivateRoute(){
+    this.router.navigate(['/main/competitions/search']);
   }
 
 }

@@ -8,6 +8,10 @@
       <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
 
+          <div class="logo-container" fxLayout="column">
+            <img src="assets/images/icon_red.png" />
+          </div>
+
           <div class="login-title-container" fxLayout="column">
             <p class="session-expired text" *ngIf="sessionExpired">{{ 'ERROR_SESSION_EXPIRED' | oTranslate }}</p>
             <span class="title_text">{{ 'LOGIN_TITLE' | oTranslate }}:</span>
@@ -47,7 +51,7 @@
   <div id="footer" class="footer-container">
     <div fxLayout="row" fxLayoutAlign="end center">
       <span>{{ 'FOOTER_CREATED_BY' | oTranslate }}</span>
-      <span> &copy; 2021 </span>
+      <span> &copy; 2023 </span>
       <span>{{ 'FOOTER_RIGHTS' | oTranslate }}</span>
       <span> | </span>
       <span>{{ 'FOOTER_IMG' | oTranslate }}</span>

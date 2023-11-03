@@ -4,11 +4,16 @@ import { RouterModule, Routes } from '@angular/router';
 import { HomeComponent } from './home.component';
 import { CompetitionsDetailComponent } from '../competitions/competitions-detail/competitions-detail.component';
 import { CompetitionsResultsHistoryComponent } from '../competitions/competitions-results-history/competitions-results-history.component';
+import { CompetitionsNewComponent } from '../competitions/competitions-new/competitions-new.component';
 
 const routes: Routes = [
   {
     path: '',
     component: HomeComponent
+  },
+  {
+    path: 'new',
+    component: CompetitionsNewComponent
   },
   {
     path: ':COMP_ID',

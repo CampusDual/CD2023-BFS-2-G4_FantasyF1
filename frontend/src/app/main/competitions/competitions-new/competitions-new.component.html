@@ -1,9 +1,7 @@
-<h2 class=title>{{"NEW_LEAGUE" | oTranslate}}</h2>
-
 <o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;I;U;D" show-header-navigation="no">
+  <h2 class="title">{{ 'NEW_LEAGUE' | oTranslate }}</h2>
   <o-row>
-
-    <o-column title-label="COMPETITION_DATA" fxFlex>
+    <o-column fxFlex>
       <o-row>
         <o-text-input class="input-padding" attr="COMP_NAME" fxFlex="40" required="yes"></o-text-input>
       </o-row>

@@ -62,7 +62,7 @@
                     ON RP.UCP_ID = UCP.UCP_ID
                     #WHERE#
                     GROUP BY UC.USER_, C.COMP_ID, UC.UC_AVAILABLE_MONEY
-                    ORDER BY TOTAL_POINTS DESC;
+                    #ORDER#;
                 ]]>
             </Sentence>
         </Query>
@@ -70,7 +70,7 @@
             <Sentence>
                 <![CDATA[
                     WITH RANKING AS (
-                        SELECT C.COMP_ID, UC.USER_, C.COMP_NAME, RC.RAC_ROUND, sum(RP.RP_POINTS) as TOTAL_POINTS
+                        SELECT C.COMP_ID, UC.USER_, C.COMP_NAME, RC.RAC_ROUND, sum(RP.RP_POINTS) as TOTAL_POINTS, RP.RP_POINTS, P.PIL_SURNAME
                         FROM COMPETITIONS C
                         LEFT JOIN USERS_COMPETITIONS UC
                         ON C.COMP_ID = UC.COMP_ID
@@ -82,7 +82,9 @@
                         ON R.RES_ID = RP.RES_ID
                         LEFT JOIN RACES RC
                         ON RC.RAC_ID = R.RAC_ID
-                        GROUP BY UC.USER_, C.COMP_ID, RC.RAC_ROUND
+                        LEFT JOIN PILOTS P
+	                    ON P.PIL_ID = UCP.PIL_ID
+                        GROUP BY UC.USER_, C.COMP_ID, RC.RAC_ROUND, RP.RP_POINTS, P.PIL_SURNAME
                     )
                     SELECT #COLUMNS#
                     FROM RANKING

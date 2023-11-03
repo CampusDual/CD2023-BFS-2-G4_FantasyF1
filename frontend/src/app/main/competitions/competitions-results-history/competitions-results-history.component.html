@@ -1,25 +1,26 @@
-<p>competitions-results-history works!</p>
-<o-form #form_component service="competitions" entity="competition" keys="COMP_ID" show-header-actions="no"
-    header-actions="R" show-header-navigation="no">
-    <o-column title="{{ 'COMP_INFO' | oTranslate }}">
+<o-form service="competitions" entity="competition" keys="COMP_ID" show-header-actions="none" header-actions=""
+    show-header-navigation="no">
+    <o-column title="{{ 'USER_DETAIL' | oTranslate }}">
         <o-row>
-            <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="no" fxFlex="15"
-                required="yes" style="display: none;"></o-text-input>
+            <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="yes" fxFlex="50"
+                required="no" style="display: none;"></o-text-input>
         </o-row>
         <o-row>
             <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
         </o-row>
+        <o-row>
+            <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+        </o-row>
     </o-column>
-    <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
-        <o-table fxFlex service="competitions" virtual-scroll="no"
-            pagination-controls="yes" entity="rankingByUserAndId" parent-keys="COMP_ID;USER_" 
-            columns="COMP_ID;COMP_NAME;USER_;RAC_ROUND;TOTAL_POINTS" visible-columns="COMP_ID;COMP_NAME;RAC_ROUND;TOTAL_POINTS;USER_" insert-button="no"
-            delete-button="no" query-rows="10">
-            <o-table-column attr="COMP_ID" title="COMP_ID" content-align="center"></o-table-column>
-            <o-table-column attr="COMP_NAME" title="COMP_NAME" content-align="center"></o-table-column>
+    <o-column title="{{ 'COMP_ROUNDS' | oTranslate }}">
+        <o-table (onDataLoaded)="loadDataTable($event)" title="{{'USER_' | oTranslate}}: {{username}}" show-title="true"
+            fxFlex service="competitions" virtual-scroll="no" pagination-controls="yes" entity="rankingByUserAndId"
+            parent-keys="COMP_ID;USER_" columns="COMP_ID;COMP_NAME;USER_;RAC_ROUND;TOTAL_POINTS;RP_POINTS;PIL_SURNAME"
+            visible-columns="RAC_ROUND;PIL_SURNAME;RP_POINTS" insert-button="no" delete-button="no" query-rows="10"
+            sort-columns="RAC_ROUND:DESC">
             <o-table-column attr="RAC_ROUND" title="RAC_ROUND" content-align="center"></o-table-column>
-            <o-table-column attr="USER_" title="USER_" content-align="center"></o-table-column>
-            <o-table-column attr="TOTAL_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
+            <o-table-column attr="PIL_SURNAME" title="PILOT" content-align="center"></o-table-column>
+            <o-table-column attr="RP_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
         </o-table>
     </o-column>
 </o-form>

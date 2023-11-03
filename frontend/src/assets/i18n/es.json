@@ -39,8 +39,7 @@
   "COMP_EDIT": "Editar mi equipo",
   "USER_": "Usuario",
   "COMP_ACCESS": "Unirme a la competición",
-  "P1SURNAME": "Piloto 1",
-  "P2SURNAME": "Piloto 2",
+  "PILOT": "Piloto",
   "TEAM_NAME": "Escudería",
   "UC_AVAILABLE_MONEY": "Dinero disponible",
   "UC_POINTS": "Puntos",
@@ -60,5 +59,8 @@
   "PILOT_PURCHASED": "Piloto comprado",
   "PILOT_SOLD": "Piloto vendido",
   "USER_HAS_PILOT_CHECK": "El piloto ya ha sido comprado por otro usuario",
-  "AVAILABLE_ACTIONS": "Acciones disponibles"
+  "AVAILABLE_ACTIONS": "Acciones disponibles",
+  "RAC_ROUND": "Ronda",
+  "COMP_ROUNDS": "Histórico de puntos",
+  "USER_DETAIL": "Detalle de usuario"
 }

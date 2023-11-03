@@ -7,9 +7,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetitionsResultsHistoryComponent implements OnInit {
 
+  username: String;
+
   constructor() { }
 
   ngOnInit() {
+  }
+
+  loadDataTable(data) {
+    this.username = data[0].USER_;
   }
 
 }

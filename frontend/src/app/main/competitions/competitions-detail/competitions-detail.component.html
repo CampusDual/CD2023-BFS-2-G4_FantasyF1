@@ -31,7 +31,9 @@
       pagination-controls="no" entity="rankingById" parent-keys="COMP_ID" keys="USER_" columns="COMP_ID;USER_;TOTAL_POINTS"
       visible-columns="USER_;TOTAL_POINTS" insert-button="no" delete-button="no" query-rows="10"
       (onDataLoaded)="showButton($event)" sort-columns="TOTAL_POINTS:DESC">
-        <o-table-column attr="USER_" title="USER_" content-align="center"></o-table-column>
+        <o-table-column attr="USER_" title="USER_" content-align="center">
+          <app-competitions-detail-renderer></app-competitions-detail-renderer>
+        </o-table-column>
         <o-table-column attr="TOTAL_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
     </o-table>
   </o-column>

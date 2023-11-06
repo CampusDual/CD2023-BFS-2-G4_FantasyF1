@@ -85,7 +85,13 @@ export class CompetitionsDetailComponent implements OnInit {
   }
 
   editTeam() {
-    this.router.navigate(['/main/competitions/edit', this.dataCompetition["COMP_ID"]]);
+    
+    // this.router.navigate(['/main/competitions/edit', this.dataCompetition["COMP_ID"]]);
+
+
+    const competitionId = this.dataCompetition["COMP_ID"];
+    const url = `/main/competitions/edit/${competitionId}?isdetail=true`;
+    this.router.navigateByUrl(url);
   }
 
 

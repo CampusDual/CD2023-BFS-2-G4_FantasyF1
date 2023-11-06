@@ -1,5 +1,5 @@
 <o-form #form_component service="competitions" entity="competition" keys="COMP_ID" show-header-actions="no"
-  header-actions="R" show-header-navigation="no" (onDataLoaded)="showPanelCode($event)">
+  header-actions="R" show-header-navigation="no" (onDataLoaded)="showPanelCode($event)" editable-detail="no">
   <o-column title="{{ 'COMP_INFO' | oTranslate }}">
     <o-row>
       <o-text-input class="input-padding" attr="COMP_ID" sql-type="INTEGER" enabled="no" fxFlex="15" required="yes"

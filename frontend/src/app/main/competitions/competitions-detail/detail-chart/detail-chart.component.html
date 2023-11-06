@@ -1,0 +1,16 @@
+
+<div layout="column" fxFlex>
+  <div fxLayout="row" fxFlexFill>
+    <o-chart #lineChart showLegend="true" class="graph" fxFlex type="line" x-label="Time" y-label="Amount (€)" 
+    service="competition" entity="rankingByUserAndId" columns="USER_" visible-columns="USER_" 
+    x-axis="RAC_ROUND" x-data-type="number"  y-axis="TOTAL_POINTS" y-data-type="number"
+    [chart-parameters]="lineChartParametersSerie"></o-chart>
+  </div>
+</div>
+<div layout="column" fxFlex>
+  <div fxLayout="row" fxFlexFill>
+    <o-chart #barChart parent-keys="COMP_ID"  showLegend="true" class="graphr" fxFlex type="discreteBar" x-label="Time" y-label="Amount (€)" service="competitions" 
+    entity="competitionById"  x-axis="USER_" x-data-type="String"  y-axis="UC_POINTS" y-data-type="number"
+    ></o-chart>
+  </div>
+</div>

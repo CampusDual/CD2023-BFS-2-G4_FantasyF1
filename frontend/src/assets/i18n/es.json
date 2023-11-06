@@ -34,7 +34,7 @@
   "COMP_AVAILABLE_TITLE": "Competiciones disponibles",
   "COMP_USER_TITLE": "Mis competiciones",
   "SEARCH_PRIVATE_LEAGUE": "Buscar competición privada",
-  "COMP_CODE": "Código de la competición (sólo para competiciones privadas)",
+  "COMP_CODE": "Código de competición privada",
   "COMP_INFO": "Detalle de la competición",
   "COMP_EDIT": "Editar mi equipo",
   "USER_": "Usuario",
@@ -62,5 +62,7 @@
   "AVAILABLE_ACTIONS": "Acciones disponibles",
   "RAC_ROUND": "Ronda",
   "COMP_ROUNDS": "Histórico de puntos",
-  "USER_DETAIL": "Detalle de usuario"
+  "USER_DETAIL": "Detalle de usuario",
+  "ROUND_POINTS": "Puntos de la ronda",
+  "ACC_POINTS": "Puntos acumulados"
 }

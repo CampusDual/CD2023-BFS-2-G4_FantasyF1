@@ -34,7 +34,7 @@
   "COMP_AVAILABLE_TITLE": "Available competitions",
   "COMP_USER_TITLE": "My competitions",
   "SEARCH_PRIVATE_LEAGUE": "Search private competition",
-  "COMP_CODE": "Competition code (only necessary for private competitions)",
+  "COMP_CODE": "Private competition code",
   "COMP_INFO": "Competition info",
   "COMP_EDIT": "Edit my team",
   "USER_": "Username",
@@ -62,5 +62,7 @@
   "AVAILABLE_ACTIONS": "Available actions",
   "RAC_ROUND": "Round",
   "COMP_ROUNDS": "Progression of points",
-  "USER_DETAIL": "User detail"
+  "USER_DETAIL": "User detail",
+  "ROUND_POINTS": "Round points",
+  "ACC_POINTS": "Accumulated points"
 }

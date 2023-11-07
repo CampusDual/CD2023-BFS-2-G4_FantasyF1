@@ -16,7 +16,7 @@ export class CompetitionsDetailComponent implements OnInit {
   @ViewChild("form_component", { static: true }) form_component: OFormComponent;
   @ViewChild('lineChart', { static: true }) lineChart: OChartComponent;
 
-  public lineChartParametersSerie: LineChartConfiguration;
+  lineChartParametersSerie: LineChartConfiguration;
   arrayParaLaGrafica: Object;
   namesUsersCompetitionForGraph: string = "";
 
@@ -36,8 +36,9 @@ export class CompetitionsDetailComponent implements OnInit {
     this.lineChartParametersSerie = new LineChartConfiguration();
     this.lineChartParametersSerie.legend.vers = 'furious';
     this.lineChartParametersSerie.legendPosition = 'bottom';
-    this.lineChartParametersSerie.color = ['rgb(67, 6, 128)'];
     this.lineChartParametersSerie.showLegend = true;
+    this.lineChartParametersSerie.x1Axis.axisLabel="Rounds"
+    this.lineChartParametersSerie.y1Axis.axisLabel="Points"
   }
 
   ngOnInit() {
@@ -92,43 +93,23 @@ export class CompetitionsDetailComponent implements OnInit {
   ///LÓGICA PARA LAS GRÁFICAS///
   loadDataTableForGraph(data) {
 
-    //Creamos un nuevo array para la gráfica usando la info que nos trae la tabla
-    console.log({ data });
-    this.arrayParaLaGrafica = []
-    const rounds = Array.from(new Set(data.map(r => r["RAC_ROUND"])));
     const users: Array<string> = Array.from(new Set(data.map(r => r["USER_"])));
-    let round_data = rounds
-      .map(rac_round => {
-        let resp = { rac_round, };
-        for (let user of users) {
-          let user_points = data.find(r => r["RAC_ROUND"] === rac_round && r["USER_"] === user);
-          if (!user_points) {
-            resp[user] = 0;
-          } else {
-            resp[user] = user_points["TOTAL_POINTS"];
-          }
-        }
-        //console.table(resp);
-        return resp;
-      })
-    console.log(round_data);
-    this.arrayParaLaGrafica = {
-      data: round_data
-    }
-
-
+    this.namesUsersCompetitionForGraph = users.join(";")
     let graphArray: Array<Object> = [];
     let filterForUsers: Array<String> = [];
 
     for (let eachRecordOfData of data) {
+      let accumulatedPointsPerRound: number = 0;
       if (!filterForUsers.includes(eachRecordOfData["USER_"])) {
         let objectForEachUser = {
           key: eachRecordOfData["USER_"]
         }
         let values = []
+        values.push({ x: 0, y: 0 })
         for (let r2 of data) {
           if (r2["USER_"] === eachRecordOfData["USER_"]) {
-            values.push({ x: r2["RAC_ROUND"], y: r2["TOTAL_POINTS"] })
+            accumulatedPointsPerRound = accumulatedPointsPerRound + r2["TOTAL_POINTS"];
+            values.push({ x: r2["RAC_ROUND"], y: accumulatedPointsPerRound })
           }
         }
         objectForEachUser["values"] = values;
@@ -139,9 +120,6 @@ export class CompetitionsDetailComponent implements OnInit {
         console.log("Info of user already added.");
       }
     }
-    console.log(graphArray);
-
-    this.namesUsersCompetitionForGraph = users.join(";")
     this.lineChart.setDataArray(graphArray);
     this.lineChart.reloadData();
   }

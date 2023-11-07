@@ -69,5 +69,9 @@
   "LINE_CHART_TITLE": "Desarrollo de la competición",
   "LINE_CHART_YAXIS": "Puntos en la clasifiación",
   "LINE_CHART_XAXIS": "Rondas de carreras",
-  "COMP": "Competición"
+  "COMP": "Competición",
+  "CONFIRM_BUY": "Confimar la compra",
+  "WANT_BUY": "¿Quiere comprar el piloto?",
+  "CONFIRM_SELL": "Confirmar la venta",
+  "WANT_SELL": "¿Quiere vender al piloto?"
 }

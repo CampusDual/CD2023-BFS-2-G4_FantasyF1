@@ -69,5 +69,9 @@
   "LINE_CHART_TITLE": "Competition's progress",
   "LINE_CHART_YAXIS": "Ranking Points",
   "LINE_CHART_XAXIS": "Rounds of races",
-  "COMP": "Competition"
+  "COMP": "Competition",
+  "CONFIRM_BUY": "Confirm buy",
+  "WANT_BUY": "Do you want to buy the pilot?",
+  "CONFIRM_SELL": "Confirm sell",
+  "WANT_SELL": "Do you want to sell the pilot?"
 }

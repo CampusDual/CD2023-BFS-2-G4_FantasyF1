@@ -1,5 +1,5 @@
 import { Component, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
-import { DialogService, OBaseTableCellRenderer, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
+import { DialogService, OBaseTableCellRenderer, OTranslateService, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
 import { CompetitionData } from '../competition-data.service';
 import { Router } from '@angular/router';
 
@@ -21,7 +21,8 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
     public childService: CompetitionData, 
     private router: Router,
     protected snackService: SnackBarService,
-    protected dialogService: DialogService
+    protected dialogService: DialogService,
+    private translator: OTranslateService
 
   ) {
     super(injector);
@@ -82,7 +83,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
 
   showSellConfirm(evt: any, ucpId, pilId){
     if(this.dialogService){
-      this.dialogService.confirm('Confirm dialog title', 'Do you want to sell?');
+      this.dialogService.confirm(this.translator.get('CONFIRM_SELL'), this.translator.get('WANT_SELL'));
       this.dialogService.dialogRef.afterClosed().subscribe(result => {
         if(result){
           this.sellDriver(ucpId, pilId);
@@ -93,7 +94,7 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
 
   showBuyConfirm(evt: any, pilId, pilPrice){
     if(this.dialogService){
-      this.dialogService.confirm('Confirm dialog title', 'Do you want to buy?');
+      this.dialogService.confirm(this.translator.get('CONFIRM_BUY'), this.translator.get('WANT_BUY'));
       this.dialogService.dialogRef.afterClosed().subscribe(result => {
         if(result){
           this.buyDriver(pilId, pilPrice);

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogService, OFormComponent, OTextInputComponent, OntimizeService } from 'ontimize-web-ngx';
+import { DialogService, OFormComponent, OTextInputComponent, OTranslateService, OntimizeService } from 'ontimize-web-ngx';
 import { LineChartConfiguration, OChartComponent } from 'ontimize-web-ngx-charts';
 
 declare var d3: any;
@@ -32,13 +32,14 @@ export class CompetitionsDetailComponent implements OnInit {
     protected service: OntimizeService,
     private router: Router,
     protected dialogService: DialogService,
+    private translator: OTranslateService
   ) {
     this.lineChartParametersSerie = new LineChartConfiguration();
     this.lineChartParametersSerie.legend.vers = 'furious';
     this.lineChartParametersSerie.legendPosition = 'bottom';
     this.lineChartParametersSerie.showLegend = true;
-    this.lineChartParametersSerie.x1Axis.axisLabel="Rounds"
-    this.lineChartParametersSerie.y1Axis.axisLabel="Points"
+    this.lineChartParametersSerie.x1Axis.axisLabel=this.translator.get('LINE_CHART_XAXIS');
+    this.lineChartParametersSerie.y1Axis.axisLabel=this.translator.get('LINE_CHART_YAXIS');
   }
 
   ngOnInit() {
@@ -92,7 +93,6 @@ export class CompetitionsDetailComponent implements OnInit {
 
   ///LÓGICA PARA LAS GRÁFICAS///
   loadDataTableForGraph(data) {
-
     const users: Array<string> = Array.from(new Set(data.map(r => r["USER_"])));
     this.namesUsersCompetitionForGraph = users.join(";")
     let graphArray: Array<Object> = [];

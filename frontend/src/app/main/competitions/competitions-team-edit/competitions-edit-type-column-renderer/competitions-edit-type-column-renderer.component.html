@@ -1,5 +1,32 @@
 <ng-template #templateref let-cellvalue="cellvalue" let-rowvalue="rowvalue">
-    <span *ngIf="rowvalue['USER_'] && rowvalue['USER_'] != username">{{"PILOT_SELECTED_BY" | oTranslate}} {{rowvalue["USER_"]}}</span>
-    <span> <o-button *ngIf="!rowvalue['USER_']" class="buyButton" label="BUY_DRIVER" attr="stroked3" type="STROKED" (click)="buyDriver(rowvalue['PIL_ID'], rowvalue['PIL_PRICE'], rowvalue['UC_ID'])"></o-button></span>
-    <span> <o-button *ngIf="rowvalue['USER_'] == username" class="sellButton" label="SELL_DRIVER" attr="stroked3" type="STROKED" (click)="sellDriver(rowvalue['UCP_ID'],rowvalue['PIL_ID'])"></o-button></span>
+
+    <span
+        *ngIf="rowvalue['PIL_PRICE'] > childService.moneyUser && (rowvalue['USER_'] != username || rowvalue['USER_'] == null) && rowvalue['USER_'] == null">
+        {{"NOT_ENOUGH_MONEY" | oTranslate}}
+    </span>
+
+    <span *ngIf="rowvalue['USER_'] && rowvalue['USER_'] != username">
+        {{"PILOT_SELECTED_BY" | oTranslate}}
+        {{rowvalue["USER_"]}}
+    </span>
+
+    <span class="already_2_drivers"
+        *ngIf="rowvalue['USER_'] == null && rowvalue['PIL_PRICE'] <= childService.moneyUser && childService.getPilotsUserCount() >= 2">
+        {{"ALREADY_2_DRIVERS" | oTranslate}}
+    </span>
+
+    <span>
+        <o-button
+            *ngIf="rowvalue['USER_'] == null && rowvalue['PIL_PRICE'] <= childService.moneyUser && childService.getPilotsUserCount() < 2"
+            class="buyButton" label="BUY_DRIVER" attr="stroked3" type="STROKED"
+            (click)="buyDriver(rowvalue['PIL_ID'], rowvalue['PIL_PRICE'], rowvalue['UC_ID'])">
+        </o-button>
+    </span>
+
+    <span>
+        <o-button *ngIf="rowvalue['USER_'] == username" class="sellButton" label="SELL_DRIVER" attr="stroked3"
+            type="STROKED" (click)="sellDriver(rowvalue['UCP_ID'],rowvalue['PIL_ID'])">
+        </o-button>
+    </span>
+
 </ng-template>

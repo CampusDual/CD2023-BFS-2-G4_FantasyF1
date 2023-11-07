@@ -3,23 +3,26 @@
     entity="availableMoneyFilter" keys="COMP_ID" show-header-navigation="no" keys-sql-types="INTEGER">
     <o-row>
       <o-column fxFlex="50">
-        <o-text-input attr="COMP_NAME" read-only="yes" required="no" fxFlex="40" class="biggerInput"></o-text-input>
+        <o-text-input attr="COMP_NAME" label="{{'COMP' | oTranslate}}" read-only="yes" required="no" fxFlex="45"
+          class="biggerInput" appearance="outline"></o-text-input>
       </o-column>
       <o-column fxFlex="50">
-        <o-currency-input class="input-padding" attr="UC_AVAILABLE_MONEY" sql-type="INTEGER" read-only="yes" fxFlex="20"
-          required="no" class="biggerInput" thousand-separator="." decimal-separator=","></o-currency-input>
+        <o-currency-input class="input-padding" attr="UC_AVAILABLE_MONEY" sql-type="INTEGER" read-only="yes" fxFlex="45"
+          appearance="outline" required="no" class="biggerInput" thousand-separator="."
+          decimal-separator=","></o-currency-input>
       </o-column>
     </o-row>
     <o-row>
       <o-text-input class="hidden" attr="UC_ID" sql-type="INTEGER" enabled="no" fxFlex="15"
         required="yes"></o-text-input>
     </o-row>
-    <div fxFill fxLayout="column" fxLayoutAlign="start">
-      <o-table (onDataLoaded)="loadTableData($event)" #table_team_edit title="BUY_SELL_DRIVERS_TITLE" show-title="true"
-        attr="competitionsEditTable" service="users_competitions_pilots" entity="userCompetitionPilotFilter"
-        parent-keys="COMP_ID" columns="COMP_ID;UCP_ID;PIL_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID"
+    <o-column fxFill fxLayout="column" fxLayoutAlign="start" title="BUY_SELL_DRIVERS_TITLE">
+      <o-table (onDataLoaded)="loadTableData($event)" #table_team_edit attr="competitionsEditTable"
+        service="users_competitions_pilots" entity="userCompetitionPilotFilter" parent-keys="COMP_ID"
+        columns="COMP_ID;UCP_ID;PIL_ID;PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_;UC_ID"
         visible-columns="PIL_NAME;PIL_SURNAME;PIL_PRICE;USER_" query-rows="22" horizontal-scroll="false"
-        auto-adjust="true" virtual-scroll="no" insert-button="no" delete-button="no" pagination-controls="no">
+        auto-adjust="true" virtual-scroll="no" insert-button="no" delete-button="no" pagination-controls="no"
+        sort-columns="PIL_PRICE:DESC">
         <o-table-column attr="PIL_NAME" title="PIL_NAME" content-align="center"></o-table-column>
         <o-table-column attr="PIL_SURNAME" title="PIL_SURNAME" content-align="center"></o-table-column>
         <o-table-column attr="PIL_PRICE" title="PIL_PRICE" content-align="center" type="currency" thousand-separator="."
@@ -28,7 +31,6 @@
           <app-competitions-edit-type-column-renderer></app-competitions-edit-type-column-renderer>
         </o-table-column>
       </o-table>
-
-    </div>
+    </o-column>
   </o-form>
 </o-form>

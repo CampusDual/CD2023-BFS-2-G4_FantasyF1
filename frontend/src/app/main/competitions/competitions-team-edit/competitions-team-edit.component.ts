@@ -10,9 +10,7 @@ import { OFormComponent, OTableComponent } from 'ontimize-web-ngx';
 export class CompetitionsTeamEditComponent implements OnInit {
 
   @ViewChild('table_team_edit', {static:true}) table_team_edit: OTableComponent;
-
   @ViewChild('form_team_edit', {static:true}) form_team_edit: OFormComponent;
-
   constructor(public parentService: CompetitionData) { }
   
   ngOnInit() {
@@ -30,7 +28,6 @@ export class CompetitionsTeamEditComponent implements OnInit {
     this.parentService.setCompId(data.COMP_ID)
     this.parentService.setMoneyUser(data.UC_AVAILABLE_MONEY);
     this.parentService.setUcId(data.UC_ID);
-   
   }
 
   loadTableData(data){
@@ -42,10 +39,8 @@ export class CompetitionsTeamEditComponent implements OnInit {
       if(user.USER_===username){
         counter_pilots++;
       }
-      
     }
     this.parentService.setPilotsUserCount(counter_pilots);
-
   }
 
 }

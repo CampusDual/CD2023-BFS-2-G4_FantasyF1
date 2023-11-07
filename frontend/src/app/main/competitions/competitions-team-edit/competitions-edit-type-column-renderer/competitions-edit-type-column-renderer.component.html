@@ -18,17 +18,14 @@
     <span>
         <o-button
             *ngIf="rowvalue['USER_'] == null && rowvalue['PIL_PRICE'] <= childService.moneyUser && childService.getPilotsUserCount() < 2"
-            class="buyButton" label="BUY_DRIVER" attr="stroked3" type="STROKED"
+            class="buyButton" label="BUY_DRIVER" attr="raised4" type="RAISED" layout-padding color="primary"
             (click)="showBuyConfirm($event, rowvalue['PIL_ID'], rowvalue['PIL_PRICE'], rowvalue['UC_ID'])">
         </o-button>
     </span>
 
     <span>
-        <!-- <o-button *ngIf="rowvalue['USER_'] == username" class="sellButton" label="SELL_DRIVER" attr="stroked3"
-            type="STROKED" (click)="sellDriver(rowvalue['UCP_ID'],rowvalue['PIL_ID'])">
-        </o-button> -->
-        <o-button *ngIf="rowvalue['USER_'] == username" class="sellButton" label="SELL_DRIVER" attr="stroked3"
-            type="STROKED" (click)="showSellConfirm($event, rowvalue['UCP_ID'],rowvalue['PIL_ID'])">
+        <o-button *ngIf="rowvalue['USER_'] == username" class="sellButton" label="SELL_DRIVER" attr="raised4" type="RAISED" layout-padding color="accent"
+         (click)="showSellConfirm($event, rowvalue['UCP_ID'],rowvalue['PIL_ID'])">
         </o-button>
     </span>
 

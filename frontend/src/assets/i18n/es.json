@@ -64,5 +64,6 @@
   "COMP_ROUNDS": "Histórico de puntos",
   "USER_DETAIL": "Detalle de usuario",
   "ROUND_POINTS": "Puntos de la ronda",
-  "ACC_POINTS": "Puntos acumulados"
+  "ACC_POINTS": "Puntos acumulados",
+  "LINE_GRAPH_TITLE": "Gráfica de la competición"
 }

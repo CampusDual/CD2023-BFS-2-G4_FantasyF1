@@ -64,5 +64,6 @@
   "COMP_ROUNDS": "Progression of points",
   "USER_DETAIL": "User detail",
   "ROUND_POINTS": "Round points",
-  "ACC_POINTS": "Accumulated points"
+  "ACC_POINTS": "Accumulated points",
+  "LINE_GRAPH_TITLE": "Competition graph"
 }

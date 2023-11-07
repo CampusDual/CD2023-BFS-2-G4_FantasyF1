@@ -41,19 +41,14 @@
   </o-column>
 
   <o-column>
-    <o-table (onDataLoaded)="loadDataTableForChart($event)" service="competitions" entity="rankingByUserAndId"
+    <o-table  style="display: none;" (onDataLoaded)="loadDataTableForGraph($event)" service="competitions" entity="rankingByUserRoundId"
     fxFlex parent-keys="COMP_ID" columns="COMP_ID;USER_;RAC_ROUND;TOTAL_POINTS" visible-columns="USER_;RAC_ROUND;TOTAL_POINTS" insert-button="no" delete-button="no"
-    sort-columns="RAC_ROUND"
-    >
-      <o-table-column attr="USER_" title="USER_" content-align="center">
-        <app-competitions-detail-renderer></app-competitions-detail-renderer>
-      </o-table-column>
-      <o-table-column attr="RAC_ROUND" title="RAC_ROUND" content-align="center"></o-table-column>
-      <o-table-column attr="TOTAL_POINTS" title="UC_POINTS" content-align="center"></o-table-column>
+    sort-columns="RAC_ROUND">
       </o-table>
   </o-column>
 
   <div layout="column" fxFlex>
+    <h2 class=title >{{"LINE_GRAPH_TITLE"| oTranslate}}</h2>
     <div fxLayout="row" fxFlexFill>
       <o-chart #lineChart showLegend="true" class="graph" fxFlex type="line" x-label="Time" y-label="Amount (€)" 
       x-axis="rac_round" [y-axis]="namesUsersCompetitionForGraph"

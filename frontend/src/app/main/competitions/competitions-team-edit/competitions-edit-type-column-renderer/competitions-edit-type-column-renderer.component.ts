@@ -1,5 +1,5 @@
 import { Component, Injector, Input, TemplateRef, ViewChild } from '@angular/core';
-import { OBaseTableCellRenderer, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
+import { DialogService, OBaseTableCellRenderer, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
 import { CompetitionData } from '../competition-data.service';
 import { Router } from '@angular/router';
 
@@ -15,9 +15,14 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
   protected service: OntimizeService;
   username: string = "";
 
-  constructor(protected injector2: Injector, protected injector: Injector,
-    public childService: CompetitionData, private router: Router,
-    protected snackService: SnackBarService
+  constructor(
+    protected injector2: Injector, 
+    protected injector: Injector,
+    public childService: CompetitionData, 
+    private router: Router,
+    protected snackService: SnackBarService,
+    protected dialogService: DialogService
+
   ) {
     super(injector);
     this.service = this.injector2.get(OntimizeService);
@@ -73,5 +78,27 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
         this.snackService.open("PILOT_SOLD");
         this.childService.triggerDataUpdate();
       })
+  }
+
+  showSellConfirm(evt: any, ucpId, pilId){
+    if(this.dialogService){
+      this.dialogService.confirm('Confirm dialog title', 'Do you want to sell?');
+      this.dialogService.dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.sellDriver(ucpId, pilId);
+        }
+      })
+    }
+  }
+
+  showBuyConfirm(evt: any, pilId, pilPrice){
+    if(this.dialogService){
+      this.dialogService.confirm('Confirm dialog title', 'Do you want to buy?');
+      this.dialogService.dialogRef.afterClosed().subscribe(result => {
+        if(result){
+          this.buyDriver(pilId, pilPrice);
+        }
+      })
+    }
   }
 }

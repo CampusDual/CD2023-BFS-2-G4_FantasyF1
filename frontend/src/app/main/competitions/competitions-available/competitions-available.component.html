@@ -3,7 +3,7 @@
 <div fxFill fxLayout="column" fxLayoutAlign="start">
 
   <o-table title="COMP_ALL_TITLE" show-title="false" attr="allCompetitionsTable" service="competitions"
-      entity="publicCountCompetition" keys="COMP_ID" key="COMP_ID"
+      entity="publicCountCompetition" keys="COMP_ID" key="COMP_ID" auto-adjust="false"
       columns="COMP_ID;COMP_NAME;COMP_ISPUBLIC;COMP_DESCRIPTION;NUM_USERS;COMPLETE"
       visible-columns="COMP_NAME;COMP_DESCRIPTION;NUM_USERS" query-rows="10" insert-button="no" delete-button="no">
       <o-table-column attr="COMP_NAME" title="COMP_NAME" content-align="center"></o-table-column>

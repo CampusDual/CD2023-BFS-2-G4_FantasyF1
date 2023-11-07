@@ -73,5 +73,10 @@
   "CONFIRM_BUY": "Confimar la compra",
   "WANT_BUY": "¿Quiere comprar el piloto?",
   "CONFIRM_SELL": "Confirmar la venta",
-  "WANT_SELL": "¿Quiere vender al piloto?"
+  "WANT_SELL": "¿Quiere vender al piloto?",
+  "RED": "Rojo",
+  "BLUE": "Azul",
+  "GREEN": "Verde",
+  "BLACK": "Negro",
+  "COMP_IMAGE": "Logo de la competición"
 }

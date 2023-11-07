@@ -33,7 +33,7 @@
   "COMP_AVAILABLE_MENU": "Public competitions",
   "COMP_AVAILABLE_TITLE": "Available competitions",
   "COMP_USER_TITLE": "My competitions",
-  "SEARCH_PRIVATE_LEAGUE": "Search private competition",
+  "SEARCH_PRIVATE_LEAGUE": "Find private competition",
   "COMP_CODE": "Private competition code",
   "COMP_INFO": "Competition info",
   "COMP_EDIT": "Edit my team",
@@ -73,5 +73,10 @@
   "CONFIRM_BUY": "Confirm buy",
   "WANT_BUY": "Do you want to buy the pilot?",
   "CONFIRM_SELL": "Confirm sell",
-  "WANT_SELL": "Do you want to sell the pilot?"
+  "WANT_SELL": "Do you want to sell the pilot?",
+  "RED": "Red",
+  "BLUE": "Blue",
+  "GREEN": "Green",
+  "BLACK": "Black",
+  "COMP_IMAGE": "Competition logo"
 }

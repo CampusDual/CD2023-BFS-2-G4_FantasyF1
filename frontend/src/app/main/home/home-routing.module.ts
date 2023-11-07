@@ -20,7 +20,7 @@ const routes: Routes = [
     component: CompetitionsDetailComponent
   },
   {
-    path: ':COMP_ID/:USER_',
+    path: ':COMP_ID/:UC_ID',
     component: CompetitionsResultsHistoryComponent
   }
 ];

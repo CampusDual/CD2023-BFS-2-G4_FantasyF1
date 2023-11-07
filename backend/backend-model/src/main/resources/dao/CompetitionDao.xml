@@ -34,7 +34,7 @@
             <Sentence>
                 <![CDATA[
                     WITH COMP_BY_ID AS
-                        (SELECT C.COMP_ID, C.COMP_NAME, UC.USER_, UC.UC_ID, UC.UC_AVAILABLE_MONEY, UC.UC_POINTS, c.COMP_DESCRIPTION, c.COMP_CODE
+                        (SELECT C.COMP_ID, UC.USER_, UC.UC_ID, C.COMP_NAME, UC.UC_AVAILABLE_MONEY, UC.UC_POINTS, c.COMP_DESCRIPTION, c.COMP_CODE
                         FROM COMPETITIONS C
                         LEFT JOIN USERS_COMPETITIONS UC
                         ON C.COMP_ID = UC.COMP_ID
@@ -52,7 +52,7 @@
             </AmbiguousColumns>
             <Sentence>
                 <![CDATA[
-                    SELECT C.COMP_ID, C.COMP_NAME, UC.USER_, UC.UC_AVAILABLE_MONEY, c.COMP_DESCRIPTION, c.COMP_CODE, sum(RP.RP_POINTS) as TOTAL_POINTS
+                    SELECT C.COMP_ID, C.COMP_NAME, UC.USER_, UC.UC_ID, UC.UC_AVAILABLE_MONEY, c.COMP_DESCRIPTION, c.COMP_CODE, sum(RP.RP_POINTS) as TOTAL_POINTS
                     FROM COMPETITIONS C
                     LEFT JOIN USERS_COMPETITIONS UC
                     ON C.COMP_ID = UC.COMP_ID
@@ -61,7 +61,7 @@
                     LEFT JOIN RACES_POINTS RP
                     ON RP.UCP_ID = UCP.UCP_ID
                     #WHERE#
-                    GROUP BY UC.USER_, C.COMP_ID, UC.UC_AVAILABLE_MONEY
+                    GROUP BY UC.USER_, C.COMP_ID, UC.UC_AVAILABLE_MONEY, UC.UC_ID
                     #ORDER#;
                 ]]>
             </Sentence>

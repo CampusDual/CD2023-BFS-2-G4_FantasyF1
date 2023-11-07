@@ -28,7 +28,7 @@
   </o-column>
   <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
     <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" virtual-scroll="no"
-      pagination-controls="no" entity="rankingById" parent-keys="COMP_ID" keys="USER_" columns="COMP_ID;USER_;TOTAL_POINTS"
+      pagination-controls="no" entity="rankingById" parent-keys="COMP_ID" keys="UC_ID" columns="COMP_ID;UC_ID;USER_;TOTAL_POINTS"
       visible-columns="USER_;TOTAL_POINTS" insert-button="no" delete-button="no" query-rows="10"
       (onDataLoaded)="showButton($event)" sort-columns="TOTAL_POINTS:DESC">
         <o-table-column attr="USER_" title="USER_" content-align="center">

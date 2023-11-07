@@ -7,52 +7,54 @@
     </o-row>
     <o-row>
       <span fxFlex="50">
-        <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+        <o-text-input attr="COMP_NAME" sql-type="STRING" fxFlex="50" read-only="yes"
+          appearance="outline"></o-text-input>
       </span>
       <span fxFlex="50">
-        <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50"
-          read-only="yes"></o-text-input>
+        <o-text-input #code_panel *ngIf="isPrivate" attr="COMP_CODE" sql-type="STRING" fxFlex="50" read-only="yes"
+          appearance="outline"></o-text-input>
       </span>
       <span *ngIf=(isEditable) fxFlex="50">
-        <o-button (click)="editTeam()" attr="stroked2" type="STROKED" label="COMP_EDIT" layout-padding
-          color="primary"></o-button>
+        <o-button (click)="editTeam()" attr="raised4" type="RAISED" label="COMP_EDIT" layout-padding
+          color="warn"></o-button>
       </span>
       <span *ngIf=(!isEditable) fxFlex="50">
-        <o-button id="joinButton" (click)="joinLeague()" attr="stroked2" type="STROKED" label="COMP_ACCESS"
-          layout-padding color="primary"></o-button>
+        <o-button id="joinButton" (click)="joinLeague()" attr="raised4" type="RAISED" label="COMP_ACCESS" layout-padding
+          color="warn"></o-button>
       </span>
     </o-row>
     <o-row>
-      <o-text-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="50" read-only="yes"></o-text-input>
+      <o-textarea-input attr="COMP_DESCRIPTION" sql-type="STRING" fxFlex="100" read-only="yes"
+        appearance="outline"></o-textarea-input>
     </o-row>
   </o-column>
   <o-column title="{{ 'COMP_CLASIF' | oTranslate }}">
     <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" virtual-scroll="no"
-      pagination-controls="no" entity="rankingById" parent-keys="COMP_ID" keys="UC_ID" columns="COMP_ID;UC_ID;USER_;TOTAL_POINTS"
-      visible-columns="USER_;TOTAL_POINTS" insert-button="no" delete-button="no" query-rows="10"
-      (onDataLoaded)="showButton($event)" sort-columns="TOTAL_POINTS:DESC">
-        <o-table-column attr="USER_" title="USER_" content-align="center">
-          <app-competitions-detail-renderer></app-competitions-detail-renderer>
-        </o-table-column>
-        <o-table-column attr="TOTAL_POINTS" title="UC_POINTS" content-align="center">
-          <app-competitions-detail-renderer></app-competitions-detail-renderer>
-        </o-table-column>
+      pagination-controls="no" entity="rankingById" parent-keys="COMP_ID" keys="UC_ID"
+      columns="COMP_ID;UC_ID;USER_;TOTAL_POINTS" visible-columns="USER_;TOTAL_POINTS" insert-button="no"
+      delete-button="no" query-rows="10" (onDataLoaded)="showButton($event)" sort-columns="TOTAL_POINTS:DESC">
+      <o-table-column attr="USER_" title="USER_" content-align="center">
+        <app-competitions-detail-renderer></app-competitions-detail-renderer>
+      </o-table-column>
+      <o-table-column attr="TOTAL_POINTS" title="UC_POINTS" content-align="center">
+        <app-competitions-detail-renderer></app-competitions-detail-renderer>
+      </o-table-column>
     </o-table>
   </o-column>
 
   <o-column>
-    <o-table  style="display: none;" (onDataLoaded)="loadDataTableForGraph($event)" service="competitions" entity="rankingByUserRoundId"
-    fxFlex parent-keys="COMP_ID" columns="COMP_ID;USER_;RAC_ROUND;TOTAL_POINTS" visible-columns="USER_;RAC_ROUND;TOTAL_POINTS" insert-button="no" delete-button="no"
-    sort-columns="RAC_ROUND">
-      </o-table>
+    <o-table style="display: none;" (onDataLoaded)="loadDataTableForGraph($event)" service="competitions"
+      entity="rankingByUserRoundId" fxFlex parent-keys="COMP_ID" columns="COMP_ID;USER_;RAC_ROUND;TOTAL_POINTS"
+      visible-columns="USER_;RAC_ROUND;TOTAL_POINTS" insert-button="no" delete-button="no" sort-columns="RAC_ROUND">
+    </o-table>
   </o-column>
 
   <div layout="column" fxFlex>
-    <h2 class=title >{{"LINE_GRAPH_TITLE"| oTranslate}}</h2>
+    <h2 class=title>{{"LINE_GRAPH_TITLE"| oTranslate}}</h2>
     <div fxLayout="row" fxFlexFill>
-      <o-chart #lineChart showLegend="true" class="graph" fxFlex type="line" x-label="Time" y-label="Amount (€)" 
-      x-axis="rac_round" [y-axis]="namesUsersCompetitionForGraph"
-      [chart-parameters]="lineChartParametersSerie"></o-chart>
+      <o-chart #lineChart showLegend="true" class="graph" fxFlex type="line" x-label="Time" y-label="Amount (€)"
+        x-axis="rac_round" [y-axis]="namesUsersCompetitionForGraph"
+        [chart-parameters]="lineChartParametersSerie"></o-chart>
     </div>
   </div>
 

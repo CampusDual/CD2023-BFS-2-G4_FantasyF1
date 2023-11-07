@@ -1,11 +1,11 @@
 <div fxFill fxLayout="column" fxLayoutAlign="start">
-  <h2 class="title">{{'SEARCH_PRIVATE_LEAGUE' | oTranslate}}</h2>
-  <form (submit)="searchPrivate()">
-      <div class="container" fxLayoutAlign="center">
-          <input #privateComp type="text" placeholder="{{'INSERT_CODE' | oTranslate}}">
-      </div>
-      <div class="container" fxLayoutAlign="center">
-          <o-button label="SEARCH" attr="stroked3" type="STROKED" (click)="searchPrivate()"></o-button>
-      </div>
-  </form>
+    <h2 class="title">{{'SEARCH_PRIVATE_LEAGUE' | oTranslate}}</h2>
+    <form (submit)="searchPrivate()">
+        <div class="container" fxLayoutAlign="center">
+            <input #privateComp type="text" placeholder="{{'INSERT_CODE' | oTranslate}}">
+        </div>
+        <div class="container" fxLayoutAlign="center">
+            <o-button label="SEARCH" attr="raised4" type="RAISED" (click)="searchPrivate()" layout-padding color="warn"></o-button>
+        </div>
+    </form>
 </div>

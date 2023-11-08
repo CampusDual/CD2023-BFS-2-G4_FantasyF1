@@ -22,6 +22,11 @@ export class CompetitionsHomeComponent implements OnInit {
 
   searchPrivateRoute(){
     this.router.navigate(['/main/competitions/search']);
+    const url = `/main/competitions/search?isdetail=true`;
+    this.router.navigateByUrl(url);
+
+
+
   }
 
 }

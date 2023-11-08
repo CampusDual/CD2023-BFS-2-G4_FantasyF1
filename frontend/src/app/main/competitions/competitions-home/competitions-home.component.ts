@@ -18,15 +18,14 @@ export class CompetitionsHomeComponent implements OnInit {
 
   newLeagueRoute(){
     this.router.navigate(['/main/home/new']);
+    const url = `/main/home/new?isdetail=true`;
+    this.router.navigateByUrl(url);
   }
 
   searchPrivateRoute(){
     this.router.navigate(['/main/competitions/search']);
     const url = `/main/competitions/search?isdetail=true`;
     this.router.navigateByUrl(url);
-
-
-
   }
 
 }

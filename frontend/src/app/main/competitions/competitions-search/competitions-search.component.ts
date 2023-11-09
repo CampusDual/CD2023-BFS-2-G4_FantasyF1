@@ -29,7 +29,9 @@ export class CompetitionsSearchComponent implements OnInit {
   searchPrivate() {
     this.service.query({ "COMP_CODE": this.code.nativeElement.value, "COMP_ISPUBLIC": false },
      ["COMP_ID"], "competition").subscribe(resp => {
-      this.router.navigate(['/main/home/', resp.data[0].COMP_ID]);
+      const competitionId = resp.data[0].COMP_ID;
+      const url = `/main/home/${competitionId}?isdetail=true`;
+      this.router.navigateByUrl(url);
     });
   }
 

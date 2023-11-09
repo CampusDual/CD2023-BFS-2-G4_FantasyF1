@@ -6,6 +6,7 @@ import { CompetitionsAvailableComponent } from './competitions-available/competi
 import { CompetitionsSearchComponent } from './competitions-search/competitions-search.component';
 import { CompetitionsNewComponent } from './competitions-new/competitions-new.component';
 import { CompetitionsTeamEditComponent } from './competitions-team-edit/competitions-team-edit.component';
+import { CompetitionsResultsHistoryComponent } from './competitions-results-history/competitions-results-history.component';
 
 
 const routes: Routes = [{
@@ -33,6 +34,10 @@ const routes: Routes = [{
 {
   path: 'available/:COMP_ID',
   component: CompetitionsDetailComponent
+},
+{
+  path: 'available/:COMP_ID/:UC_ID',
+  component: CompetitionsResultsHistoryComponent
 }
 ,
 {

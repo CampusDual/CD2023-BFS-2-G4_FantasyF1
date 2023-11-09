@@ -10,14 +10,13 @@ import { CompetitionsDetailComponent } from './competitions-detail/competitions-
 import { CompetitionsTeamEditComponent } from './competitions-team-edit/competitions-team-edit.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CompetitionsResultsHistoryComponent } from './competitions-results-history/competitions-results-history.component';
-import { DetailChartComponent } from './competitions-detail/detail-chart/detail-chart.component';
 import { OChartModule } from 'ontimize-web-ngx-charts';
 
 
 @NgModule({
   declarations: [CompetitionsHomeComponent, CompetitionsNewComponent, CompetitionsSearchComponent,
     CompetitionsAvailableComponent, CompetitionsDetailComponent, CompetitionsTeamEditComponent,
-    CompetitionsResultsHistoryComponent, DetailChartComponent],
+    CompetitionsResultsHistoryComponent],
   imports: [
     CommonModule,
     OntimizeWebModule,

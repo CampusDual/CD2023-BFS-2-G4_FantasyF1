@@ -65,10 +65,13 @@
   "USER_DETAIL": "Points per round",
   "ROUND_POINTS": "Points",
   "ACC_POINTS": "Accumulated points",
+  "BAR_CHART_TITLE": "Points per pilots throughout the competition ",
   "LINE_GRAPH_TITLE": "Competition graph",
   "LINE_CHART_TITLE": "Competition's progress",
   "LINE_CHART_YAXIS": "Ranking points",
   "LINE_CHART_XAXIS": "Rounds",
+  "BAR_CHART_YAXIS": "Points per race",
+  "BAR_CHART_XAXIS": "Rounds of races",
   "COMP": "Competition",
   "CONFIRM_BUY": "Confirm purchase",
   "WANT_BUY": "Do you want to buy this driver?",
@@ -78,5 +81,7 @@
   "BLUE": "Blue",
   "GREEN": "Green",
   "BLACK": "Black",
-  "COMP_IMAGE": "Competition logo"
+  "COMP_IMAGE": "Competition logo",
+  "INFO_NO_DATA_COMPETITION": "No rounds have been played yet in this competition",
+  "INFO_NO_DATA_COMPETITION_ROUNDS": "You have not played any rounds with pilots in this competition yet"
 }

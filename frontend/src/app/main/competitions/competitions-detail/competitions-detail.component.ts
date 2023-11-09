@@ -90,37 +90,46 @@ export class CompetitionsDetailComponent implements OnInit {
     this.router.navigateByUrl(url);
   }
 
-
-  ///LÓGICA PARA LAS GRÁFICAS///
-  loadDataTableForGraph(data) {
+  loadDataTableForGraph(data: Array<any>) {
     const users: Array<string> = Array.from(new Set(data.map(r => r["USER_"])));
     this.namesUsersCompetitionForGraph = users.join(";")
     let graphArray: Array<Object> = [];
     let filterForUsers: Array<String> = [];
+    console.log({data});
 
-    for (let eachRecordOfData of data) {
-      let accumulatedPointsPerRound: number = 0;
-      if (!filterForUsers.includes(eachRecordOfData["USER_"])) {
-        let objectForEachUser = {
-          key: eachRecordOfData["USER_"]
-        }
-        let values = []
-        values.push({ x: 0, y: 0 })
-        for (let r2 of data) {
-          if (r2["USER_"] === eachRecordOfData["USER_"]) {
-            accumulatedPointsPerRound = accumulatedPointsPerRound + r2["TOTAL_POINTS"];
-            values.push({ x: r2["RAC_ROUND"], y: accumulatedPointsPerRound })
+    if (data.length===0) {
+      document.getElementById("lineGraph").classList.add("hideGraph")
+      document.getElementById("infoNoData").classList.remove("hiddenInfo")
+    } else{
+      document.getElementById("lineGraph").classList.remove("hideGraph")
+      document.getElementById("infoNoData").classList.add("hiddenInfo")
+      for (let eachRecordOfData of data) {
+        let accumulatedPointsPerRound: number = 0;
+        if (!filterForUsers.includes(eachRecordOfData["USER_"])) {
+          let objectForEachUser = {
+            key: eachRecordOfData["USER_"]
           }
+          let values = []
+          for(let i=0; i<data[0]["RAC_ROUND"]; i++){
+            values.push({ x: i, y: 0 })
+          }
+          for (let r2 of data) {
+            if (r2["USER_"] === eachRecordOfData["USER_"]) {
+              accumulatedPointsPerRound = accumulatedPointsPerRound + r2["TOTAL_POINTS"];
+              values.push({ x: r2["RAC_ROUND"], y: accumulatedPointsPerRound })
+            }
+          }
+          objectForEachUser["values"] = values;
+          graphArray.push(objectForEachUser);
+          filterForUsers.push(eachRecordOfData["USER_"])
         }
-        objectForEachUser["values"] = values;
-        graphArray.push(objectForEachUser);
-        filterForUsers.push(eachRecordOfData["USER_"])
+        else {
+          console.log("Info of user already added.");
+        }
       }
-      else {
-        console.log("Info of user already added.");
-      }
+      console.log({graphArray})
+      this.lineChart.setDataArray(graphArray);
+      this.lineChart.reloadData();
     }
-    this.lineChart.setDataArray(graphArray);
-    this.lineChart.reloadData();
   }
 }

@@ -54,10 +54,11 @@
     </o-table>
   </o-column>
 
-  <o-column content-align="center" title="{{'LINE_CHART_TITLE'| oTranslate}}">
+  <o-column  content-align="center" title="{{'LINE_CHART_TITLE'| oTranslate}}">
     <o-row fxFlexFill>
-      <o-chart #lineChart showLegend="true" class="graph" fxFlex type="line"
+      <o-chart id="lineGraph" #lineChart showLegend="true" class="graph" fxFlex type="line"
         [chart-parameters]="lineChartParametersSerie"></o-chart>
     </o-row>
-  </o-column>
+  </o-column> 
+  <h2 id="infoNoData" class="hiddenInfo">{{ 'INFO_NO_DATA_COMPETITION' | oTranslate }}</h2>
 </o-form>

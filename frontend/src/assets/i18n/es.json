@@ -65,10 +65,13 @@
   "USER_DETAIL": "Puntos por ronda",
   "ROUND_POINTS": "Puntos",
   "ACC_POINTS": "Puntos acumulados",
+  "BAR_CHART_TITLE": "Puntos por pilotos a lo largo de la competición",
   "LINE_GRAPH_TITLE": "Gráfica de la competición",
   "LINE_CHART_TITLE": "Desarrollo de la competición",
   "LINE_CHART_YAXIS": "Puntos en la clasifiación",
   "LINE_CHART_XAXIS": "Rondas",
+  "BAR_CHART_YAXIS": "Puntos por carrera",
+  "BAR_CHART_XAXIS": "Rondas",
   "COMP": "Competición",
   "CONFIRM_BUY": "Confimar la compra",
   "WANT_BUY": "¿Quieres comprar este piloto?",
@@ -78,5 +81,7 @@
   "BLUE": "Azul",
   "GREEN": "Verde",
   "BLACK": "Negro",
-  "COMP_IMAGE": "Logo de la competición"
+  "COMP_IMAGE": "Logo de la competición",
+  "INFO_NO_DATA_COMPETITION": "Todavía no se ha jugado ninguna ronda en esta competición.",
+  "INFO_NO_DATA_COMPETITION_ROUNDS": "Todavía no has jugado ninguna ronda con pilotos en esta competición."
 }

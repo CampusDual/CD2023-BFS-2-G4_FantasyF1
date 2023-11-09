@@ -35,7 +35,7 @@
         </span>
         <span fxFlex="50">
             <o-column title="{{ 'COMP_ROUNDS' | oTranslate }}" fxFlex="90">
-                <o-table fxFlex service="competitions" virtual-scroll="no" pagination-controls="yes"
+                <o-table (onDataLoaded)="loadDataTableForChart($event)" fxFlex service="competitions" virtual-scroll="no" pagination-controls="yes"
                     entity="rankingByUserAndId" parent-keys="COMP_ID;USER_"
                     columns="COMP_ID;COMP_NAME;USER_;RAC_ROUND;TOTAL_POINTS;RP_POINTS;PIL_SURNAME"
                     visible-columns="RAC_ROUND;PIL_SURNAME;RP_POINTS" insert-button="no" delete-button="no"
@@ -49,4 +49,13 @@
             </o-column>
         </span>
     </o-row>
+
+    <o-column content-align="center" title="{{'BAR_CHART_TITLE'| oTranslate}}">
+        <o-row fxFlexFill>
+          <o-chart  id="barGraph" #multiBarChart showLegend="true" class="graph" fxFlex type="multiBar"
+         [chart-parameters]="multiBarConfig"
+          ></o-chart>
+        </o-row>
+    </o-column>
+    <h2 id="infoNoData" class="hiddenInfo">{{ 'INFO_NO_DATA_COMPETITION_ROUNDS' | oTranslate }}</h2>
 </o-form>

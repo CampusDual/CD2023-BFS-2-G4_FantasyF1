@@ -1,0 +1,12 @@
+input {
+    display: flex;
+}
+
+.buttonConfirm {
+    display: inline-block;
+    width: 20%;
+}
+
+.buttonCancel {
+    display: inline-block;
+}

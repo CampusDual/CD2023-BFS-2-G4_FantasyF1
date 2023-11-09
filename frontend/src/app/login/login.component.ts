@@ -3,6 +3,7 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, LocalStorageService, NavigationService } from 'ontimize-web-ngx';
 import { Observable } from 'rxjs';
+import { LoginFormService } from './login-form/login-form.service';
 
 @Component({
   selector: 'login',
@@ -11,6 +12,8 @@ import { Observable } from 'rxjs';
   encapsulation: ViewEncapsulation.None
 })
 export class LoginComponent implements OnInit {
+
+  modalSwitch: Boolean = false;
 
   loginForm: FormGroup = new FormGroup({});
   userCtrl: FormControl = new FormControl('', Validators.required);
@@ -26,6 +29,7 @@ export class LoginComponent implements OnInit {
     @Inject(AuthService) private authService: AuthService,
     @Inject(LocalStorageService) private localStorageService,
     public injector: Injector,
+    private modalSS: LoginFormService
   ) {
     this.router = router;
     
@@ -44,6 +48,7 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit(): any {
+    this.modalSS.$modal.subscribe((valor)=>{this.modalSwitch = valor});
     this.navigation.setVisible(false);
 
     this.loginForm.addControl('username', this.userCtrl);
@@ -77,5 +82,10 @@ export class LoginComponent implements OnInit {
       default: break;
     }
   }
+  showForm(){
+    this.modalSwitch = true;
+  }
+
+
 
 }

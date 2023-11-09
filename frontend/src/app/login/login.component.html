@@ -7,38 +7,42 @@
     <div class="wrapp-login">
       <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
+          <div id="login" *ngIf="modalSwitch == false">
+            <div class="logo-container" fxLayout="column">
+              <img src="assets/images/icon_red.png" />
+            </div>
+            <div class="login-title-container" fxLayout="column">
+              <p class="session-expired text" *ngIf="sessionExpired">{{ 'ERROR_SESSION_EXPIRED' | oTranslate }}</p>
+              <span class="title_text">{{ 'LOGIN_TITLE' | oTranslate }}:</span>
+            </div>
 
-          <div class="logo-container" fxLayout="column">
-            <img src="assets/images/icon_red.png" />
+            <div fxLayout="column" fxLayoutGap="10px">
+              <mat-form-field fxFill class="m-top-24">
+                <input matInput class="mat-input" #user placeholder="{{ 'USERNAME' | oTranslate }}" id="username"
+                  [formControl]="userCtrl">
+                <mat-error *ngIf="userCtrl.hasError('required')">
+                  {{ 'ERROR_USER_REQUIRED' | oTranslate }}
+                </mat-error>
+              </mat-form-field>
+              <mat-form-field fxFill class="m-top-24">
+                <input matInput class="mat-input" #password placeholder="{{ 'PASSWORD' | oTranslate }}" id="password"
+                  type="password" [formControl]="pwdCtrl">
+                <mat-error *ngIf="pwdCtrl.hasError('required')">
+                  {{ 'ERROR_PASS_REQUIRED' | oTranslate }}
+                </mat-error>
+              </mat-form-field>
+            </div>
+
+            <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="m-top-24">
+              <mat-checkbox class="text">{{ 'REMEMBER_ME' | oTranslate }}</mat-checkbox>
+            </div>
+
+            <button mat-raised-button color="primary" type="submit">{{ 'LOGIN' | oTranslate }}</button>
           </div>
-
-          <div class="login-title-container" fxLayout="column">
-            <p class="session-expired text" *ngIf="sessionExpired">{{ 'ERROR_SESSION_EXPIRED' | oTranslate }}</p>
-            <span class="title_text">{{ 'LOGIN_TITLE' | oTranslate }}:</span>
+          <button mat-raised-button color="primary" type="submit" (click)="showForm()">REGISTRARSE</button>
+          <div class="" *ngIf="modalSwitch == true">
+            <app-login-form></app-login-form>
           </div>
-
-          <div fxLayout="column" fxLayoutGap="10px">
-            <mat-form-field fxFill class="m-top-24">
-              <input matInput class="mat-input" #user placeholder="{{ 'USERNAME' | oTranslate }}" id="username"
-                [formControl]="userCtrl">
-              <mat-error *ngIf="userCtrl.hasError('required')">
-                {{ 'ERROR_USER_REQUIRED' | oTranslate }}
-              </mat-error>
-            </mat-form-field>
-            <mat-form-field fxFill class="m-top-24">
-              <input matInput class="mat-input" #password placeholder="{{ 'PASSWORD' | oTranslate }}" id="password"
-                type="password" [formControl]="pwdCtrl">
-              <mat-error *ngIf="pwdCtrl.hasError('required')">
-                {{ 'ERROR_PASS_REQUIRED' | oTranslate }}
-              </mat-error>
-            </mat-form-field>
-          </div>
-
-          <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="m-top-24">
-            <mat-checkbox class="text">{{ 'REMEMBER_ME' | oTranslate }}</mat-checkbox>
-          </div>
-
-          <button mat-raised-button color="primary" type="submit">{{ 'LOGIN' | oTranslate }}</button>
           <div layout-padding></div>
           <div layout-padding></div>
 

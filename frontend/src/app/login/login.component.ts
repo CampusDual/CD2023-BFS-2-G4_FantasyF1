@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService, LocalStorageService, NavigationService } from 'ontimize-web-ngx';
 import { Observable } from 'rxjs';
 import { LoginFormService } from './login-form/login-form.service';
+import { RegisterService } from '../register/register-home/register.service';
 
 @Component({
   selector: 'login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
     @Inject(AuthService) private authService: AuthService,
     @Inject(LocalStorageService) private localStorageService,
     public injector: Injector,
-    private modalSS: LoginFormService
+    private modalSS: RegisterService
   ) {
     this.router = router;
     

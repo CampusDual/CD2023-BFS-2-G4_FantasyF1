@@ -1,0 +1,28 @@
+ <p>register-home works!</p>
+ <div class="modal">
+    <div class="modal_body">
+      <o-form editable-detail="no" show-header="no">
+  
+        <o-text-input #nickname attr="input" label="NickName" data="" read-only="no" required="yes">
+          <mat-icon oMatSuffix>sentiment_very_satisfied</mat-icon>
+        </o-text-input>
+  
+        <o-password-input #password attr="password" label="Password" data="" read-only="no" required="yes"></o-password-input>
+        <o-password-input #password2 attr="password2" label="Confirm Password" data="" read-only="no" required="yes"></o-password-input>
+  
+        <o-text-input #name attr="name" label="Name" data="" read-only="no" required="no"></o-text-input>
+        <o-text-input #surname attr="surname" label="Surname" data="" read-only="no" required="yenos"></o-text-input>
+  
+        <o-email-input #email attr="email" label="Email" data="" read-only="no" required="no"></o-email-input>
+  
+        <o-nif-input #nif attr="nif" label="NIF" data="" read-only="no" required="no"></o-nif-input>
+  
+        <div>
+          <o-button attr="raised4" type="RAISED" label="Confirm" layout-padding color="warn" style="display: inline-block;" (click)="insertUser()"></o-button>
+          <o-button attr="raised4" type="RAISED" label="Cancel" layout-padding color="warn" style="display: inline-block;" (click)="closeModal()"></o-button>
+        </div>
+  
+  
+    </o-form>
+  
+  </div>

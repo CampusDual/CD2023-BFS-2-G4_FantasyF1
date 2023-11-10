@@ -11,11 +11,12 @@ import org.springframework.web.bind.annotation.RestController;
 public class PilotPriceRestController extends ORestController<IPilotPriceService> {
 
     @Autowired
-    private IPilotPriceService iPilotPriceService;
-
+    private IPilotPriceService pilotPriceService;
 
     @Override
     public IPilotPriceService getService() {
-        return iPilotPriceService;
+        return this.pilotPriceService;
     }
+
+
 }

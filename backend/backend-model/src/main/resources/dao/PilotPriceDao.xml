@@ -11,5 +11,22 @@
         <Column>PP_ID</Column>
     </UpdateKeys>
     <Queries>
+        <Query id="listNamePrice">
+            <Sentence>
+                <![CDATA[
+                    WITH NAMES_PRICES AS (
+                        SELECT PP.PP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, PP.PP_PRICE
+                        FROM PILOTS_PRICES PP
+                        LEFT JOIN PILOTS P
+                        ON P.PIL_ID = PP.PIL_ID
+                        ORDER BY PP.PP_ID DESC
+                        LIMIT 22)
+                    SELECT #COLUMNS#
+                    FROM NAMES_PRICES
+                    #WHERE#
+                    #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

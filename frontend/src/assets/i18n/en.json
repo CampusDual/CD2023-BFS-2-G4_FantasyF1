@@ -86,5 +86,6 @@
   "INFO_NO_DATA_COMPETITION_ROUNDS": "You have not played any rounds with pilots in this competition yet",
   "SELECT_PILOTS": "Select pilots",
   "FILTER_PILOTS": "Find", 
-  "CLEAR_FILTER_PILOTS": "Clear filter"
+  "CLEAR_FILTER_PILOTS": "Clear filter",
+  "PP_PRICE": "Current price"
 }

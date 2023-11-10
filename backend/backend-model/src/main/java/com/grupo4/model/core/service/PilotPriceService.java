@@ -20,7 +20,8 @@ public class PilotPriceService implements IPilotPriceService {
     private PilotPriceDao pilotPriceDao;
 
     @Autowired
-    private DefaultOntimizeDaoHelper DaoHelper;
+    private DefaultOntimizeDaoHelper daoHelper;
+
 
     @Override
     public EntityResult pilotPriceQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
@@ -29,9 +30,6 @@ public class PilotPriceService implements IPilotPriceService {
 
     @Override
     public EntityResult pilotPriceInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-
-
-
         return null;
     }
 
@@ -44,4 +42,10 @@ public class PilotPriceService implements IPilotPriceService {
     public EntityResult pilotPriceDelete(Map<String, Object> keyValues) throws OntimizeJEERuntimeException {
         return null;
     }
+
+    @Override
+    public EntityResult listNamePriceQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.pilotPriceDao, keysValues, attributes, "listNamePrice");
+    }
+
 }

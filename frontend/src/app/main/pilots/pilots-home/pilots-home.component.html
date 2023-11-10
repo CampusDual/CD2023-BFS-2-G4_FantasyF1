@@ -1,0 +1,15 @@
+<o-column fxLayout>
+    <h2 class=title>{{"PILOTS_TITLE" | oTranslate}}</h2>
+</o-column>
+<o-column fxLayout fxLayoutAlign="start">
+    <o-row>
+        <o-table attr="pilotsPricesTable" service="pilots_prices" entity="listNamePrice" keys="PP_ID"
+            columns="PP_ID;PIL_ID;PIL_NAME;PIL_SURNAME;PP_PRICE" visible-columns="PIL_NAME;PIL_SURNAME;PP_PRICE"
+            query-rows="22" horizontal-scroll="false" auto-adjust="false" virtual-scroll="no" insert-button="no"
+            delete-button="no" virtual-scroll="no" sort-columns="PP_PRICE:DESC">
+            <o-table-column attr="PIL_NAME" title="PIL_NAME" content-align="center"></o-table-column>
+            <o-table-column attr="PIL_SURNAME" title="PIL_SURNAME" content-align="center"></o-table-column>
+            <o-table-column attr="PP_PRICE" title="PP_PRICE" content-align="center"></o-table-column>
+        </o-table>
+    </o-row>
+</o-column>

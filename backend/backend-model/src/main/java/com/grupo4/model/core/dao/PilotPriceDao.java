@@ -8,15 +8,11 @@ import org.springframework.stereotype.Repository;
 @Lazy
 @Repository(value ="PilotPriceDao")
 @ConfigurationFile(
-        configurationFile = "dao/PilotPrice.xml",
+        configurationFile = "dao/PilotPriceDao.xml",
         configurationFilePlaceholder = "dao/placeholders.properties")
 public class PilotPriceDao extends OntimizeJdbcDaoSupport {
-
-    public static final String PP_ID = "PP_ID";
+    public static final String PIL_ID = "PP_ID";
     public static final String PP_PRICE = "PP_PRICE";
     public static final String PP_VARIATION = "PP_VARIATION";
-    public static final String PIL_ID = "PIL_ID";
-    public static final String RES_ID = "RES_ID";
-
 
 }

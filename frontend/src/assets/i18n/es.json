@@ -83,5 +83,8 @@
   "BLACK": "Negro",
   "COMP_IMAGE": "Logo de la competición",
   "INFO_NO_DATA_COMPETITION": "Todavía no se ha jugado ninguna ronda en esta competición.",
-  "INFO_NO_DATA_COMPETITION_ROUNDS": "Todavía no has jugado ninguna ronda con pilotos en esta competición."
+  "INFO_NO_DATA_COMPETITION_ROUNDS": "Todavía no has jugado ninguna ronda con pilotos en esta competición.",
+  "SELECT_PILOTS": "Selecciona los pilotos",
+  "FILTER_PILOTS": "Buscar", 
+  "CLEAR_FILTER_PILOTS": "Limpiar filtro"
 }

@@ -1,0 +1,15 @@
+<JdbcEntitySetup
+        xmlns="http://www.ontimize.com/schema/jdbc"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.ontimize.com/schema/jdbc http://www.ontimize.com/schema/jdbc/ontimize-jdbc-dao.xsd"
+        catalog="" schema="${mainschema}" table="PILOTS_PRICES"
+        datasource="mainDataSource" sqlhandler="dbSQLStatementHandler">
+    <DeleteKeys>
+        <Column>PP_ID</Column>
+    </DeleteKeys>
+    <UpdateKeys>
+        <Column>PP_ID</Column>
+    </UpdateKeys>
+    <Queries>
+    </Queries>
+</JdbcEntitySetup>

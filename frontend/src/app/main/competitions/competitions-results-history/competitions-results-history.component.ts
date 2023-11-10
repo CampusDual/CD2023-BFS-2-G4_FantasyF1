@@ -78,6 +78,7 @@ export class CompetitionsResultsHistoryComponent implements OnInit {
         }
       }
       console.log({graphArray});
+      graphArray.sort((a, b) => a["values"][0].x - b["values"][0].x);
       this.multiBarChart.setDataArray(graphArray);
     }
   }

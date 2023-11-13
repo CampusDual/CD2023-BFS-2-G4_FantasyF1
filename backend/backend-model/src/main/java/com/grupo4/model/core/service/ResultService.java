@@ -29,6 +29,16 @@ public class ResultService implements IResultService {
     }
 
     @Override
+    public EntityResult roundClasificationQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.resultDao, keysValues, attributes, "roundClasification");
+    }
+
+    @Override
+    public EntityResult generalClasificationQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
+        return this.daoHelper.query(this.resultDao, keysValues, attributes, "generalClasification");
+    }
+
+    @Override
     public EntityResult resultInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
         return this.daoHelper.insert(this.resultDao, attributes);
     }

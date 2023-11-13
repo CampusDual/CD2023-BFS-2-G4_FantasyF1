@@ -11,5 +11,29 @@
         <Column>RES_ID</Column>
     </UpdateKeys>
     <Queries>
+        <Query id="generalClasification">
+            <Sentence>
+                <![CDATA[
+                    SELECT P.PIL_SURNAME, SUM(R.RES_POINTS) AS TOTAL, P.PIL_PRICE
+                    FROM PILOTS P
+                    INNER JOIN RESULTS R ON
+                    P.PIL_ID = R.PIL_ID
+                    GROUP BY P.PIL_ID, P.PIL_SURNAME
+                    ORDER BY TOTAL DESC;
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="roundClasification">
+            <Sentence>
+                <![CDATA[
+                    SELECT R.RAC_ID, P.PIL_ID, P.PIL_SURNAME, R.RES_POINTS, R.RES_POSITION, R.RES_POSITION_TEXT
+                    FROM PILOTS P
+                    INNER JOIN RESULTS R ON
+                    P.PIL_ID = R.PIL_ID
+                    #WHERE#
+                    ORDER BY R.RES_POSITION;
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

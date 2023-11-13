@@ -25,12 +25,12 @@ public class PilotPriceService implements IPilotPriceService {
 
     @Override
     public EntityResult pilotPriceQuery(Map<String, Object> keysValues, List<String> attributes) throws OntimizeJEERuntimeException {
-        return null;
+        return this.daoHelper.query(this.pilotPriceDao, keysValues, attributes);
     }
 
     @Override
     public EntityResult pilotPriceInsert(Map<String, Object> attributes) throws OntimizeJEERuntimeException {
-        return null;
+        return this.daoHelper.insert(this.pilotPriceDao, attributes);
     }
 
     @Override

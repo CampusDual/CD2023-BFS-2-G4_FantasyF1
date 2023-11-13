@@ -1,6 +1,11 @@
 import { Component, ElementRef, Injector, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { OntimizeService } from 'ontimize-web-ngx';
+import { MatDialog, MAT_DIALOG_DATA, MatDialogRef, MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { FormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @Component({
   selector: 'app-competitions-search',
@@ -13,7 +18,7 @@ export class CompetitionsSearchComponent implements OnInit {
   
   @ViewChild("privateComp", { static: true }) code: ElementRef;
 
-  constructor(protected injector: Injector, private router: Router) {
+  constructor(protected injector: Injector, private router: Router, public dialogRef: MatDialogRef<CompetitionsSearchComponent>) {
     this.service = this.injector.get(OntimizeService);
   }
 
@@ -33,6 +38,10 @@ export class CompetitionsSearchComponent implements OnInit {
       const url = `/main/home/${competitionId}?isdetail=true`;
       this.router.navigateByUrl(url);
     });
+  }
+
+  onNoClick(): void {
+    this.dialogRef.close();
   }
 
 }

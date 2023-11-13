@@ -1,26 +1,24 @@
-<o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;I;U;D" show-header-navigation="no">
-  <h2 class="title">{{ 'NEW_LEAGUE' | oTranslate }}</h2>
-  <o-column fxFlex>
-    <span>
-      <o-row fxFlex="50">
+<o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;I;U;D" show-header-navigation="no" show-header="no">
+  <o-column fxFlex title="{{ 'NEW_LEAGUE' | oTranslate }}">
+      <o-row>
         <o-text-input class="input-padding" attr="COMP_NAME" fxFlex="95" required="yes"></o-text-input>
       </o-row>
-      <o-row fxFlex="25">
+    <span>
+      <o-row fxFlex="50">
         <o-combo #type_combo (onChange)="changeType()" attr="COMP_ISPUBLIC" data="Public" label="COMP_TYPE"
-          [static-data]="staticData" value-column="value" columns="value;name" visible-columns="name"
-          null-selection="no" read-only="no" required="yes" fxFlex="90"></o-combo>
+          [static-data]="staticData" value-column="value" columns="value;name" visible-columns="name" null-selection="no"
+          read-only="no" required="yes" fxFlex="90"></o-combo>
       </o-row>
-      <!-- <o-row fxFlex="25">
-        <o-combo attr="COMP_IMAGE" data="Public" label="COMP_IMAGE" [static-data]="staticColors" value-column="value"
-          columns="value;name" visible-columns="name" null-selection="no" read-only="no" required="no"
-          fxFlex="90"></o-combo>
-      </o-row> -->
+      <o-row fxFlex="50">
+        <o-text-input id="codigo" class="code_form" #league_code attr="COMP_CODE" read-only="yes" fxFlex></o-text-input>
+      </o-row>
     </span>
     <o-row>
       <o-textarea-input attr="COMP_DESCRIPTION" fxFlex max-length="500" required="yes"></o-textarea-input>
     </o-row>
     <o-row>
-      <o-text-input id="codigo" class="code_form" #league_code attr="COMP_CODE" read-only="yes" fxFlex></o-text-input>
+      <o-button label="SAVE" attr="raised4" type="RAISED" (click)="addCompetition()" layout-padding
+        color="primary"></o-button>
     </o-row>
   </o-column>
 </o-form>

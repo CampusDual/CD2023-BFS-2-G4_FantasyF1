@@ -1,14 +1,11 @@
-<o-form editable-detail="no">
-    <div fxFill fxLayout="column" fxLayoutAlign="start">
-        <h2 class="title">{{'SEARCH_PRIVATE_LEAGUE' | oTranslate}}</h2>
-        <form (submit)="searchPrivate()">
-            <div class="container" fxLayoutAlign="center">
-                <input #privateComp type="text" placeholder="{{'INSERT_CODE' | oTranslate}}">
-            </div>
-            <div class="container" fxLayoutAlign="center">
-                <o-button label="SEARCH" attr="raised4" type="RAISED" (click)="searchPrivate()" layout-padding
-                    color="primary"></o-button>
-            </div>
-        </form>
-    </div>
+<o-form show-header="no" (submit)="searchPrivate()">
+    <o-column fxFlex title="{{ 'SEARCH_PRIVATE_LEAGUE' | oTranslate }}">
+        <o-row fxfill fxLayoutAlign="center">
+            <o-text-input #privateComp type="text" label="{{'INSERT_CODE' | oTranslate}}"> </o-text-input>
+        </o-row>
+        <o-row fxLayoutAlign="center">
+            <o-button label="SEARCH" attr="raised4" type="RAISED" (click)="searchPrivate()" layout-padding
+                color="primary"></o-button>
+        </o-row>
+    </o-column>
 </o-form>

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { CompetitionsSearchComponent } from '../competitions-search/competitions-search.component';
 
 @Component({
   selector: 'app-competitions-available',
@@ -7,9 +9,19 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CompetitionsAvailableComponent implements OnInit {
 
-  constructor() { }
+  constructor(public dialog: MatDialog) { }
 
   ngOnInit() {
+  }
+
+  // searchPrivateRoute(){
+  //   this.router.navigate(['/main/competitions/search']);
+  //   const url = `/main/competitions/search?isdetail=true`;
+  //   this.router.navigateByUrl(url);
+  // }
+
+  openDialog() {
+    this.dialog.open(CompetitionsSearchComponent);
   }
 
 }

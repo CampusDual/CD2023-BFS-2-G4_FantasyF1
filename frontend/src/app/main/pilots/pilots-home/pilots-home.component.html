@@ -4,12 +4,34 @@
 <o-column fxLayout fxLayoutAlign="start">
     <o-row>
         <o-table attr="pilotsPricesTable" service="pilots_prices" entity="listNamePrice" keys="PP_ID"
-            columns="PP_ID;PIL_ID;PIL_NAME;PIL_SURNAME;PP_PRICE" visible-columns="PIL_NAME;PIL_SURNAME;PP_PRICE"
-            query-rows="22" horizontal-scroll="false" auto-adjust="false" virtual-scroll="no" insert-button="no"
-            delete-button="no" virtual-scroll="no" sort-columns="PP_PRICE:DESC">
+            columns="PP_ID;PIL_ID;RAC_ID;RAC_ROUND;PIL_NAME;PIL_SURNAME;PP_PRICE;PP_VARIATION" visible-columns="RAC_ROUND;PIL_NAME;PIL_SURNAME;PP_PRICE;PP_VARIATION"
+            query-rows="20" horizontal-scroll="false" auto-adjust="false" virtual-scroll="no" insert-button="no"
+            delete-button="no" virtual-scroll="no" sort-columns="RAC_ROUND:DESC">
+            <o-table-column attr="RAC_ROUND" title="RAC_ROUND" content-align="center"></o-table-column>
             <o-table-column attr="PIL_NAME" title="PIL_NAME" content-align="center"></o-table-column>
             <o-table-column attr="PIL_SURNAME" title="PIL_SURNAME" content-align="center"></o-table-column>
             <o-table-column attr="PP_PRICE" title="PP_PRICE" content-align="center"></o-table-column>
+            <o-table-column attr="PP_VARIATION" title="PP_VARIATION" content-align="center"></o-table-column>
         </o-table>
     </o-row>
 </o-column>
+
+
+<o-form show-header="no">
+  <o-row>
+    <o-column fxFlex="70" >
+      <o-combo #combo_filter attr="combo-multiple" label="SELECT_PILOTS" [static-data]="arrayPilots"
+      value-column="pilotId" columns="pilotId;pilotSurname"
+     visible-columns="pilotSurname" multiple="yes" fxFlex>
+   </o-combo>
+    </o-column>
+    <o-column>
+      <o-button (click)="recogerDataCombo()" attr="raised4" type="RAISED" label="FILTER_PILOTS" layout-padding
+      color="primary"></o-button>
+    </o-column>
+    <o-column>
+      <o-button (click)="clearFilterPiltos()" attr="raised4" type="RAISED" label="CLEAR_FILTER_PILOTS" layout-padding
+      color="accent"></o-button>
+    </o-column>
+  </o-row>
+</o-form>

@@ -15,3 +15,23 @@
         </o-table>
     </o-row>
 </o-column>
+
+
+<o-form show-header="no">
+  <o-row>
+    <o-column fxFlex="70" >
+      <o-combo #combo_filter attr="combo-multiple" label="SELECT_PILOTS" [static-data]="arrayPilots"
+      value-column="pilotId" columns="pilotId;pilotSurname"
+     visible-columns="pilotSurname" multiple="yes" fxFlex>
+   </o-combo>
+    </o-column>
+    <o-column>
+      <o-button (click)="recogerDataCombo()" attr="raised4" type="RAISED" label="FILTER_PILOTS" layout-padding
+      color="primary"></o-button>
+    </o-column>
+    <o-column>
+      <o-button (click)="clearFilterPiltos()" attr="raised4" type="RAISED" label="CLEAR_FILTER_PILOTS" layout-padding
+      color="accent"></o-button>
+    </o-column>
+  </o-row>
+</o-form>

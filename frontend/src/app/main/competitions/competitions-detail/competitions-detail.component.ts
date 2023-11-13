@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { DialogService, OFormComponent, OTextInputComponent, OTranslateService, OntimizeService } from 'ontimize-web-ngx';
+import { DialogService, OFormComponent, OTextInputComponent, OTranslateService, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
 import { LineChartConfiguration, OChartComponent } from 'ontimize-web-ngx-charts';
 
 declare var d3: any;
@@ -22,7 +22,6 @@ export class CompetitionsDetailComponent implements OnInit {
 
   dataCompetition: {};
   dataTable: any;
-  arrayPilots: Array<any> = [];
 
   isEditable: boolean = false;
   isPrivate: boolean = true;
@@ -32,7 +31,8 @@ export class CompetitionsDetailComponent implements OnInit {
     protected service: OntimizeService,
     private router: Router,
     protected dialogService: DialogService,
-    private translator: OTranslateService
+    private translator: OTranslateService,
+    protected snackService: SnackBarService
   ) {
     this.lineChartParametersSerie = new LineChartConfiguration();
     this.lineChartParametersSerie.legend.vers = 'furious';
@@ -110,7 +110,7 @@ export class CompetitionsDetailComponent implements OnInit {
             key: eachRecordOfData["USER_"]
           }
           let values = []
-          for(let i=0; i<data[0]["RAC_ROUND"]; i++){
+          for(let i=0; i<eachRecordOfData["RAC_ROUND"]; i++){
             values.push({ x: i, y: 0 })
           }
           for (let r2 of data) {
@@ -132,4 +132,5 @@ export class CompetitionsDetailComponent implements OnInit {
       this.lineChart.reloadData();
     }
   }
+
 }

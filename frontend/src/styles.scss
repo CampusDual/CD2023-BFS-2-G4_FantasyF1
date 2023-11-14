@@ -20,3 +20,29 @@
 #edit_team_header{
     height: 110px;
 }
+
+tbody tr:nth-child(even) {
+    background-color: #eee7e8;
+}
+
+tbody tr:nth-child(odd) {
+    background-color:#edc5c5;
+}
+
+th {
+    background-color: #da3930 !important; 
+    color: white !important;
+    color: #fff;
+}
+
+tr:hover {
+    font-weight: bolder;
+    background-color: #dfa197 !important; 
+    color: white !important;
+}
+
+button.mat-raised-button:hover {
+    color: #eee7e8;
+    background-color: black;
+    font-weight: bold;
+}

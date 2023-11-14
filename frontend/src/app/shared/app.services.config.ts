@@ -16,5 +16,8 @@ export const SERVICE_CONFIG: Object = {
   },
   'pilots_prices': {
     'path': '/pilots_prices'
+  },
+  'results': {
+    'path': '/results'
   }
 };

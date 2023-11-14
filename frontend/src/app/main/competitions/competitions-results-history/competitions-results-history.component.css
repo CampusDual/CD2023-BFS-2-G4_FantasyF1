@@ -5,3 +5,7 @@
 .hiddenInfo{
     display: none;
 }
+
+td {
+    background-color: greenyellow !important;
+}

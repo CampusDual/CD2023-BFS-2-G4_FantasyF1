@@ -87,5 +87,7 @@
   "SELECT_PILOTS": "Select drivers",
   "FILTER_PILOTS": "Find", 
   "CLEAR_FILTER_PILOTS": "Clear filter",
-  "PP_PRICE": "Current price"
+  "PP_PRICE": "Current price",
+  "RES_POSITION": "Position",
+  "RAC_NAME": "Circuit"
 }

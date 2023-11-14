@@ -23,13 +23,14 @@
             <o-column title="{{ 'USER_DETAIL' | oTranslate }}" fxFlex="90">
                 <o-table (onDataLoaded)="loadDataTable($event)" fxFlex service="competitions" virtual-scroll="no"
                     pagination-controls="yes" entity="rankingByUserRoundId" parent-keys="COMP_ID;USER_"
-                    columns="COMP_ID;USER_;RAC_ROUND;TOTAL_POINTS" visible-columns="RAC_ROUND;TOTAL_POINTS;ACCUMULATED"
+                    columns="COMP_ID;USER_;RAC_ROUND;RAC_NAME;TOTAL_POINTS" visible-columns="RAC_ROUND;RAC_NAME;ACCUMULATED;TOTAL_POINTS"
                     insert-button="no" delete-button="no" query-rows="10" sort-columns="RAC_ROUND:DESC" fxFlex="90">
                     <o-table-column attr="RAC_ROUND" title="RAC_ROUND" content-align="center"></o-table-column>
+                    <o-table-column attr="RAC_NAME" title="RAC_NAME" content-align="center"></o-table-column>
+                    <o-table-column attr="ACCUMULATED" title="ACC_POINTS" content-align="center"></o-table-column>
                     <o-table-column attr="TOTAL_POINTS" title="ROUND_POINTS" content-align="center">
                         <app-competitions-results-column-renderer></app-competitions-results-column-renderer>
                     </o-table-column>
-                    <o-table-column attr="ACCUMULATED" title="ACC_POINTS" content-align="center"></o-table-column>
                 </o-table>
             </o-column>
         </span>
@@ -37,10 +38,12 @@
             <o-column title="{{ 'COMP_ROUNDS' | oTranslate }}" fxFlex="90">
                 <o-table (onDataLoaded)="loadDataTableForChart($event)" fxFlex service="competitions" virtual-scroll="no" pagination-controls="yes"
                     entity="rankingByUserAndId" parent-keys="COMP_ID;USER_"
-                    columns="COMP_ID;COMP_NAME;USER_;RAC_ROUND;TOTAL_POINTS;RP_POINTS;PIL_SURNAME"
-                    visible-columns="RAC_ROUND;PIL_SURNAME;RP_POINTS" insert-button="no" delete-button="no"
+                    columns="COMP_ID;COMP_NAME;USER_;RAC_ROUND;TOTAL_POINTS;RP_POINTS;PIL_SURNAME;RES_POSITION_TEXT;RAC_NAME"
+                    visible-columns="RAC_ROUND;RAC_NAME;RES_POSITION_TEXT;PIL_SURNAME;RP_POINTS" insert-button="no" delete-button="no"
                     query-rows="10" sort-columns="RAC_ROUND:DESC" fxFlex="90">
                     <o-table-column attr="RAC_ROUND" title="RAC_ROUND" content-align="center"></o-table-column>
+                    <o-table-column attr="RAC_NAME" title="RAC_NAME" content-align="center"></o-table-column>
+                    <o-table-column attr="RES_POSITION_TEXT" title="RES_POSITION" content-align="center"></o-table-column>
                     <o-table-column attr="PIL_SURNAME" title="PILOT" content-align="center"></o-table-column>
                     <o-table-column attr="RP_POINTS" title="UC_POINTS" content-align="center">
                         <app-competitions-results-column-renderer></app-competitions-results-column-renderer>

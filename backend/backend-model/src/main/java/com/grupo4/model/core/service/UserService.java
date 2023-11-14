@@ -40,6 +40,10 @@ public class UserService implements IUserService {
 
 		return this.daoHelper.insert(userDao, attrMap);
 	}
+	@Override
+	public EntityResult userRegisterInsert(Map<?, ?> attrMap) {
+		return this.daoHelper.insert(userDao, attrMap);
+	}
 
 	public EntityResult userUpdate(Map<?, ?> attrMap, Map<?, ?> keyMap) {
 		return this.daoHelper.update(userDao, attrMap, keyMap);
@@ -48,5 +52,6 @@ public class UserService implements IUserService {
 	public EntityResult userDelete(Map<?, ?> keyMap) {
 		return this.daoHelper.delete(this.userDao, keyMap);
 	}
+
 
 }

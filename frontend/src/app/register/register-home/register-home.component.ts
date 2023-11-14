@@ -50,7 +50,7 @@ export class RegisterHomeComponent implements OnInit {
       alert("Entra en el insert");
       this.service.insert(
         {"USER_": this.nickname.getValue(), "PASSWORD": this.password.getValue()},
-        "user").subscribe(
+        "userRegister").subscribe(
           resp => {
             alert("Usuario registrado correctamente");
           },

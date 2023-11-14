@@ -69,7 +69,17 @@
             <Sentence>
                 <![CDATA[
                     WITH RANKING AS (
-                        SELECT C.COMP_ID, UC.USER_, C.COMP_NAME, RC.RAC_ROUND, sum(RP.RP_POINTS) as TOTAL_POINTS, RP.RP_POINTS, P.PIL_SURNAME
+                        SELECT
+                            C.COMP_ID,
+                            UC.USER_,
+                            C.COMP_NAME,
+                            RC.RAC_ROUND,
+                            sum(RP.RP_POINTS) as TOTAL_POINTS,
+                            RP.RP_POINTS,
+                            P.PIL_SURNAME,
+                            R.RES_POSITION,
+                            RC.RAC_NAME,
+                            R.RES_POSITION_TEXT
                         FROM COMPETITIONS C
                         LEFT JOIN USERS_COMPETITIONS UC
                         ON C.COMP_ID = UC.COMP_ID
@@ -84,7 +94,15 @@
                         LEFT JOIN PILOTS P
 	                    ON P.PIL_ID = UCP.PIL_ID
 	                    WHERE RC.RAC_ROUND IS NOT NULL
-                        GROUP BY UC.USER_, C.COMP_ID, RC.RAC_ROUND, RP.RP_POINTS, P.PIL_SURNAME
+                        GROUP BY
+                            UC.USER_,
+                            C.COMP_ID,
+                            RC.RAC_ROUND,
+                            RP.RP_POINTS,
+                            P.PIL_SURNAME,
+                            R.RES_POSITION,
+                            RC.RAC_NAME,
+                            R.RES_POSITION_TEXT
                     )
                     SELECT #COLUMNS#
                     FROM RANKING
@@ -97,7 +115,7 @@
             <Sentence>
                 <![CDATA[
                     WITH RANKING AS (
-                        SELECT C.COMP_ID, UC.USER_, C.COMP_NAME, RC.RAC_ROUND, sum(RP.RP_POINTS) as TOTAL_POINTS
+                        SELECT C.COMP_ID, UC.USER_, C.COMP_NAME, RC.RAC_ROUND, sum(RP.RP_POINTS) as TOTAL_POINTS, RC.RAC_NAME
                         FROM COMPETITIONS C
                         LEFT JOIN USERS_COMPETITIONS UC
                         ON C.COMP_ID = UC.COMP_ID
@@ -110,7 +128,7 @@
                         LEFT JOIN RACES RC
                         ON RC.RAC_ID = R.RAC_ID
                         WHERE RC.RAC_ROUND IS NOT NULL
-                        GROUP BY UC.USER_, C.COMP_ID, RC.RAC_ROUND
+                        GROUP BY UC.USER_, C.COMP_ID, RC.RAC_ROUND, RC.RAC_NAME
                         ORDER BY RC.RAC_ROUND ASC
                     )
                     SELECT #COLUMNS#

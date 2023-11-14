@@ -49,7 +49,7 @@ public class MainRestController {
     public String updateAPI() {
         //getPilots();
         //getRaces();
-        this.getResults(8);
+        this.getResults(9);
         //System.out.println("Actualizando datos de la api");
         //this.getRoundClasification(1);
         //this.getGeneralClasificationPerRound(5);
@@ -187,7 +187,11 @@ public class MainRestController {
                         JSONObject resultObject = (JSONObject) result;
                         JSONObject driver = (JSONObject) resultObject.get("Driver");
                         resultsMap.put(ResultDao.RES_POSITION, resultObject.get("position"));
-                        resultsMap.put(ResultDao.RES_POSITION_TEXT, resultObject.get("positionText"));
+
+                        //Se checkea el position text para modificarlo por DNF o DNS
+                        String position = resultObject.get("positionText").toString();
+                        String positionChanged =  this.changePositionText(position);
+                        resultsMap.put(ResultDao.RES_POSITION_TEXT, positionChanged);
 
                         //Se checkea el position text para variar la puntuacion en caso de ser R o W
                         String positionText = resultObject.get("positionText").toString();
@@ -358,6 +362,18 @@ public class MainRestController {
         attrResult.add(ResultDao.RES_ID);
         EntityResult result = this.resultService.resultQuery(resultRaceID.getRecordValues(0), attrResult);
         return !result.isEmpty();
+    }
+
+    public String changePositionText(String position){
+        String positionChanged = "";
+        if(position.equals("R")){
+            positionChanged = "DNF";
+        } else if(position.equals("W")){
+            positionChanged = "DNS";
+        } else {
+            positionChanged = position;
+        }
+        return positionChanged;
     }
 
 

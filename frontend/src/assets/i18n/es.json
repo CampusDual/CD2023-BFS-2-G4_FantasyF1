@@ -89,5 +89,10 @@
   "CLEAR_FILTER_PILOTS": "Limpiar filtro",
   "PP_PRICE": "Precio actual",
   "RES_POSITION": "Posición",
-  "RAC_NAME": "Circuit"
+  "RAC_NAME": "Circuit",
+  "REGISTER": "Registro",
+  "USER_REGISTER_OK": "Usuario registrado correctamente",
+  "USER_EXISTS": "Hay un usuario registrado con ese nombre",
+  "PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
+  "EMPTY_FIELD": "Hay campos vacios"
 }

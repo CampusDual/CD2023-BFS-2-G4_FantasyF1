@@ -39,7 +39,7 @@
 
             <button mat-raised-button color="primary" type="submit">{{ 'LOGIN' | oTranslate }}</button>
           </div>
-          <button mat-raised-button color="primary" type="submit" (click)="showForm()">REGISTRARSE</button>
+          <button mat-raised-button color="primary" type="submit" (click)="showForm()">{{ 'REGISTER' | oTranslate }}</button>
           <div class="" *ngIf="modalSwitch == true">
             <app-register-home></app-register-home>
           </div>

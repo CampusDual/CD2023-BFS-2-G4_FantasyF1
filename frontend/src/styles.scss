@@ -46,3 +46,17 @@ button.mat-raised-button:hover {
     background-color: black;
     font-weight: bold;
 }
+
+
+/*New button response style*/
+.o-button button{
+    transform: scale(1);
+    transition: transform 0.15s ease-in-out;
+}
+.o-button button:hover{
+    transform: scale(1.04);
+    
+}
+.o-button button:active{
+    transform: scale(0.95);
+}

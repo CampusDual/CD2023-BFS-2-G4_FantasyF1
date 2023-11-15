@@ -48,7 +48,6 @@ export class CompetitionsResultsHistoryComponent implements OnInit {
   }
 
   loadDataTableForChart(data) {
-    console.log(data);
     let graphArray: Array<Object> = [];
     let filterForPilots: Array<String> = [];
 
@@ -77,7 +76,6 @@ export class CompetitionsResultsHistoryComponent implements OnInit {
           graphArray.push(objectForEachPilotRound);
         }
       }
-      console.log({graphArray});
       graphArray.sort((a, b) => a["values"][0].x - b["values"][0].x);
       this.multiBarChart.setDataArray(graphArray);
     }

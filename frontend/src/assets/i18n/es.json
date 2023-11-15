@@ -93,5 +93,7 @@
   "EMAIL_FORMAT_INCORRECT": "Formato de email incorrecto",
   "EMAIL_EXISTS": "El email ya está siendo utilizado",
   "REGISTER_TITLE": "Crea tu usuario",
-  "DATA_EXISTS": "Campos incorrectos"
+  "DATA_EXISTS": "Campos incorrectos",
+  "CONFIRM_PASSWORD": "Confirmar contraseña",
+  "PILOTS_TITLE": "Comparador de pilotos"
 }

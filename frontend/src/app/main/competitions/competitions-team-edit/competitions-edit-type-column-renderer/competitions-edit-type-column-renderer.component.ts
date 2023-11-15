@@ -58,12 +58,10 @@ export class CompetitionsEditTypeColumnRendererComponent extends OBaseTableCellR
             resp => {
               this.snackService.open("PILOT_PURCHASED");
               this.childService.triggerDataUpdate();
-              console.log("Compra y recarga realizada");
             },
             err => {
               this.snackService.open("USER_HAS_PILOT_CHECK");
               this.childService.triggerDataUpdate();
-              console.log("No compra pero recarga realizada");
             }
           )
       }

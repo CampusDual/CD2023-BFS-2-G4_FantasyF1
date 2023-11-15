@@ -93,5 +93,7 @@
   "EMAIL_FORMAT_INCORRECT": "Invalid email format",
   "EMAIL_EXISTS": "Email already exists",
   "REGISTER_TITLE": "Create your user",
-  "DATA_EXISTS": "Invalid fields"
+  "DATA_EXISTS": "Invalid fields",
+  "CONFIRM_PASSWORD": "Confirm password",
+  "PILOTS_TITLE": "Compare drivers"
 }

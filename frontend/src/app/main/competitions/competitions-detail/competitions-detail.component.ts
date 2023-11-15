@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { DialogService, OFormComponent, OTextInputComponent, OTranslateService, OntimizeService, SnackBarService } from 'ontimize-web-ngx';
 import { LineChartConfiguration, OChartComponent } from 'ontimize-web-ngx-charts';
@@ -12,7 +12,7 @@ declare var d3: any;
 })
 export class CompetitionsDetailComponent implements OnInit {
 
-  @ViewChild("code_panel", { static: true }) code_panel: OTextInputComponent;
+  @ViewChild("code_panel", { static: true }) code_panel: ElementRef;
   @ViewChild("form_component", { static: true }) form_component: OFormComponent;
   @ViewChild('lineChart', { static: true }) lineChart: OChartComponent;
 
@@ -38,8 +38,8 @@ export class CompetitionsDetailComponent implements OnInit {
     this.lineChartParametersSerie.legend.vers = 'furious';
     this.lineChartParametersSerie.legendPosition = 'bottom';
     this.lineChartParametersSerie.showLegend = true;
-    this.lineChartParametersSerie.x1Axis.axisLabel=this.translator.get('LINE_CHART_XAXIS');
-    this.lineChartParametersSerie.y1Axis.axisLabel=this.translator.get('LINE_CHART_YAXIS');
+    this.lineChartParametersSerie.x1Axis.axisLabel = this.translator.get('LINE_CHART_XAXIS');
+    this.lineChartParametersSerie.y1Axis.axisLabel = this.translator.get('LINE_CHART_YAXIS');
   }
 
   ngOnInit() {
@@ -66,6 +66,7 @@ export class CompetitionsDetailComponent implements OnInit {
     this.dataCompetition = data;
     if (data.COMP_CODE === "") {
       this.isPrivate = false
+      this.code_panel.nativeElement.style.display = 'none';
     }
   }
 
@@ -95,12 +96,11 @@ export class CompetitionsDetailComponent implements OnInit {
     this.namesUsersCompetitionForGraph = users.join(";")
     let graphArray: Array<Object> = [];
     let filterForUsers: Array<String> = [];
-    console.log({data});
 
-    if (data.length===0) {
+    if (data.length === 0) {
       document.getElementById("lineGraph").classList.add("hideGraph")
       document.getElementById("infoNoData").classList.remove("hiddenInfo")
-    } else{
+    } else {
       document.getElementById("lineGraph").classList.remove("hideGraph")
       document.getElementById("infoNoData").classList.add("hiddenInfo")
       for (let eachRecordOfData of data) {
@@ -110,7 +110,7 @@ export class CompetitionsDetailComponent implements OnInit {
             key: eachRecordOfData["USER_"]
           }
           let values = []
-          for(let i=0; i<eachRecordOfData["RAC_ROUND"]; i++){
+          for (let i = 0; i < eachRecordOfData["RAC_ROUND"]; i++) {
             values.push({ x: i, y: 0 })
           }
           for (let r2 of data) {
@@ -123,11 +123,7 @@ export class CompetitionsDetailComponent implements OnInit {
           graphArray.push(objectForEachUser);
           filterForUsers.push(eachRecordOfData["USER_"])
         }
-        else {
-          console.log("Info of user already added.");
-        }
       }
-      console.log({graphArray})
       this.lineChart.setDataArray(graphArray);
       this.lineChart.reloadData();
     }

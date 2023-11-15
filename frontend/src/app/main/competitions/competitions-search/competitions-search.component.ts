@@ -28,7 +28,6 @@ export class CompetitionsSearchComponent implements OnInit {
 
   searchPrivate() {
     const code = this.privateComp.getValue();
-    console.log(code);
 
     this.service.query({ "COMP_CODE": code, "COMP_ISPUBLIC": false },
       ["COMP_ID"], "competition").subscribe(resp => {

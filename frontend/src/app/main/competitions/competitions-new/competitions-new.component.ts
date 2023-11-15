@@ -68,11 +68,6 @@ export class CompetitionsNewComponent implements OnInit {
     const type_combo = this.type_combo.getValue();
     const league_code = this.league_code.getValue();
 
-    console.log(compName);
-    console.log(compDescription);
-    console.log(type_combo);
-    console.log(league_code);
-
     this.service.insert({ "COMP_NAME": compName, "COMP_DESCRIPTION": compDescription, "COMP_CODE": league_code, "COMP_ISPUBLIC": type_combo }
       , "competition").subscribe(resp => {
         const competitionId = resp.data.COMP_ID;

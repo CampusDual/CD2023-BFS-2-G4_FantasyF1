@@ -2,24 +2,27 @@
   <span class="title_text">{{ 'REGISTER_TITLE' | oTranslate }}:</span>
 </div>
 <div class="modal">
-    <div class="modal_body">
-      <o-form editable-detail="no" show-header="no">
-  
-        <o-text-input #nickname attr="input" label="NickName" data="" read-only="no" required="yes">
-          <mat-icon oMatSuffix>sentiment_very_satisfied</mat-icon>
-        </o-text-input>
-  
-        <o-password-input #password attr="password" label="Password" data="" read-only="no" required="yes"></o-password-input>
-        <o-password-input #password2 attr="password2" label="Confirm Password" data="" read-only="no" required="yes"></o-password-input>
+  <div class="modal_body">
+    <o-form editable-detail="no" show-header="no">
 
-        <o-email-input #email attr="email" label="Email" data="" read-only="no" required="yes"></o-email-input>
-  
-        <div>
-          <o-button attr="raised4" type="RAISED" label="Confirm" layout-padding color="warn" style="display: inline-block; float: left" (click)="insertUser()"></o-button>
-          <o-button attr="raised4" type="RAISED" label="Cancel" layout-padding color="warn" style="display: inline-block; float: right" (click)="closeModal()"></o-button>
-        </div>
-  
-  
+      <o-text-input #nickname attr="input" label="{{'USERNAME' | oTranslate}}" data="" read-only="no" required="yes">
+        <mat-icon oMatSuffix>sentiment_very_satisfied</mat-icon>
+      </o-text-input>
+
+      <o-password-input #password attr="password" label="{{'PASSWORD' | oTranslate}}" data="" read-only="no"
+        required="yes"></o-password-input>
+      <o-password-input #password2 attr="password2" label="{{'CONFIRM_PASSWORD' | oTranslate}}" data="" read-only="no"
+        required="yes"></o-password-input>
+
+      <o-email-input #email attr="email" label="Email" data="" read-only="no" required="yes"></o-email-input>
+
+      <div>
+        <o-button attr="raised4" type="RAISED" label="Cancel" layout-padding color="accent"
+          style="display: inline-block; float: left" (click)="closeModal()"></o-button>
+
+        <o-button attr="raised4" type="RAISED" label="Confirm" layout-padding color="primary"
+          style="display: inline-block; float: right" (click)="insertUser()"></o-button>
+
+      </div>
     </o-form>
-  
   </div>

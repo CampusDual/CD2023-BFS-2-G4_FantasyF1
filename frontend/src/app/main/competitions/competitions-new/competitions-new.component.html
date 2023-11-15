@@ -1,22 +1,25 @@
-<o-form service="competitions" entity="competition" keys="COMP_ID" header-actions="R;I;U;D" show-header-navigation="no" show-header="no">
+<o-form show-header="no" (onInsert)="addCompetition()">
   <o-column fxFlex title="{{ 'NEW_LEAGUE' | oTranslate }}">
-      <o-row>
-        <o-text-input class="input-padding" attr="COMP_NAME" fxFlex="95" required="yes"></o-text-input>
-      </o-row>
+    <o-row>
+      <o-text-input #compName class="input-padding" attr="compName" label="{{'COMP_NAME' | oTranslate}}" fxFlex="99" required="yes"></o-text-input>
+    </o-row>
     <span>
       <o-row fxFlex="50">
-        <o-combo #type_combo (onChange)="changeType()" attr="COMP_ISPUBLIC" data="Public" label="COMP_TYPE"
-          [static-data]="staticData" value-column="value" columns="value;name" visible-columns="name" null-selection="no"
-          read-only="no" required="yes" fxFlex="90"></o-combo>
+        <o-combo #type_combo (onChange)="changeType()" attr="type_combo" data="Public" label="{{'COMP_TYPE' | oTranslate}}"
+          [static-data]="staticData" value-column="value" columns="value;name" visible-columns="name"
+          null-selection="no" read-only="no" required="yes" fxFlex="90"></o-combo>
       </o-row>
       <o-row fxFlex="50">
-        <o-text-input id="codigo" class="code_form" #league_code attr="COMP_CODE" read-only="yes" fxFlex></o-text-input>
+        <o-text-input id="codigo" class="code_form" #league_code attr="league_code" label="{{'COMP_CODE' | oTranslate}}" read-only="yes" fxFlex></o-text-input>
       </o-row>
     </span>
     <o-row>
-      <o-textarea-input attr="COMP_DESCRIPTION" fxFlex max-length="500" required="yes"></o-textarea-input>
+      <o-textarea-input #compDescription attr="compDescription" label="{{'COMP_DESCRIPTION' | oTranslate}}" fxFlex max-length="500"
+        required="yes"></o-textarea-input>
     </o-row>
     <o-row>
+      <o-button label="CANCEL" attr="raised4" type="RAISED" (click)="onNoClick()" layout-padding
+        color="accent"></o-button>
       <o-button label="SAVE" attr="raised4" type="RAISED" (click)="addCompetition()" layout-padding
         color="primary"></o-button>
     </o-row>

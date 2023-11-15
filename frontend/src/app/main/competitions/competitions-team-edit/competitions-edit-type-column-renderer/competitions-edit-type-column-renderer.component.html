@@ -2,12 +2,11 @@
 
     <span style="color: rgb(255, 115, 115); font-weight: bold;"
         *ngIf="rowvalue['PIL_PRICE'] > childService.moneyUser && (rowvalue['USER_'] != username || rowvalue['USER_'] == null) && rowvalue['USER_'] == null">
-        {{"NOT_ENOUGH_MONEY" | oTranslate}}
+        <p>{{"NOT_ENOUGH_MONEY" | oTranslate}}</p>
     </span>
 
     <span *ngIf="rowvalue['USER_'] && rowvalue['USER_'] != username" style="color: rgb(94, 190, 253); font-weight: bold;"> 
-        {{"PILOT_SELECTED_BY" | oTranslate}}
-        <span style="color: rgb(0, 130, 216);">{{rowvalue["USER_"]}}</span>
+        <p><span>{{"PILOT_SELECTED_BY" | oTranslate}} </span><span style="color: rgb(0, 130, 216);">{{rowvalue["USER_"]}}</span></p>
     </span>
 
     <span class="already_2_drivers" style="color: rgb(0, 199, 33); font-weight: bold;"

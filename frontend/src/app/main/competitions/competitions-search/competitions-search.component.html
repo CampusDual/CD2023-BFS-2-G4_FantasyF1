@@ -1,9 +1,12 @@
-<o-form show-header="no" (submit)="searchPrivate()">
+<o-form show-header="no">
     <o-column fxFlex title="{{ 'SEARCH_PRIVATE_LEAGUE' | oTranslate }}">
-        <o-row fxfill fxLayoutAlign="center">
-            <o-text-input #privateComp type="text" label="{{'INSERT_CODE' | oTranslate}}"> </o-text-input>
+        <o-row>
+            <o-text-input #privateComp attr="privateComp" label="{{'INSERT_CODE' | oTranslate}}" fxFlex="99">
+            </o-text-input>
         </o-row>
-        <o-row fxLayoutAlign="center">
+        <o-row>
+            <o-button label="CANCEL" attr="raised4" type="RAISED" (click)="onNoClick()" layout-padding
+                color="accent"></o-button>
             <o-button label="SEARCH" attr="raised4" type="RAISED" (click)="searchPrivate()" layout-padding
                 color="primary"></o-button>
         </o-row>

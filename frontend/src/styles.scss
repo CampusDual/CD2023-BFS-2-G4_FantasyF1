@@ -14,19 +14,26 @@
 #UC_AVAILABLE_MONEY{
     text-align: right;    
 }
+
+.mat-form-field.icon-field .mat-form-field-suffix .svg-icon > svg{
+    padding-top: 0rem;
+    padding-bottom: 0.3rem;
+}
+
 #COMP_NAME, #UC_AVAILABLE_MONEY{
     height: 1.5rem;
 }
+
 #edit_team_header{
     height: 110px;
 }
 
 tbody tr:nth-child(even) {
-    background-color: #eee7e8;
+    background-color: #fff1f1;
 }
 
 tbody tr:nth-child(odd) {
-    background-color:#edc5c5;
+    background-color:#ffffff;
 }
 
 th {
@@ -35,11 +42,33 @@ th {
     color: #fff;
 }
 
-tr:hover {
+
+
+
+tbody tr:hover {
     font-weight: bolder;
-    background-color: #dfa197 !important; 
+    background-color: #ffe3e3 !important; 
     color: white !important;
 }
+
+// New row response style
+tbody tr {
+    transform: scale(1);
+  transition: transform 0.1s;
+
+  &:hover {
+
+    @keyframes scaleUp {
+      to {
+        transform: scale(1.04);
+      }
+    }
+
+    animation: scaleUp 0.07s forwards;
+  }
+}
+
+
 
 button.mat-raised-button:hover {
     color: #eee7e8;
@@ -47,8 +76,7 @@ button.mat-raised-button:hover {
     font-weight: bold;
 }
 
-
-/*New button response style*/
+//New button response style
 .o-button button{
     transform: scale(1);
     transition: transform 0.15s ease-in-out;

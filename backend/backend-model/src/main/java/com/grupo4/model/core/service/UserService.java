@@ -36,14 +36,19 @@ public class UserService implements IUserService {
 		return this.daoHelper.query(userDao, keyMap, attrList);
 	}
 
-	public EntityResult userInsert(Map<?, ?> attrMap) {
+	@Override
+	public EntityResult userEmailQuery(Map<?, ?> keyMap, List<?> attrList) {
+		return this.daoHelper.query(userDao, keyMap, attrList, "emailRegistered");
+	}
 
+	public EntityResult userInsert(Map<?, ?> attrMap) {
 		return this.daoHelper.insert(userDao, attrMap);
 	}
 	@Override
 	public EntityResult userRegisterInsert(Map<?, ?> attrMap) {
 		return this.daoHelper.insert(userDao, attrMap);
 	}
+
 
 	public EntityResult userUpdate(Map<?, ?> attrMap, Map<?, ?> keyMap) {
 		return this.daoHelper.update(userDao, attrMap, keyMap);

@@ -56,5 +56,16 @@
                 ]]>
             </Sentence>
         </Query>
+        <Query id="emailRegistered">
+            <Sentence>
+                <![CDATA[
+                    SELECT
+                        EMAIL
+                    FROM
+                        ${mainschema}.TUSER
+                    #WHERE#
+                ]]>
+            </Sentence>
+        </Query>
     </Queries>
 </JdbcEntitySetup>

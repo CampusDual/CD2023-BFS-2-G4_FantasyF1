@@ -94,5 +94,7 @@
   "USER_REGISTER_OK": "Usuario registrado correctamente",
   "USER_EXISTS": "Hay un usuario registrado con ese nombre",
   "PASSWORD_NOT_MATCH": "Las contraseñas no coinciden",
-  "EMPTY_FIELD": "Hay campos vacios"
+  "EMPTY_FIELD": "Hay campos vacios",
+  "EMAIL_FORMAT_INCORRECT": "Formato de email incorrecto",
+  "EMAIL_EXISTS": "El email ya está siendo utilizado"
 }

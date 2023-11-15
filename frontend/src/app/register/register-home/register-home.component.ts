@@ -52,22 +52,38 @@ export class RegisterHomeComponent implements OnInit {
     const password = this.password.getValue();
     const password2 = this.password2.getValue();
     const email = this.email.getValue();
+
     if(
       this.checkNotEmptyFields(nickname) &&
       this.checkNotEmptyFields(password) && 
       this.checkNotEmptyFields(password2) &&
       this.checkNotEmptyFields(email)){
         if(this.checkEqualPasswords(password, password2)){
-          this.service.insert(
-            {"USER_": this.nickname.getValue(), "PASSWORD": this.password.getValue()},
-            "userRegister").subscribe(
-              resp => {
-                this.dialogService.info(this.translator.get('REGISTER'), 'USER_REGISTER_OK');
-              },
-              err => {
-                this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('USER_EXISTS'));
-                this.modalSS.$modal.emit(true);
-              });
+          if(!this.checkEmailFormat(email)){
+            this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('EMAIL_FORMAT_INCORRECT'));
+            this.modalSS.$modal.emit(true);
+          } else{
+            const columns = ["EMAIL"]; 
+            this.service.query({"EMAIL":email}, columns, "userEmail").subscribe(
+              respuesta => {
+                if(respuesta.data[0] !== undefined){
+                  this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('EMAIL_EXISTS'));
+                  this.modalSS.$modal.emit(true);
+                } else {
+                  this.service.insert(
+                    {"USER_": nickname, "PASSWORD": password, "EMAIL":email},
+                    "userRegister").subscribe(
+                      resp => {
+                        this.dialogService.info(this.translator.get('REGISTER'), 'USER_REGISTER_OK');
+                      },
+                      err => {
+                        this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('USER_EXISTS'));
+                        this.modalSS.$modal.emit(true);
+                      });
+                }
+              }
+            )
+          }
         } else{
           this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('PASSWORD_NOT_MATCH'));
           this.modalSS.$modal.emit(true);
@@ -77,7 +93,6 @@ export class RegisterHomeComponent implements OnInit {
       this.modalSS.$modal.emit(true);
     }
   }
-  
 
   checkNotEmptyFields(password: String): Boolean{
     if(password.length > 0){
@@ -95,4 +110,12 @@ export class RegisterHomeComponent implements OnInit {
     return this.email.getValue() === this.email.getValue();
   }
 
+  checkEmailFormat(email: String): Boolean{
+    const EMAIL_REGEX = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+    if (email.match(EMAIL_REGEX)){
+      return true;
+    } else {
+      return false;
+    }
+  }
 }

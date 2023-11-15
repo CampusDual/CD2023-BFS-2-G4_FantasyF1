@@ -96,5 +96,7 @@
   "PASSWORD_NOT_MATCH": "Password don´t match",
   "EMPTY_FIELD": "There are empty fields",
   "EMAIL_FORMAT_INCORRECT": "Invalid email format",
-  "EMAIL_EXISTS": "Email in use"
+  "EMAIL_EXISTS": "Email in use",
+  "REGISTER_TITLE": "Create your user",
+  "DATA_EXISTS": "Invalid fields"
 }

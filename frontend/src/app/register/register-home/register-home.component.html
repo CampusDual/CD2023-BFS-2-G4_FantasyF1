@@ -1,3 +1,6 @@
+<div class="login-title-container" fxLayout="column">
+  <span class="title_text">{{ 'REGISTER_TITLE' | oTranslate }}:</span>
+</div>
 <div class="modal">
     <div class="modal_body">
       <o-form editable-detail="no" show-header="no">
@@ -11,14 +14,9 @@
 
         <o-email-input #email attr="email" label="Email" data="" read-only="no" required="yes"></o-email-input>
   
-        <o-text-input #name attr="name" label="Name" data="" read-only="no" required="no"></o-text-input>
-        <o-text-input #surname attr="surname" label="Surname" data="" read-only="no" required="yenos"></o-text-input>
-  
-        <o-nif-input #nif attr="nif" label="NIF" data="" read-only="no" required="no"></o-nif-input>
-  
         <div>
           <o-button attr="raised4" type="RAISED" label="Confirm" layout-padding color="warn" style="display: inline-block; float: left" (click)="insertUser()"></o-button>
-          <o-button attr="raised4" type="RAISED" label="Cancel" layout-padding color="warn" style="display: inline-block; float: right;" (click)="closeModal()"></o-button>
+          <o-button attr="raised4" type="RAISED" label="Cancel" layout-padding color="warn" style="display: inline-block; float: right" (click)="closeModal()"></o-button>
         </div>
   
   

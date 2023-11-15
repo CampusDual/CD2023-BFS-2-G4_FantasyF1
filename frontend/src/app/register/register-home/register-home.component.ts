@@ -67,7 +67,7 @@ export class RegisterHomeComponent implements OnInit {
             this.service.query({"EMAIL":email}, columns, "userEmail").subscribe(
               respuesta => {
                 if(respuesta.data[0] !== undefined){
-                  this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('EMAIL_EXISTS'));
+                  this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('DATA_EXISTS'));
                   this.modalSS.$modal.emit(true);
                 } else {
                   this.service.insert(
@@ -77,7 +77,7 @@ export class RegisterHomeComponent implements OnInit {
                         this.dialogService.info(this.translator.get('REGISTER'), 'USER_REGISTER_OK');
                       },
                       err => {
-                        this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('USER_EXISTS'));
+                        this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('DATA_EXISTS'));
                         this.modalSS.$modal.emit(true);
                       });
                 }

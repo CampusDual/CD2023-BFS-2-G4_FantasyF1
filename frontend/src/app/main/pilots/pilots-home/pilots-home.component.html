@@ -1,23 +1,7 @@
-<o-column fxLayout>
-    <h2 class=title>{{"PILOTS_TITLE" | oTranslate}}</h2>
-</o-column>
-<o-column fxLayout fxLayoutAlign="start">
-    <o-row>
-        <o-table attr="pilotsPricesTable" service="pilots_prices" entity="listNamePrice" keys="PP_ID"
-            columns="PP_ID;PIL_ID;RAC_ID;RAC_ROUND;PIL_NAME;PIL_SURNAME;PP_PRICE;PP_VARIATION" visible-columns="RAC_ROUND;PIL_NAME;PIL_SURNAME;PP_PRICE;PP_VARIATION"
-            query-rows="20" horizontal-scroll="false" auto-adjust="false" virtual-scroll="no" insert-button="no"
-            delete-button="no" virtual-scroll="no" sort-columns="RAC_ROUND:DESC">
-            <o-table-column attr="RAC_ROUND" title="RAC_ROUND" content-align="center"></o-table-column>
-            <o-table-column attr="PIL_NAME" title="PIL_NAME" content-align="center"></o-table-column>
-            <o-table-column attr="PIL_SURNAME" title="PIL_SURNAME" content-align="center"></o-table-column>
-            <o-table-column attr="PP_PRICE" title="PP_PRICE" content-align="center"></o-table-column>
-            <o-table-column attr="PP_VARIATION" title="PP_VARIATION" content-align="center"></o-table-column>
-        </o-table>
-    </o-row>
-</o-column>
 
+<h1>PONER EL LOGO DE LA APLICACION¿?¿?¿ </h1>
 
-<o-form show-header="no">
+<o-form #form_component show-header="no">
   <o-row>
     <o-column fxFlex="70" >
       <o-combo #combo_filter attr="combo-multiple" label="SELECT_PILOTS" [static-data]="arrayPilots"
@@ -26,7 +10,7 @@
    </o-combo>
     </o-column>
     <o-column>
-      <o-button (click)="recogerDataCombo()" attr="raised4" type="RAISED" label="FILTER_PILOTS" layout-padding
+      <o-button (click)="loadInfoChartsFromCombo()" attr="raised4" type="RAISED" label="FILTER_PILOTS" layout-padding
       color="primary"></o-button>
     </o-column>
     <o-column>
@@ -34,4 +18,7 @@
       color="accent"></o-button>
     </o-column>
   </o-row>
+  <app-pilots-price-chart #chartPrice class="hiddenInfo" id="chartPrice"></app-pilots-price-chart>
+  <h2 id="infoNoData" >{{ 'NO_INFO_CHARTS_COMBO' | oTranslate }}</h2>
+  <app-pilots-points-chart #chartPoints class="hiddenInfo" id="chartPoints"></app-pilots-points-chart>
 </o-form>

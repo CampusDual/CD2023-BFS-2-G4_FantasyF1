@@ -95,5 +95,10 @@
   "REGISTER_TITLE": "Create your user",
   "DATA_EXISTS": "Invalid fields",
   "CONFIRM_PASSWORD": "Confirm password",
-  "PILOTS_TITLE": "Compare drivers"
+  "PILOTS_TITLE": "Compare drivers",
+  "PICK_PILOTS_MESSAGE": "Pick some pilots in order to see the data",
+ "LINE_CHART_PRICES_YAXIS": "Price of the driver",
+ "LINE_CHART_PRICES_TITLE": "Driver price progression",
+  "BAR_CHART_POINTS_PROGRESSION_TITLE": "Driver points progression",
+  "NO_INFO_CHARTS_COMBO": "There is still no information to display"
 }

@@ -24,12 +24,18 @@
             </Sentence>
         </Query>
         <Query id="roundClasification">
+            <AmbiguousColumns>
+                <AmbiguousColumn name="PIL_ID" prefix="P" />
+                <AmbiguousColumn name="RAC_ID" prefix="R" />
+            </AmbiguousColumns>
             <Sentence>
                 <![CDATA[
-                    SELECT R.RAC_ID, P.PIL_ID, P.PIL_SURNAME, R.RES_POINTS, R.RES_POSITION, R.RES_POSITION_TEXT
+                    SELECT R.RAC_ID, RA.RAC_ROUND, P.PIL_ID, P.PIL_SURNAME, R.RES_POINTS, R.RES_POSITION, R.RES_POSITION_TEXT
                     FROM PILOTS P
                     INNER JOIN RESULTS R ON
                     P.PIL_ID = R.PIL_ID
+                    INNER JOIN RACES RA ON
+                    RA.RAC_ID = R.RAC_ID
                     #WHERE#
                     ORDER BY R.RES_POSITION;
                 ]]>

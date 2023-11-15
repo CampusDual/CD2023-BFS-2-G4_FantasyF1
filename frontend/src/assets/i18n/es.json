@@ -95,5 +95,10 @@
   "REGISTER_TITLE": "Crea tu usuario",
   "DATA_EXISTS": "Campos incorrectos",
   "CONFIRM_PASSWORD": "Confirmar contraseña",
-  "PILOTS_TITLE": "Comparador de pilotos"
+  "PILOTS_TITLE": "Comparador de pilotos",
+  "LINE_CHART_PRICES_TITLE": "Progresión del precio de los pilotos",
+  "BAR_CHART_POINTS_PROGRESSION_TITLE": "Progresión de puntos de los pilotos",
+  "LINE_CHART_PRICES_YAXIS": "Precio del piloto",
+  "PICK_PILOTS_MESSAGE": "Selecciona pilotos para poder ver los datos",
+  "NO_INFO_CHARTS_COMBO": "Todavía no hay información que mostrar"
 }

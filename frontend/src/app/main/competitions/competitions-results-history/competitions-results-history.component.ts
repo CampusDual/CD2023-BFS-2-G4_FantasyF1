@@ -13,22 +13,22 @@ export class CompetitionsResultsHistoryComponent implements OnInit {
   username: String;
   multiBarConfig: MultiBarChartConfiguration;
 
-  constructor( private translator: OTranslateService
-    ) {
+  constructor(private translator: OTranslateService
+  ) {
     this.multiBarConfig = new MultiBarChartConfiguration();
-    this.multiBarConfig.stacked = false;
+    this.multiBarConfig.stacked = true;
     this.multiBarConfig.legend.vers = 'furious';
-    this.multiBarConfig.showControls = false;
+    this.multiBarConfig.showControls = true;
     this.multiBarConfig.legend.margin.top = 5;
-    this.multiBarConfig.x1Axis.axisLabel=this.translator.get('BAR_CHART_XAXIS');
-    this.multiBarConfig.y1Axis.axisLabel=this.translator.get('BAR_CHART_YAXIS');
+    this.multiBarConfig.x1Axis.axisLabel = this.translator.get('BAR_CHART_XAXIS');
+    this.multiBarConfig.y1Axis.axisLabel = this.translator.get('BAR_CHART_YAXIS');
   }
 
   ngAfterViewInit(): void {
     if (this.multiBarChart) {
       let chartService: ChartService = this.multiBarChart.getChartService();
       let chartOps = chartService.getChartOptions();
-      chartOps["yDomain"] = [-5, 25];
+      chartOps["yDomain"] = [-10, 50];
     }
   }
 
@@ -50,6 +50,8 @@ export class CompetitionsResultsHistoryComponent implements OnInit {
   loadDataTableForChart(data) {
     let graphArray: Array<Object> = [];
     let filterForPilots: Array<String> = [];
+    data.sort((a, b) => a["RAC_ROUND"] + b["RAC_ROUND"]);
+    const uniqueRoundsSet = [new Set(data.map(item => item.RAC_ROUND))];
 
     if (data.length === 0) {
       document.getElementById("barGraph").classList.add("hideGraph")
@@ -70,15 +72,25 @@ export class CompetitionsResultsHistoryComponent implements OnInit {
               })
             }
           }
+          let uniqueRoundsArray: Array<any> = Array.from(uniqueRoundsSet[0]);
+          uniqueRoundsArray.sort((a, b) => a - b);
+          for (let i = 1; i <= uniqueRoundsArray[uniqueRoundsArray.length - 1]; i++) {
+            let containsRacRound: boolean = values.some(item => item.x === i)
+            if (!containsRacRound) {
+              values.push({
+                x: i, y: 0
+              })
+            }
+          }
           values.sort((a, b) => a.x - b.x);
           filterForPilots.push(eachRecordOfData["PIL_SURNAME"])
           objectForEachPilotRound["values"] = values;
           graphArray.push(objectForEachPilotRound);
         }
       }
-      graphArray.sort((a, b) => a["values"][0].x - b["values"][0].x);
-      this.multiBarChart.setDataArray(graphArray);
     }
+    graphArray.sort((a, b) => a["values"][0].x - b["values"][0].x);
+    this.multiBarChart.setDataArray(graphArray);
   }
 
 

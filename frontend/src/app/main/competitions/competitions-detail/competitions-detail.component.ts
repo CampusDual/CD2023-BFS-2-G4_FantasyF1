@@ -17,7 +17,6 @@ export class CompetitionsDetailComponent implements OnInit {
   @ViewChild('lineChart', { static: true }) lineChart: OChartComponent;
 
   lineChartParametersSerie: LineChartConfiguration;
-  arrayParaLaGrafica: Object;
   namesUsersCompetitionForGraph: string = "";
 
   dataCompetition: {};
@@ -92,15 +91,16 @@ export class CompetitionsDetailComponent implements OnInit {
   }
 
   loadDataTableForGraph(data: Array<any>) {
+    
     const users: Array<string> = Array.from(new Set(data.map(r => r["USER_"])));
     this.namesUsersCompetitionForGraph = users.join(";")
     let graphArray: Array<Object> = [];
     let filterForUsers: Array<String> = [];
-
-    if (data.length === 0) {
+  
+    if (data.length===0) {
       document.getElementById("lineGraph").classList.add("hideGraph")
       document.getElementById("infoNoData").classList.remove("hiddenInfo")
-    } else {
+    } else{
       document.getElementById("lineGraph").classList.remove("hideGraph")
       document.getElementById("infoNoData").classList.add("hiddenInfo")
       for (let eachRecordOfData of data) {
@@ -110,7 +110,7 @@ export class CompetitionsDetailComponent implements OnInit {
             key: eachRecordOfData["USER_"]
           }
           let values = []
-          for (let i = 0; i < eachRecordOfData["RAC_ROUND"]; i++) {
+          for(let i=0; i<eachRecordOfData["RAC_ROUND"]; i++){
             values.push({ x: i, y: 0 })
           }
           for (let r2 of data) {

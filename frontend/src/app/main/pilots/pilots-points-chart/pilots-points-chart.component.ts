@@ -52,7 +52,6 @@ export class PilotsPointsChartComponent implements OnInit {
         results => {
           results
             .forEach(resp => {
-              resp.data.sort((a, b) => a["RAC_ROUND"] + b["RAC_ROUND"]);
 
               for (let eachRecordOfData of resp.data) {
                 if (!filterForPilots.includes(eachRecordOfData["PIL_SURNAME"])) {

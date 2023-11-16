@@ -19,6 +19,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 
 @RestController
 public class MainRestController {
@@ -40,6 +43,12 @@ public class MainRestController {
     @Autowired
     PilotPriceService pilotPriceService;
 
+    ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
+
+    private int round = 1;
+
+    private final int LAST_ROUND = 23;
+
     @RequestMapping(value = "/main", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     public String main() {
         return "index";
@@ -49,11 +58,23 @@ public class MainRestController {
     public String updateAPI() {
         //getPilots();
         //getRaces();
-        this.getResults(9);
+        //this.getResults(17);
         //System.out.println("Actualizando datos de la api");
         //this.getRoundClasification(1);
         //this.getGeneralClasificationPerRound(5);
+        scheduler.scheduleAtFixedRate(() -> loadRaces(), 0, 1, TimeUnit.SECONDS);
         return "OK";
+    }
+
+    private void loadRaces() {
+        if(this.round <= this.LAST_ROUND){
+            System.out.println("Cargando datos de la carrera " + this.round);
+            //this.getResults(this.round);
+            this.round++;
+        } else {
+            scheduler.shutdown();
+            System.out.println("Finalizan las carreras");
+        }
     }
 
     public static JSONObject getConnection(String direction) {
@@ -287,20 +308,25 @@ public class MainRestController {
         for(int j = 0; j < clasification.calculateRecordNumber(); j++){
 
             //Se recupera el valor que tiene el piloto
-            int pp_price = getPilotPrice(clasification, j);
+            int pp_former_price = getPilotPrice(clasification, j);
 
             //Se introducen los datos en pilots_prices
-            int pp_variation = arrayPricesStandings.get(j);
+            int pp_new_price = arrayPricesStandings.get(j);
             int pil_id = (int) clasification.getRecordValues(j).get(PilotDao.PIL_ID);
             int rac_id = (int) clasification.getRecordValues(j).get(RaceDao.RAC_ID);
 
-            mapPilotPriceToInsert.put(PilotPriceDao.PP_PRICE, pp_price);
-            mapPilotPriceToInsert.put(PilotPriceDao.PP_VARIATION, pp_variation);
+            mapPilotPriceToInsert.put(PilotPriceDao.PP_FORMER_PRICE, pp_former_price);
+            mapPilotPriceToInsert.put(PilotPriceDao.PP_NEW_PRICE, pp_new_price);
             mapPilotPriceToInsert.put(PilotDao.PIL_ID, pil_id);
             mapPilotPriceToInsert.put(RaceDao.RAC_ID, rac_id);
 
             //Se hace el insert
             this.pilotPriceService.pilotPriceInsert(mapPilotPriceToInsert);
+
+            //Se hace un update de la tabla pilotos
+            Map<String, Object> mapPilotUpdate = Map.of(PilotDao.PIL_PRICE, pp_new_price);
+            Map<String, Object> attributesPilotUpdate = Map.of(PilotDao.PIL_ID, pil_id);
+            this.pilotService.pilotUpdate(mapPilotUpdate, attributesPilotUpdate);
         }
 
     }

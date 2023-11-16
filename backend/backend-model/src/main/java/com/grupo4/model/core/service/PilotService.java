@@ -34,7 +34,7 @@ public class PilotService implements IPilotService {
 
     @Override
     public EntityResult pilotUpdate(Map<String, Object> attributes, Map<String, Object> KeyValues) throws OntimizeJEERuntimeException {
-        return null;
+        return this.daoHelper.update(this.pilotDao, attributes, KeyValues);
     }
 
     @Override

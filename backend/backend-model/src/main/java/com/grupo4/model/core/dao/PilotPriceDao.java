@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
         configurationFilePlaceholder = "dao/placeholders.properties")
 public class PilotPriceDao extends OntimizeJdbcDaoSupport {
     public static final String PIL_ID = "PP_ID";
-    public static final String PP_PRICE = "PP_PRICE";
-    public static final String PP_VARIATION = "PP_VARIATION";
+    public static final String PP_FORMER_PRICE = "PP_FORMER_PRICE";
+    public static final String PP_NEW_PRICE = "PP_NEW_PRICE";
 
 }

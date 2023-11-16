@@ -14,13 +14,13 @@
         <Query id="filter">
             <Sentence>
                 <![CDATA[
-                    WITH USER_COMPETITION AS
+                    WITH FILTER AS
                         (SELECT  uc.UC_ID, uc.USER_, c.COMP_ID, c.COMP_NAME, c.COMP_DESCRIPTION, c.COMP_CODE
                         FROM ${mainschema}.USERS_COMPETITIONS uc
                         INNER JOIN COMPETITIONS c
                         ON c.COMP_ID = uc.COMP_ID)
                     SELECT #COLUMNS#
-                    FROM USER_COMPETITION
+                    FROM FILTER
                     #WHERE#
                     #ORDER#;
                 ]]>
@@ -29,7 +29,7 @@
         <Query id="teamDetails">
             <Sentence>
                 <![CDATA[
-                    WITH COMPETI AS
+                    WITH TEAM_DETAILS AS
                         (SELECT C.COMP_ID, C.COMP_NAME, UC.USER_, UC.UC_ID, P1.PIL_NAME AS P1NAME, P1.PIL_SURNAME AS P1SURNAME,
                                 P2.PIL_NAME AS P2NAME, P2.PIL_SURNAME AS P2SURNAME, T.TEAM_NAME, UC.UC_AVAILABLE_MONEY
                         FROM COMPETITIONS C
@@ -42,7 +42,7 @@
                         LEFT JOIN TEAMS T
                         ON UC.TEAM_ID = T.TEAM_ID)
                     SELECT #COLUMNS#
-                    FROM COMPETI
+                    FROM TEAM_DETAILS
                     #WHERE#
                     #ORDER#;
                 ]]>
@@ -51,7 +51,7 @@
         <Query id="selectedTeam">
             <Sentence>
                 <![CDATA[
-                    WITH COMPETI AS
+                    WITH SELECTED_TEAM AS
                         (SELECT
                             UC.UC_ID, UC.COMP_ID, T.TEAM_ID, T.TEAM_NAME, T.TEAM_PRICE
                         FROM
@@ -59,7 +59,23 @@
                         RIGHT JOIN USERS_COMPETITIONS UC ON
                             T.TEAM_ID = UC.TEAM_ID)
                     SELECT #COLUMNS#
-                    FROM COMPETI
+                    FROM SELECTED_TEAM
+                    #WHERE#
+                    #ORDER#;
+                ]]>
+            </Sentence>
+        </Query>
+        <Query id="priceHistory">
+            <Sentence>
+                <![CDATA[
+                    WITH PRICE_HISTORY AS
+                        (SELECT UC.COMP_ID, UC.UC_ID, UC.USER_, P.PIL_ID, UCP.UCP_DATE_PURCHASED, UCP.UCP_DATE_SOLD,
+                            P.PIL_NAME, P.PIL_SURNAME, UCP.UCP_PRICE_PURCHASED, UCP.UCP_PRICE_SOLD
+                        FROM USERS_COMPETITIONS UC
+                        LEFT JOIN USERS_COMPETITIONS_PILOTS UCP ON UC.UC_ID = UCP.UC_ID
+                        LEFT JOIN PILOTS P ON P.PIL_ID = UCP.PIL_ID)
+                    SELECT #COLUMNS#
+                    FROM PRICE_HISTORY
                     #WHERE#
                     #ORDER#;
                 ]]>

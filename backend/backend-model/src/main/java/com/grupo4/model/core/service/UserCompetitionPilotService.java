@@ -76,11 +76,9 @@ public class UserCompetitionPilotService implements IUserCompetitionPilotService
                 userCompetitionService.userCompetitionUpdate(attributesToUpdate, keysForUpdate);
                 return this.daoHelper.insert(this.userCompetitionPilotDao, attributes);
             } else {
-                System.out.println("Not enough money");
                 return null;
             }
         } else {
-            System.out.println("El registro ya existe, no se inserta nada");
             EntityResult recordAlreadyExists = new EntityResultMapImpl();
             recordAlreadyExists.setCode(EntityResult.OPERATION_WRONG);
             recordAlreadyExists.setMessage("Record already exists");

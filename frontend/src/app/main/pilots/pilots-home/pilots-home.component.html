@@ -1,7 +1,7 @@
-<o-column fxLayout>
-  <h2 class=title>{{"PILOTS_TITLE" | oTranslate}}</h2>
-</o-column>
 <o-form #form_component show-header="no">
+    <o-column>
+      <h2 class=title>{{"PILOTS_TITLE" | oTranslate}}</h2>
+    </o-column>
   <o-row>
     <o-column fxFlex="70" >
       <o-combo #combo_filter attr="combo-multiple" label="SELECT_PILOTS" [static-data]="arrayPilots"

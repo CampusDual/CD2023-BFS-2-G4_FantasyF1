@@ -57,18 +57,19 @@ tbody tr:hover {
 
 // New row response style
 tbody tr {
-    transform: scale(1);
     transition: transform 0.1s;
+    cursor: pointer;
 
     &:hover {
-
-        @keyframes scaleUp {
-            to {
-                transform: scale(1.07);
+        td {
+            @keyframes scaleUp {
+                to {
+                    transform: scale(1.13);
+                }
             }
-        }
 
-        animation: scaleUp 0.2s forwards;
+            animation: scaleUp 0.2s forwards;
+        }
     }
 }
 

@@ -13,15 +13,15 @@ export class PilotsPriceChartComponent implements OnInit {
   @ViewChild('lineChart', { static: true }) lineChart: OChartComponent;
   lineChartParametersSerie: LineChartConfiguration;
 
-  constructor(protected service: OntimizeService,protected snackService: SnackBarService, private translator: OTranslateService
-   ) {
+  constructor(protected service: OntimizeService, protected snackService: SnackBarService, private translator: OTranslateService
+  ) {
     this.lineChartParametersSerie = new LineChartConfiguration();
     this.lineChartParametersSerie.legend.vers = 'furious';
     this.lineChartParametersSerie.legendPosition = 'bottom';
     this.lineChartParametersSerie.showLegend = true;
-    this.lineChartParametersSerie.x1Axis.axisLabel=this.translator.get('LINE_CHART_XAXIS');
-    this.lineChartParametersSerie.y1Axis.axisLabel=this.translator.get('LINE_CHART_PRICES_YAXIS');
-   }
+    this.lineChartParametersSerie.x1Axis.axisLabel = this.translator.get('LINE_CHART_XAXIS');
+    this.lineChartParametersSerie.y1Axis.axisLabel = this.translator.get('LINE_CHART_PRICES_YAXIS');
+  }
 
   ngOnInit() {
     this.configureService();
@@ -34,41 +34,51 @@ export class PilotsPriceChartComponent implements OnInit {
       chartOps["yDomain"] = [-10000, 130000];
     }
   }
-  
+
   protected configureService() {
     const conf = this.service.getDefaultServiceConfiguration('pilots_prices');
     this.service.configureService(conf);
   }
-  
-  loadPricePerRoundChart(arrayCombo: Array<any>){
+
+  loadPricePerRoundChart(arrayCombo: Array<any>) {
 
     this.configureService()
-  
+    let promises = []
+
     let priceVariationChart: Array<Object> = [];
-      for(let pilotId of arrayCombo){
-        this.service.query({ "PIL_ID": pilotId},
-          ["PIL_SURNAME", "PP_NEW_PRICE", "RAC_ROUND"], "listNamePrice").subscribe(resp => {
-        let values = [];
-        let eachPilotForGraph = {
-          key: resp.data[0]["PIL_SURNAME"]
-        }
-        for(let i =0; i<resp.data.length; i++){
-          if(resp.data[i]["RAC_ROUND"]===undefined){
-            values.push({
-              x: 0, y: resp.data[i]["PP_NEW_PRICE"]
-             })
-          } else{
-            values.push({
-              x: resp.data[i]["RAC_ROUND"], y: resp.data[i]["PP_NEW_PRICE"]
-             })
+    for (let pilotId of arrayCombo) {
+      let p = this.service.query({ "PIL_ID": pilotId },
+        ["PIL_SURNAME", "PP_NEW_PRICE", "RAC_ROUND"], "listNamePrice")
+        .toPromise();
+      promises.push(p);
+    }
+    Promise.all(
+      promises
+    ).then(
+      results => {
+        results.forEach((resp => {
+          let values = [];
+          let eachPilotForGraph = {
+            key: resp.data[0]["PIL_SURNAME"]
           }
-        }
-        values.sort((a, b) => a.x - b.x);
-        eachPilotForGraph['values']= values;
-        priceVariationChart.push(eachPilotForGraph);
-      });
+          for (let i = 0; i < resp.data.length; i++) {
+            if (resp.data[i]["RAC_ROUND"] === undefined) {
+              values.push({
+                x: 0, y: resp.data[i]["PP_NEW_PRICE"]
+              })
+            } else {
+              values.push({
+                x: resp.data[i]["RAC_ROUND"], y: resp.data[i]["PP_NEW_PRICE"]
+              })
+            }
+          }
+          values.sort((a, b) => a.x - b.x);
+          eachPilotForGraph['values'] = values;
+          priceVariationChart.push(eachPilotForGraph);
+        }))
+        this.lineChart.setDataArray(priceVariationChart);
+        this.lineChart.reloadData();
       }
-      this.lineChart.setDataArray(priceVariationChart);
-      this.lineChart.reloadData();
+    )
   }
 }

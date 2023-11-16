@@ -39,34 +39,43 @@ export class PilotsPointsChartComponent implements OnInit {
 
     let graphArray: Array<Object> = [];
     let filterForPilots: Array<String> = [];
+    let promises = []
     for (let pilotId of arrayCombo) {
-      this.service.query({ "PIL_ID": pilotId },
-        ["PIL_SURNAME", "RES_POINTS", "RAC_ROUND"], "roundClasification").subscribe(resp => {
-          resp.data.sort((a, b) => a["RAC_ROUND"] + b["RAC_ROUND"]);
+      let p = this.service.query({ "PIL_ID": pilotId }, ["PIL_SURNAME", "RES_POINTS", "RAC_ROUND"], "roundClasification")
+        .toPromise();
+      promises.push(p)
+    }
+    Promise.all(
+      promises
+    )
+      .then(
+        results => {
+          results
+            .forEach(resp => {
+              resp.data.sort((a, b) => a["RAC_ROUND"] + b["RAC_ROUND"]);
 
-          for (let eachRecordOfData of resp.data) {
-            if (!filterForPilots.includes(eachRecordOfData["PIL_SURNAME"])) {
-              let objectForEachPilotRound = {
-                key: eachRecordOfData["PIL_SURNAME"],
-              }
-              let values = []
-              for (let eachRecordOfData2 of resp.data) {
-                if (eachRecordOfData["PIL_SURNAME"] === eachRecordOfData2["PIL_SURNAME"]) {
-                  values.push({
-                    x: eachRecordOfData2["RAC_ROUND"], y: eachRecordOfData2["RES_POINTS"]
-                  })
+              for (let eachRecordOfData of resp.data) {
+                if (!filterForPilots.includes(eachRecordOfData["PIL_SURNAME"])) {
+                  let objectForEachPilotRound = {
+                    key: eachRecordOfData["PIL_SURNAME"],
+                  }
+                  let values = []
+                  for (let eachRecordOfData2 of resp.data) {
+                    if (eachRecordOfData["PIL_SURNAME"] === eachRecordOfData2["PIL_SURNAME"]) {
+                      values.push({
+                        x: eachRecordOfData2["RAC_ROUND"], y: eachRecordOfData2["RES_POINTS"]
+                      })
+                    }
+                  }
+                  values.sort((a, b) => a.x - b.x);
+                  filterForPilots.push(eachRecordOfData["PIL_SURNAME"])
+                  objectForEachPilotRound["values"] = values;
+                  graphArray.push(objectForEachPilotRound);
                 }
               }
-              values.sort((a, b) => a.x - b.x);
-              filterForPilots.push(eachRecordOfData["PIL_SURNAME"])
-              objectForEachPilotRound["values"] = values;
-              graphArray.push(objectForEachPilotRound);
-              console.log({ graphArray });
-            }
-          }
-        });
-      this.barChart.setDataArray(graphArray);
-    }
+            })
+          this.barChart.setDataArray(graphArray);
+        }
+      )
   }
-
 }

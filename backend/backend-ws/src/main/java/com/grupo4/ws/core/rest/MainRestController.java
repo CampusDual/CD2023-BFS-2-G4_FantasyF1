@@ -293,12 +293,11 @@ public class MainRestController {
     public void insertPilotPrice(int round){
         List<Integer> arrayPricesStandings = List.of(130000,100000,90000,90000, 80000,80000, 70000,70000, 60000,60000, 50000,50000,
                 40000,40000, 30000,30000,20000,20000,10000,10000,0,0);
-        int correction = 88 + round;
         Map<String, Object> map = new HashMap<>();
         Map<String, Object> mapPilotPriceToInsert = new HashMap<>();
 
         //Se hace la query para saber los resultados de la ronda
-        map.put(RaceDao.RAC_ID, correction);
+        map.put(RaceDao.RAC_ID, round);
         List<String> attributes = List.of(PilotDao.PIL_ID,
                 PilotDao.PIL_SURNAME,
                 ResultDao.RES_POINTS,

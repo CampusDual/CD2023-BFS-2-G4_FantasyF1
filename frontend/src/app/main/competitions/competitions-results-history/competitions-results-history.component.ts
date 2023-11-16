@@ -50,7 +50,7 @@ export class CompetitionsResultsHistoryComponent implements OnInit {
   loadDataTableForChart(data) {
     let graphArray: Array<Object> = [];
     let filterForPilots: Array<String> = [];
-    data.sort((a, b) => a["RAC_ROUND"] + b["RAC_ROUND"]);
+    data.sort((a, b) =>  b["RAC_ROUND"] - a["RAC_ROUND"]);
     const uniqueRoundsSet = [new Set(data.map(item => item.RAC_ROUND))];
 
     if (data.length === 0) {

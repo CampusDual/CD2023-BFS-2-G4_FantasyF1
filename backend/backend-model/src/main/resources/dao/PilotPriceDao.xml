@@ -15,7 +15,7 @@
             <Sentence>
                 <![CDATA[
                     WITH NAMES_PRICES AS (
-                        SELECT PP.PP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, PP.PP_PRICE, PP_VARIATION, R.RAC_ID, R.RAC_ROUND
+                        SELECT PP.PP_ID, P.PIL_ID, P.PIL_NAME, P.PIL_SURNAME, PP.PP_FORMER_PRICE, PP.PP_NEW_PRICE, R.RAC_ID, R.RAC_ROUND
                         FROM PILOTS_PRICES PP
                         LEFT JOIN PILOTS P ON P.PIL_ID = PP.PIL_ID
                         LEFT JOIN RACES R ON PP.RAC_ID = R.RAC_ID

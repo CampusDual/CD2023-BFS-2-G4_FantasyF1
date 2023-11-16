@@ -47,7 +47,7 @@ export class PilotsPriceChartComponent implements OnInit {
     let priceVariationChart: Array<Object> = [];
       for(let pilotId of arrayCombo){
         this.service.query({ "PIL_ID": pilotId},
-       ["PIL_SURNAME", "PP_PRICE", "RAC_ROUND"], "listNamePrice").subscribe(resp => {
+          ["PIL_SURNAME", "PP_NEW_PRICE", "RAC_ROUND"], "listNamePrice").subscribe(resp => {
         let values = [];
         let eachPilotForGraph = {
           key: resp.data[0]["PIL_SURNAME"]
@@ -55,11 +55,11 @@ export class PilotsPriceChartComponent implements OnInit {
         for(let i =0; i<resp.data.length; i++){
           if(resp.data[i]["RAC_ROUND"]===undefined){
             values.push({
-              x: 0, y: resp.data[i]["PP_PRICE"]
+              x: 0, y: resp.data[i]["PP_NEW_PRICE"]
              })
           } else{
             values.push({
-              x: resp.data[i]["RAC_ROUND"], y: resp.data[i]["PP_PRICE"]
+              x: resp.data[i]["RAC_ROUND"], y: resp.data[i]["PP_NEW_PRICE"]
              })
           }
         }

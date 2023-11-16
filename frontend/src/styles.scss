@@ -3,28 +3,33 @@
     text-align: center;
     font-size: 14pt;
 }
+
 .title {
     text-align: center;
 }
-.hideGraph{
+
+.hideGraph {
     display: none;
 }
 
+
+
 /*Edit team section*/
-#UC_AVAILABLE_MONEY{
-    text-align: right;    
+#UC_AVAILABLE_MONEY {
+    text-align: right;
 }
 
-.mat-form-field.icon-field .mat-form-field-suffix .svg-icon > svg{
+.mat-form-field.icon-field .mat-form-field-suffix .svg-icon>svg {
     padding-top: 0rem;
     padding-bottom: 0.3rem;
 }
 
-#COMP_NAME, #UC_AVAILABLE_MONEY{
+#COMP_NAME,
+#UC_AVAILABLE_MONEY {
     height: 1.5rem;
 }
 
-#edit_team_header{
+#edit_team_header {
     height: 110px;
 }
 
@@ -33,42 +38,39 @@ tbody tr:nth-child(even) {
 }
 
 tbody tr:nth-child(odd) {
-    background-color:#ffffff;
+    background-color: #ffffff;
 }
 
 th {
-    background-color: #da3930 !important; 
+    background-color: #da3930 !important;
     color: white !important;
     color: #fff;
 }
 
-
-
-
 tbody tr:hover {
     font-weight: bolder;
-    background-color: #ffe3e3 !important; 
+    background-color: #ffe3e3 !important;
     color: white !important;
 }
+
+
 
 // New row response style
 tbody tr {
     transform: scale(1);
-  transition: transform 0.1s;
+    transition: transform 0.1s;
 
-  &:hover {
+    &:hover {
 
-    @keyframes scaleUp {
-      to {
-        transform: scale(1.04);
-      }
+        @keyframes scaleUp {
+            to {
+                transform: scale(1.07);
+            }
+        }
+
+        animation: scaleUp 0.2s forwards;
     }
-
-    animation: scaleUp 0.07s forwards;
-  }
 }
-
-
 
 button.mat-raised-button:hover {
     color: #eee7e8;
@@ -76,15 +78,19 @@ button.mat-raised-button:hover {
     font-weight: bold;
 }
 
+
+
 //New button response style
-.o-button button{
+.o-button button {
     transform: scale(1);
-    transition: transform 0.15s ease-in-out;
+    transition: transform 0.15s ease-out;
 }
-.o-button button:hover{
-    transform: scale(1.04);
-    
+
+.o-button button:hover {
+    transform: scale(1.05);
+
 }
-.o-button button:active{
+
+.o-button button:active {
     transform: scale(0.95);
 }

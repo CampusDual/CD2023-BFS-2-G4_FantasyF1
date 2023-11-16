@@ -24,13 +24,11 @@ const routes: Routes = [{
 {
   path: 'search',
   component: CompetitionsSearchComponent
-}
-,
+},
 {
   path: 'edit/:COMP_ID',
   component: CompetitionsTeamEditComponent
-}
-,
+},
 {
   path: 'available/:COMP_ID',
   component: CompetitionsDetailComponent
@@ -38,8 +36,7 @@ const routes: Routes = [{
 {
   path: 'available/:COMP_ID/:UC_ID',
   component: CompetitionsResultsHistoryComponent
-}
-,
+},
 {
   path: 'home/:COMP_ID',
   component: CompetitionsDetailComponent

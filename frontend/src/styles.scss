@@ -64,10 +64,10 @@ tbody tr {
         td {
             @keyframes scaleUp {
                 to {
-                    transform: scale(1.13);
+                    transform: scale(1.07);
+                    color: black;
                 }
             }
-
             animation: scaleUp 0.2s forwards;
         }
     }

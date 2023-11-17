@@ -1,0 +1,4 @@
+<ng-template #templateref let-cellvalue="cellvalue" let-rowvalue="rowvalue">
+    <span *ngIf="rowvalue['TOTAL_POINTS'] == null">0</span>
+    <span *ngIf="rowvalue['TOTAL_POINTS'] != null">{{getCellData(cellvalue)}}</span>
+</ng-template>

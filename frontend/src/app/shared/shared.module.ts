@@ -4,6 +4,7 @@ import { OntimizeWebModule } from 'ontimize-web-ngx';
 import { CompetitionsEditTypeColumnRendererComponent } from '../main/competitions/competitions-team-edit/competitions-edit-type-column-renderer/competitions-edit-type-column-renderer.component';
 import { CompetitionsResultsColumnRendererComponent } from '../main/competitions/competitions-results-history/competitions-results-column-renderer/competitions-results-column-renderer.component';
 import { CompetitionsDetailRendererComponent } from '../main/competitions/competitions-detail/competitions-detail-renderer/competitions-detail-renderer.component';
+import { CompetitionsRakingRenderComponent } from '../main/competitions/competitions-detail/competitions-raking-render/competitions-raking-render.component';
 
 @NgModule({
   imports: [
@@ -12,13 +13,15 @@ import { CompetitionsDetailRendererComponent } from '../main/competitions/compet
   declarations: [
     CompetitionsEditTypeColumnRendererComponent,
     CompetitionsResultsColumnRendererComponent,
-    CompetitionsDetailRendererComponent
+    CompetitionsDetailRendererComponent,
+    CompetitionsRakingRenderComponent
   ],
   exports: [
     CommonModule,
     CompetitionsEditTypeColumnRendererComponent,
     CompetitionsResultsColumnRendererComponent,
-    CompetitionsDetailRendererComponent
+    CompetitionsDetailRendererComponent,
+    CompetitionsRakingRenderComponent
   ]
 })
 export class SharedModule { }

@@ -3,14 +3,15 @@
 
     <div class="login-bg-container">
     </div>
+    
 
     <div class="wrapp-login">
-      <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container">
+
+      <!--Login -->
+      <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container login-zone" *ngIf="modalSwitch == false">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <div id="login" *ngIf="modalSwitch == false">
-            <div class="logo-container" fxLayout="column">
-              <img src="assets/images/icon_red.png" />
-            </div>
+          <div id="login">
+
             <div class="login-title-container" fxLayout="column">
               <p class="session-expired text" *ngIf="sessionExpired">{{ 'ERROR_SESSION_EXPIRED' | oTranslate }}</p>
               <span class="title_text">{{ 'LOGIN_TITLE' | oTranslate }}:</span>
@@ -36,33 +37,29 @@
             <div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="10px" class="m-top-24">
               <mat-checkbox class="text">{{ 'REMEMBER_ME' | oTranslate }}</mat-checkbox>
             </div>
-
             <button mat-raised-button color="primary" type="submit">{{ 'LOGIN' | oTranslate }}</button>
             <button mat-raised-button color="primary" type="submit" (click)="showForm()">{{ 'REGISTER' | oTranslate }}</button>
           </div>
-          <div *ngIf="modalSwitch == true">
-            <div class="logo-container" fxLayout="column">
-              <img src="assets/images/icon_red.png" />
-            </div>
-            <app-register-home></app-register-home>
-          </div>
           <div layout-padding></div>
           <div layout-padding></div>
-
         </form>
+      </div>
+
+      <!-- Registro -->
+      <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container login-zone" *ngIf="modalSwitch == true">
+          <app-register-home></app-register-home>
+      </div>
+
+      <div id="footer" class="footer-container">
+        <div fxLayout="row" fxLayoutAlign="end center">
+          <span>{{ 'FOOTER_CREATED_BY' | oTranslate }}</span>
+          <span> &copy; 2023 </span>
+          <span>{{ 'FOOTER_RIGHTS' | oTranslate }}</span>
+          <span> | </span>
+          <span>{{ 'FOOTER_IMG' | oTranslate }}</span>
+        </div>
       </div>
 
     </div>
   </div>
-
-  <div id="footer" class="footer-container">
-    <div fxLayout="row" fxLayoutAlign="end center">
-      <span>{{ 'FOOTER_CREATED_BY' | oTranslate }}</span>
-      <span> &copy; 2023 </span>
-      <span>{{ 'FOOTER_RIGHTS' | oTranslate }}</span>
-      <span> | </span>
-      <span>{{ 'FOOTER_IMG' | oTranslate }}</span>
-    </div>
-  </div>
-
 </div>

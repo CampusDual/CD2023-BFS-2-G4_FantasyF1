@@ -47,7 +47,6 @@ export class RegisterHomeComponent implements OnInit {
   }
 
   insertUser(){
-    this.modalSS.$modal.emit(false);
     const nickname = this.nickname.getValue();
     const password = this.password.getValue();
     const password2 = this.password2.getValue();

@@ -1,8 +1,8 @@
-.hiddenInfo{
+.hiddenInfo {
     display: none;
- }
+}
 
- #infoNoData{
+#infoNoData {
     font-size: 15px;
     text-align: center;
 }

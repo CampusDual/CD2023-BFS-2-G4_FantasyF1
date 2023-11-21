@@ -1,24 +1,24 @@
 <o-form #form_component show-header="no">
-    <o-column>
-      <h2 class=title>{{"PILOTS_TITLE" | oTranslate}}</h2>
-    </o-column>
+  <o-column>
+    <h2 class=title>{{"PILOTS_TITLE" | oTranslate}}</h2>
+  </o-column>
   <o-row>
-    <o-column fxFlex="100" >
+    <o-column fxFlex="100">
       <o-combo #combo_filter attr="combo-multiple" label="SELECT_PILOTS" [static-data]="arrayPilots"
-      value-column="pilotId" columns="pilotId;pilotSurname"
-     visible-columns="pilotSurname" multiple="yes" searchable="yes" fxFlex>
-   </o-combo>
+        value-column="pilotId" columns="pilotId;pilotSurname" visible-columns="pilotSurname" multiple="yes"
+        searchable="yes">
+      </o-combo>
     </o-column>
     <o-column>
       <o-button (click)="loadInfoChartsFromCombo()" attr="raised4" type="RAISED" label="FILTER_PILOTS" layout-padding
-      color="primary"></o-button>
+        color="primary"></o-button>
     </o-column>
     <o-column>
       <o-button (click)="clearFilterPiltos()" attr="raised4" type="RAISED" label="CLEAR_FILTER_PILOTS" layout-padding
-      color="accent"></o-button>
+        color="accent"></o-button>
     </o-column>
   </o-row>
   <app-pilots-price-chart #chartPrice class="hiddenInfo" id="chartPrice"></app-pilots-price-chart>
-  <h2 id="infoNoData" >{{ 'NO_INFO_CHARTS_COMBO' | oTranslate }}</h2>
+  <h2 id="infoNoData">{{ 'NO_INFO_CHARTS_COMBO' | oTranslate }}</h2>
   <app-pilots-points-chart #chartPoints class="hiddenInfo" id="chartPoints"></app-pilots-points-chart>
 </o-form>

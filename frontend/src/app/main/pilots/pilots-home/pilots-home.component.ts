@@ -19,11 +19,10 @@ export class PilotsHomeComponent implements OnInit {
 
   arrayPilots: Array<any> = [
     { pilotId: 1, pilotSurname: 'Albon' }, { pilotId: 2, pilotSurname: 'Alonso' }, { pilotId: 3, pilotSurname: 'Bottas' },
-    { pilotId: 4, pilotSurname: 'de Vries' },
     { pilotId: 5, pilotSurname: 'Gasly' }, { pilotId: 6, pilotSurname: 'Hamilton' }, { pilotId: 7, pilotSurname: 'Hülkenberg' },
-    { pilotId: 8, pilotSurname: 'Lawson' }, { pilotId: 9, pilotSurname: 'Leclerc' }, { pilotId: 10, pilotSurname: 'Magnussen' },
+    { pilotId: 9, pilotSurname: 'Leclerc' }, { pilotId: 10, pilotSurname: 'Magnussen' },
     { pilotId: 11, pilotSurname: 'Norris' }, { pilotId: 12, pilotSurname: 'Ocon' }, { pilotId: 13, pilotSurname: 'Piastri' },
-    { pilotId: 14, pilotSurname: 'Pérez' }, { pilotId: 15, pilotSurname: 'Ricciardo' }, { pilotId: 16, pilotSurname: 'Russell' },
+    { pilotId: 14, pilotSurname: 'Pérez' }, { pilotId: 16, pilotSurname: 'Russell' },
     { pilotId: 17, pilotSurname: 'Sainz' }, { pilotId: 18, pilotSurname: 'Sargeant' }, { pilotId: 19, pilotSurname: 'Stroll' },
     { pilotId: 20, pilotSurname: 'Tsunoda' }, { pilotId: 21, pilotSurname: 'Verstappen' }, { pilotId: 22, pilotSurname: 'Zhou' },
   ];

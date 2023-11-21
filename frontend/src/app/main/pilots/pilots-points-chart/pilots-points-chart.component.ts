@@ -10,11 +10,14 @@ import { ChartService, MultiBarChartConfiguration, OChartComponent } from 'ontim
 export class PilotsPointsChartComponent implements OnInit {
 
   @ViewChild('barChart', { static: true }) barChart: OChartComponent;
-
   barChartConfig: MultiBarChartConfiguration;
 
   constructor(protected service: OntimizeService) {
-
+    this.barChartConfig = new MultiBarChartConfiguration
+    this.barChartConfig.stacked = false;
+    this.barChartConfig.showControls = false;
+    this.barChartConfig.legend.vers = 'furious';
+    this.barChartConfig.legend.margin.top = 10;
   }
 
   ngOnInit() {
@@ -30,7 +33,7 @@ export class PilotsPointsChartComponent implements OnInit {
     if (this.barChart) {
       let chartService: ChartService = this.barChart.getChartService();
       let chartOps = chartService.getChartOptions();
-      chartOps["yDomain"] = [-50, 102];
+      chartOps["yDomain"] = [-10, 30];
     }
   }
 

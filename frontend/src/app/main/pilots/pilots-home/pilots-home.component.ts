@@ -21,8 +21,8 @@ export class PilotsHomeComponent implements OnInit {
     { pilotId: 1, pilotSurname: 'Albon' }, { pilotId: 2, pilotSurname: 'Alonso' }, { pilotId: 3, pilotSurname: 'Bottas' },
     { pilotId: 5, pilotSurname: 'Gasly' }, { pilotId: 6, pilotSurname: 'Hamilton' }, { pilotId: 7, pilotSurname: 'Hülkenberg' },
     { pilotId: 9, pilotSurname: 'Leclerc' }, { pilotId: 10, pilotSurname: 'Magnussen' },
-    { pilotId: 11, pilotSurname: 'Norris' }, { pilotId: 12, pilotSurname: 'Ocon' }, { pilotId: 13, pilotSurname: 'Piastri' },
-    { pilotId: 14, pilotSurname: 'Pérez' }, { pilotId: 16, pilotSurname: 'Russell' },
+    { pilotId: 11, pilotSurname: 'Norris' }, { pilotId: 12, pilotSurname: 'Ocon' }, { pilotId: 14, pilotSurname: 'Piastri' },
+    { pilotId: 13, pilotSurname: 'Pérez' }, { pilotId: 16, pilotSurname: 'Russell' },
     { pilotId: 17, pilotSurname: 'Sainz' }, { pilotId: 18, pilotSurname: 'Sargeant' }, { pilotId: 19, pilotSurname: 'Stroll' },
     { pilotId: 20, pilotSurname: 'Tsunoda' }, { pilotId: 21, pilotSurname: 'Verstappen' }, { pilotId: 22, pilotSurname: 'Zhou' },
   ];

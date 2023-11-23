@@ -74,6 +74,7 @@ export class RegisterHomeComponent implements OnInit {
                     "userRegister").subscribe(
                       resp => {
                         this.dialogService.info(this.translator.get('REGISTER'), 'USER_REGISTER_OK');
+                        this.modalSS.$modal.emit(false);
                       },
                       err => {
                         this.dialogService.error(this.translator.get('REGISTER'), this.translator.get('DATA_EXISTS'));

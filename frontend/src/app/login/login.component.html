@@ -10,7 +10,11 @@
       <!--Login -->
       <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container login-zone" *ngIf="modalSwitch == false">
         <form [formGroup]="loginForm" (ngSubmit)="login()">
-          <div id="login">
+          
+          <div id="login" *ngIf="modalSwitch == false">
+            <div class="logo-container" fxLayout="column">
+              <img src="assets/images/icon_red.png" />
+            </div>
 
             <div class="login-title-container" fxLayout="column">
               <p class="session-expired text" *ngIf="sessionExpired">{{ 'ERROR_SESSION_EXPIRED' | oTranslate }}</p>
@@ -47,6 +51,9 @@
 
       <!-- Registro -->
       <div fxFill fxLayout="column" fxLayoutAlign="center center" class="login-inner-container login-zone" *ngIf="modalSwitch == true">
+        <div class="logo-container" fxLayout="column">
+          <img src="assets/images/icon_red.png" />
+        </div>
           <app-register-home></app-register-home>
       </div>
 

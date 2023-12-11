@@ -18,13 +18,13 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
-DROP DATABASE "2023_BFS_2_G4";
+--DROP DATABASE "2023_BFS_2_G4";
 --
 -- TOC entry 3117 (class 1262 OID 290895)
 -- Name: 2023_BFS_2_G4; Type: DATABASE; Schema: -; Owner: -
 --
 
-CREATE DATABASE "2023_BFS_2_G4" WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
+--CREATE DATABASE "2023_BFS_2_G4" WITH TEMPLATE = template0 ENCODING = 'UTF8' LOCALE = 'en_US.UTF-8';
 
 
 \connect "2023_BFS_2_G4"
@@ -45,7 +45,7 @@ SET row_security = off;
 -- Name: public; Type: SCHEMA; Schema: -; Owner: -
 --
 
-CREATE SCHEMA public;
+--CREATE SCHEMA public;
 
 
 --
